@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { CheckCircle2, AlertCircle, ArrowLeft } from "lucide-react";
+import { CheckCircle2, AlertCircle, ArrowLeft, Download } from "lucide-react";
 
 const LOGO_URL =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
@@ -98,6 +98,26 @@ export default function WaiverPage() {
 
   const hasYesAnswers = formData.answers.some((a) => a === true);
 
+  const handleDownload = async () => {
+    const { downloadWaiverPdf } = await import("@/react-app/lib/waiverPdf");
+    downloadWaiverPdf(
+      {
+        fullName: formData.fullName,
+        dateOfBirth: formData.dateOfBirth,
+        email: formData.email,
+        phone: formData.phone,
+        answers: formData.answers,
+        acceptRisk: formData.acceptRisk,
+        acceptConsent: formData.acceptConsent,
+        acceptNonMedical: formData.acceptNonMedical,
+        acceptLiability: formData.acceptLiability,
+        acceptDeclaration: formData.acceptDeclaration,
+        signature: formData.signature,
+      },
+      HEALTH_QUESTIONS
+    );
+  };
+
   if (submitStatus === "success") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -105,15 +125,25 @@ export default function WaiverPage() {
           <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-foreground mb-2">Waiver Submitted</h1>
           <p className="text-muted-foreground mb-6">
-            Thank you for completing the Client Intake & Liability Waiver. A copy has been sent for review.
+            Thank you for completing the Client Intake & Liability Waiver. A copy has been
+            emailed to you and Angel. Download a PDF copy for your records below.
           </p>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-primary hover:underline"
+          <button
+            onClick={handleDownload}
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 mb-6"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Return to Home
-          </Link>
+            <Download className="w-5 h-5" />
+            Download Your Copy (PDF)
+          </button>
+          <div>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-primary hover:underline"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Return to Home
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -347,8 +377,18 @@ export default function WaiverPage() {
 
           {/* Error Message */}
           {submitStatus === "error" && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center">
+            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center space-y-3">
               <p className="text-sm text-red-400">{errorMessage}</p>
+              {isFormValid() && (
+                <button
+                  type="button"
+                  onClick={handleDownload}
+                  className="inline-flex items-center gap-2 text-sm text-foreground border border-border rounded-full px-4 py-2 hover:bg-secondary transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  Download a PDF copy
+                </button>
+              )}
             </div>
           )}
 
