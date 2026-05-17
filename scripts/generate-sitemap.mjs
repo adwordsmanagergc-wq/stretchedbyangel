@@ -22,7 +22,8 @@ const urls = [
   { loc: "/", changefreq: "weekly", priority: "1.0" },
   { loc: "/personal-training", changefreq: "weekly", priority: "0.9" },
   { loc: "/areas-i-service", changefreq: "monthly", priority: "0.8" },
-  { loc: "/assisted-stretching-gold-coast", changefreq: "monthly", priority: "0.6" },
+  { loc: "/assisted-stretching-gold-coast", changefreq: "monthly", priority: "0.9" },
+  { loc: "/personal-training-gold-coast", changefreq: "monthly", priority: "0.9" },
   { loc: "/disclaimer", changefreq: "yearly", priority: "0.3" },
   { loc: "/waiver", changefreq: "yearly", priority: "0.3" },
   ...SUBURBS.map((s) => ({

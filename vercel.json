@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/((?!sitemap\\.xml|robots\\.txt|llms\\.txt|assets/.*|.*\\.(?:png|jpg|jpeg|svg|ico|webp|gif|woff2?|ttf|css|js|map|xml|txt|json)).*)", "destination": "/" }
+    { "source": "/((?!api/|sitemap\\.xml|robots\\.txt|llms\\.txt|assets/.*|.*\\.(?:png|jpg|jpeg|svg|ico|webp|gif|woff2?|ttf|css|js|map|xml|txt|json)).*)", "destination": "/" }
   ],
   "headers": [
     {
