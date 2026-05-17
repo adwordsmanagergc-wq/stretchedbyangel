@@ -231,13 +231,13 @@ const META = {
   home: {
     title: "Assisted Stretching Gold Coast | Stretched By Angel",
     description:
-      "Professional assisted stretching on the Gold Coast by Angel Elliott. Increase flexibility, improve range of motion, reduce pain and muscle tension. Sessions available at Wicked Bodz Fitness Centre or in the comfort of your home. Book now!",
+      "Assisted Stretching Gold Coast — professional PNF stretching by Angel Elliott. Increase flexibility, improve range of motion, reduce pain and muscle tension. Sessions at Wicked Bodz Fitness Centre, Surfers Paradise, or in the comfort of your home. Book now.",
     ogImage: BUSINESS.image,
   },
   "personal-training": {
     title: "Personal Training Gold Coast | Angel Fitness",
     description:
-      "Professional personal training on the Gold Coast by Angel Elliott. Over 10 years experience. In-person training, online coaching, and custom programs. Transform your body today!",
+      "Personal Training Gold Coast — qualified personal trainer Angel Elliott with 10+ years experience. In-person sessions on the Gold Coast, online coaching, and custom programs available worldwide. Transform your body today.",
     ogImage: BUSINESS.image,
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;

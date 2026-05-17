@@ -36,7 +36,7 @@ export default function SuburbPTPage() {
     document.title = `Personal Training ${suburb} | Angel Fitness Gold Coast`;
     setMeta(
       "description",
-      `Personal training in ${suburb} with Angel Elliott—10+ years experience. In-person sessions, online coaching, and custom programs available. Start your transformation today.`
+      `Personal Training ${suburb} — qualified personal trainer Angel Elliott with 10+ years experience. In-person sessions for ${suburb} locals, online coaching and custom programs worldwide. Book today.`
     );
 
     const ld = document.createElement("script");

@@ -35,7 +35,7 @@ export default function SuburbStretchPage() {
     document.title = `Assisted Stretching ${suburb} | Stretched By Angel`;
     setMeta(
       "description",
-      `Professional assisted PNF stretching in ${suburb}. Mobile home visits and in-studio sessions with Angel Elliott. Improve flexibility, reduce pain. Book today.`
+      `Assisted Stretching ${suburb} — professional PNF stretching by Angel Elliott. Mobile home visits and in-studio sessions in ${suburb} and across the Gold Coast. Improve flexibility, reduce pain, book today.`
     );
 
     const ld = document.createElement("script");
