@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
+import { Analytics } from "@vercel/analytics/react";
 import HomePage from "@/react-app/pages/Home";
 import PersonalTrainingPage from "@/react-app/pages/PersonalTraining";
 import SuburbPTPage from "@/react-app/pages/SuburbPTPage";
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/areas-i-service" element={<AreasIServicePage />} />
         <Route path="/assisted-stretching-gold-coast" element={<BlogPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>
 );
