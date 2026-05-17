@@ -1,0 +1,50 @@
+@import "@fontsource-variable/inter";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme matching live stretchedbyangel.com */
+    --background: 210 40% 6%;            /* ~rgb(9,15,21) */
+    --foreground: 0 0% 98%;              /* near white */
+    --card: 215 30% 9%;
+    --card-foreground: 0 0% 98%;
+    --border: 215 25% 18%;
+    --input: 215 25% 18%;
+    --primary: 340 82% 62%;              /* pink/rose */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 25% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 215 25% 14%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 188 86% 53%;               /* cyan accent */
+    --accent-foreground: 0 0% 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
