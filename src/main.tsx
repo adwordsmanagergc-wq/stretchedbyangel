@@ -10,6 +10,7 @@ import WaiverPage from "@/react-app/pages/Waiver";
 import AreasIServicePage from "@/react-app/pages/AreasIService";
 import BlogPage from "@/react-app/pages/Blog";
 import PersonalTrainingBlogPage from "@/react-app/pages/PersonalTrainingBlog";
+import { Analytics } from "@vercel/analytics/react";
 import "@/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/assisted-stretching-gold-coast" element={<BlogPage />} />
         <Route path="/personal-training-gold-coast" element={<PersonalTrainingBlogPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>
 );
