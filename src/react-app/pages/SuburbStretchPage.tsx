@@ -9,9 +9,15 @@ import {
   Dumbbell,
   Users,
   MapPin,
+  Compass,
 } from "lucide-react";
-import { unslugify } from "@/data/suburbs";
+import { unslugify, slugify } from "@/data/suburbs";
 import { CONTACT } from "@/data/contact";
+import {
+  getProfile,
+  getNeighbors,
+  studioDistanceLabel,
+} from "@/data/suburbProfiles";
 
 const LOGO =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
@@ -26,30 +32,44 @@ function setMeta(name: string, content: string) {
   tag.setAttribute("content", content);
 }
 
+function setCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "canonical";
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
 export default function SuburbStretchPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
+  const profile = suburb ? getProfile(slug) : null;
+  const neighbors = suburb ? getNeighbors(slug) : [];
 
   useEffect(() => {
-    if (!suburb) return;
+    if (!suburb || !profile) return;
     document.title = `Assisted Stretching ${suburb} | Stretched By Angel`;
     setMeta(
       "description",
-      `Assisted Stretching ${suburb} — professional PNF stretching by Angel Elliott. Mobile home visits and in-studio sessions in ${suburb} and across the Gold Coast. Improve flexibility, reduce pain, book today.`
+      `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`
     );
+    setCanonical(`https://www.stretchedbyangel.com/assisted-stretching/${slug}`);
 
     const ld = document.createElement("script");
     ld.type = "application/ld+json";
-    ld.text = JSON.stringify(buildFaqSchema(suburb));
+    ld.text = JSON.stringify(buildFaqSchema(suburb, profile));
     document.head.appendChild(ld);
     return () => {
       ld.remove();
     };
-  }, [suburb]);
+  }, [suburb, profile, slug]);
 
-  if (!suburb) return <Navigate to="/areas-i-service" replace />;
+  if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
 
-  const faqs = buildFaqs(suburb);
+  const faqs = buildFaqs(suburb, profile);
+  const distanceLabel = studioDistanceLabel(profile.studioMin);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -90,10 +110,13 @@ export default function SuburbStretchPage() {
             <br />
             <span className="text-white">{suburb}</span>
           </h1>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Professional PNF stretching services in {suburb} to improve your flexibility,
-            relieve pain, and help you move better—delivered by Angel Elliott at your home
-            or at Wicked Bodz Fitness Centre.
+          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-4 leading-relaxed">
+            Professional PNF stretching for {suburb} — {profile.vibe}.
+            Mobile home visits, or come into the Wicked Bodz studio in Surfers
+            Paradise ({distanceLabel}).
+          </p>
+          <p className="text-base text-white/60 max-w-2xl mx-auto mb-8">
+            Local landmarks: {profile.landmarks.join(" · ")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -112,22 +135,52 @@ export default function SuburbStretchPage() {
         </div>
       </section>
 
+      {/* Unique per-suburb introduction */}
       <section className="py-16 bg-gradient-to-b from-background to-card">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            Assisted Stretching for the {suburb} Lifestyle
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+            {profile.stretchAngle}
+          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            {suburb} life means {profile.lifestyle}. The body pays for it in{" "}
+            {profile.bodyToll} — none of which solo stretching ever quite
+            reaches. Targeted assisted PNF stretching does.
+          </p>
+        </div>
+      </section>
+
+      {/* Feature cards — kept but visually compact */}
+      <section className="py-16 bg-card">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3">
-              {suburb} Stretching Sessions
+              What {suburb} Sessions Look Like
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Experience the difference professional assisted stretching makes for your
-              flexibility, recovery, and overall wellbeing in {suburb}.
+              Every session in {suburb} is built around your body on the day,
+              not a checklist.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Target, title: "Full Body Stretching", desc: "Targeting all major muscle groups" },
-              { icon: Dumbbell, title: "PNF Technique", desc: "Advanced stretching methods" },
-              { icon: Users, title: "One-on-One Sessions", desc: "Personalised attention" },
+              {
+                icon: Target,
+                title: "Full Body PNF Flow",
+                desc: "Hips, glutes, lower and upper back, shoulders, calves — all the places the daily routine quietly locks up.",
+              },
+              {
+                icon: Dumbbell,
+                title: "Active-Release Stretches",
+                desc: "Brief muscle contractions paired with deep passive stretches to access genuinely new range of motion.",
+              },
+              {
+                icon: Users,
+                title: "Tailored to You",
+                desc: "Athlete or office worker, every session is paced to your breath and your tolerance — never one-size-fits-all.",
+              },
             ].map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
@@ -142,30 +195,24 @@ export default function SuburbStretchPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-card">
+      {/* Why locals — now lifestyle-specific */}
+      <section className="py-16 bg-background">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-center">
-            Why {suburb} Locals Choose Assisted Stretching
+            Why {suburb} Locals Book Assisted Stretching
           </h2>
-          <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
-            <p>
-              Living in {suburb} on the Gold Coast means an active lifestyle—surfing, gym
-              sessions, running, or simply enjoying the outdoors. But all that activity
-              takes a toll on your body.
-            </p>
-            <p>
-              Professional assisted stretching helps you maintain the flexibility and
-              mobility you need to keep doing what you love, pain-free.
-            </p>
-          </div>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center max-w-2xl mx-auto">
+            The specific bodies I work with in {suburb} share a recognisable
+            pattern — and a recognisable set of wins.
+          </p>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
-              "Improve flexibility faster than stretching alone",
-              "Release chronic muscle tension and tightness",
-              "Recover faster from workouts and training",
-              "Reduce lower back, neck, and shoulder pain",
-              "Prevent injuries and stay active longer",
-              "Experience deep relaxation and stress relief",
+              `Release the ${profile.bodyToll.split(",")[0]} that comes with ${profile.lifestyle.split(",")[0]}`,
+              "Improve flexibility faster than stretching alone ever will",
+              "Recover faster from training, work and weekend activity",
+              "Reduce lower back, neck and shoulder pain",
+              "Stay active and injury-free into your 50s, 60s and beyond",
+              "Experience deep nervous system relaxation in every session",
             ].map((t) => (
               <li key={t} className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
@@ -176,13 +223,38 @@ export default function SuburbStretchPage() {
         </div>
       </section>
 
+      {/* Studio location context */}
+      <section className="py-16 bg-card">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <MapPin className="w-10 h-10 text-primary mx-auto mb-4" />
+          <h2 className="text-3xl font-bold mb-4">
+            Stretching Services in {suburb}
+          </h2>
+          <p className="text-muted-foreground text-lg mb-3">
+            {profile.faqLocation}
+          </p>
+          <p className="text-muted-foreground text-base mb-8 max-w-2xl mx-auto">
+            Mobile home visits across {suburb} are $110 for the 50-minute
+            session, or $100 per session as part of a 10-pack. Just provide a
+            quiet space and a yoga mat — everything else comes with me.
+          </p>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full transition-all"
+          >
+            Meet Angel & See Prices <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
             Stretching {suburb} FAQ
           </h2>
           <p className="text-muted-foreground text-center mb-12">
-            Everything you need to know about assisted stretching services in {suburb}.
+            The questions I get most often from {suburb} clients.
           </p>
           <div className="space-y-3">
             {faqs.map((f) => (
@@ -205,32 +277,56 @@ export default function SuburbStretchPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-card">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <MapPin className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="text-3xl font-bold mb-4">Stretching Services in {suburb}</h2>
-          <p className="text-muted-foreground text-lg mb-8">
-            Angel offers mobile stretching services right to your door in {suburb}. You can
-            also visit Wicked Bodz Fitness Centre in Surfers Paradise for in-studio
-            sessions.
-          </p>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full transition-all"
-          >
-            Meet Angel & See Prices <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      {/* Nearby suburbs — internal linking */}
+      {neighbors.length > 0 && (
+        <section className="py-16 bg-card">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="flex items-center gap-3 mb-6 justify-center">
+              <Compass className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-center">
+                Stretching in suburbs near {suburb}
+              </h2>
+            </div>
+            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+              I also run assisted stretching sessions across these nearby
+              {" "}Gold Coast suburbs:
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {neighbors.map((nslug) => {
+                const name = unslugify(nslug);
+                if (!name) return null;
+                return (
+                  <Link
+                    key={nslug}
+                    to={`/assisted-stretching/${slugify(name)}`}
+                    className="px-4 py-2 rounded-full border border-border bg-background/50 hover:border-primary hover:bg-primary/5 transition-all text-sm text-foreground hover:text-primary"
+                  >
+                    Stretching {name}
+                  </Link>
+                );
+              })}
+            </div>
+            <p className="text-center mt-8">
+              <Link
+                to="/areas-i-service"
+                className="text-primary hover:underline text-sm"
+              >
+                View all 77 Gold Coast suburbs →
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
 
+      {/* Final CTA */}
       <section className="py-16 bg-gradient-to-b from-background to-card">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Ready for Professional Stretching in {suburb}?
           </h2>
           <p className="text-muted-foreground text-lg mb-8">
-            Book your first assisted stretching session in {suburb} today. Your body will
-            thank you.
+            Book your first assisted stretching session in {suburb} today —
+            most clients feel noticeably looser walking out the door.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -264,12 +360,15 @@ export default function SuburbStretchPage() {
       <footer className="py-8 bg-card border-t border-border">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-muted-foreground text-sm mb-4">
-            Professional Assisted Stretching in {suburb} and the Gold Coast
+            Professional Assisted Stretching in {suburb} and across the Gold
+            Coast
           </p>
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             <span>•</span>
             <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
+            <span>•</span>
+            <Link to="/assisted-stretching-gold-coast" className="hover:text-primary transition-colors">Stretching Guide</Link>
             <span>•</span>
             <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
             <span>•</span>
@@ -284,52 +383,56 @@ export default function SuburbStretchPage() {
   );
 }
 
-function buildFaqs(s: string) {
+function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
+  const firstLifestyle = profile.lifestyle.split(",")[0].trim();
+  const firstBodyToll = profile.bodyToll.split(",")[0].trim();
+  const landmark = profile.landmarks[0] ?? `central ${suburb}`;
+
   return [
     {
-      q: `Where can I find assisted stretching in ${s}?`,
-      a: `Angel offers mobile assisted stretching directly to your home in ${s}, or you can book an in-studio session at Wicked Bodz Fitness Centre in Surfers Paradise—just a short drive from ${s}.`,
+      q: `Where can I find assisted stretching in ${suburb}?`,
+      a: profile.faqLocation,
     },
     {
-      q: "What is assisted stretching and how does it work?",
-      a: "Assisted stretching uses PNF (Proprioceptive Neuromuscular Facilitation) techniques where a trained therapist guides your body into deeper, safer stretches than you could achieve alone. It combines passive stretching with brief isometric contractions for fast flexibility gains.",
+      q: "What is assisted stretching and how does PNF work?",
+      a: "Assisted stretching uses PNF (Proprioceptive Neuromuscular Facilitation) techniques — a trained therapist guides your body into deeper, safer stretches than you could achieve alone. It combines passive stretching with brief isometric contractions to release the nervous system's protective brake and access genuinely new range of motion.",
     },
     {
-      q: `How much does stretching cost in ${s}?`,
-      a: `Single sessions: $60 for 30 minutes, $90 for 50 minutes in-studio, or $110 for a 50-minute home visit in ${s}. 10-session packages: $550 (30 min) or $800 (50 min), with home visits adding $20 per session.`,
+      q: `How much does stretching cost in ${suburb}?`,
+      a: `Single sessions are $60 (30 minutes), $90 (50 minutes in-studio), or $110 for a 50-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 50-minute session — with home visits adding $20 per session.`,
     },
     {
-      q: `What are the benefits of professional stretching in ${s}?`,
-      a: "Increased flexibility, better range of motion, reduced muscle tension, improved recovery, injury prevention, lower back/neck/shoulder pain relief, and deep relaxation.",
+      q: `What does assisted stretching specifically help with for ${suburb} residents?`,
+      a: `In ${suburb}, the most common things I work on are ${profile.bodyToll}. The lifestyle here — ${profile.lifestyle} — loads up the same muscle patterns repeatedly, and PNF stretching is the most efficient way I've found to undo it.`,
     },
     {
-      q: `Is assisted stretching good for athletes in ${s}?`,
-      a: `Absolutely. Athletes in ${s} use assisted PNF stretching to improve performance, speed up recovery, and prevent overuse injuries. It's a perfect complement to any training program.`,
+      q: `Is assisted stretching suitable for athletes and active locals in ${suburb}?`,
+      a: `Absolutely. ${suburb} has plenty of active locals — surfers, runners, gym-goers, parents who don't stop moving — and PNF stretching is what most use to recover faster, perform better, and stay injury-free. It's a perfect complement to any training routine.`,
     },
     {
-      q: `Can assisted stretching help with back pain in ${s}?`,
-      a: "Yes. Tight hips, hamstrings, and glutes are common contributors to lower back pain. Targeted assisted stretching releases these muscles and can provide noticeable relief from the very first session.",
+      q: `Can assisted stretching help with ${firstBodyToll}?`,
+      a: `Yes — that's one of the most common things ${suburb} clients book for. ${firstBodyToll.charAt(0).toUpperCase() + firstBodyToll.slice(1)} usually comes from ${firstLifestyle}, and targeted PNF stretching addresses the muscle and fascial tightness directly. Most clients notice a real difference inside one or two sessions.`,
     },
     {
-      q: `How often should I get stretched in ${s}?`,
-      a: "For best results, 1–2 sessions per week. However, even a single monthly session provides noticeable relief and maintenance. Angel will recommend a schedule based on your goals and lifestyle.",
+      q: `How often should ${suburb} locals book in?`,
+      a: "For best results, weekly for 4-6 weeks produces noticeable, measurable flexibility gains. Once you're feeling looser, fortnightly or monthly maintenance keeps you there. We'll work out a cadence that fits your goals and schedule.",
     },
     {
-      q: `Do you offer mobile stretching services in ${s}?`,
-      a: `Yes. Angel travels to homes throughout ${s} for 50-minute mobile sessions at $110, or $100 per session as part of a 10-pack. Just provide a quiet space and a yoga mat—Angel brings everything else.`,
+      q: `Do you offer mobile stretching home visits in ${suburb}?`,
+      a: `Yes — mobile home visits to ${suburb} are one of the most popular options. Sessions are 50 minutes for $110, or $100 per session as part of a 10-pack. Just provide a quiet space and a yoga mat. Especially handy if you're based near ${landmark} and would rather not drive into Surfers.`,
     },
     {
       q: "Do I need to be flexible to start?",
-      a: `Not at all. Angel works with clients across every flexibility level in ${s}—including total beginners and people recovering from injury. Every session is tailored to your body on the day.`,
+      a: `Not at all. I work with clients across every flexibility level — from people who can barely touch their shins to ex-dancers — and every session is paced to your body on the day. In fact, the less flexible you are right now, the more dramatic the early-session gains tend to be.`,
     },
   ];
 }
 
-function buildFaqSchema(suburb: string) {
+function buildFaqSchema(suburb: string, profile: ReturnType<typeof getProfile>) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: buildFaqs(suburb).map(({ q, a }) => ({
+    mainEntity: buildFaqs(suburb, profile).map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },

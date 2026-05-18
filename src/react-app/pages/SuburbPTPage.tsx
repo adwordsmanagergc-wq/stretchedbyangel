@@ -10,9 +10,15 @@ import {
   Target,
   Users,
   MapPin,
+  Compass,
 } from "lucide-react";
-import { unslugify } from "@/data/suburbs";
+import { unslugify, slugify } from "@/data/suburbs";
 import { CONTACT } from "@/data/contact";
+import {
+  getProfile,
+  getNeighbors,
+  studioDistanceLabel,
+} from "@/data/suburbProfiles";
 
 const LOGO =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
@@ -27,30 +33,44 @@ function setMeta(name: string, content: string) {
   tag.setAttribute("content", content);
 }
 
+function setCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "canonical";
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
 export default function SuburbPTPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
+  const profile = suburb ? getProfile(slug) : null;
+  const neighbors = suburb ? getNeighbors(slug) : [];
 
   useEffect(() => {
-    if (!suburb) return;
+    if (!suburb || !profile) return;
     document.title = `Personal Training ${suburb} | Angel Fitness Gold Coast`;
     setMeta(
       "description",
-      `Personal Training ${suburb} — qualified personal trainer Angel Elliott with 10+ years experience. In-person sessions for ${suburb} locals, online coaching and custom programs worldwide. Book today.`
+      `Personal Training ${suburb} — qualified trainer Angel Elliott with 10+ years experience. Strength training for ${profile.lifestyle.split(",")[0]}. In-person, online and custom programs. Book today.`
     );
+    setCanonical(`https://www.stretchedbyangel.com/personal-training/${slug}`);
 
     const ld = document.createElement("script");
     ld.type = "application/ld+json";
-    ld.text = JSON.stringify(buildFaqSchema(suburb));
+    ld.text = JSON.stringify(buildFaqSchema(suburb, profile));
     document.head.appendChild(ld);
     return () => {
       ld.remove();
     };
-  }, [suburb]);
+  }, [suburb, profile, slug]);
 
-  if (!suburb) return <Navigate to="/areas-i-service" replace />;
+  if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
 
-  const faqs = buildFaqs(suburb);
+  const faqs = buildFaqs(suburb, profile);
+  const distanceLabel = studioDistanceLabel(profile.studioMin);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -95,10 +115,13 @@ export default function SuburbPTPage() {
             <br />
             <span className="text-white">{suburb}</span>
           </h1>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed">
-            One-on-one personal training in {suburb} with Angel Elliott—qualified trainer with a
-            decade of experience helping people transform their bodies and lives. In-person on
-            the Gold Coast or online anywhere in the world.
+          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-4 leading-relaxed">
+            One-on-one personal training for {suburb} — {profile.vibe}.
+            Train in-person at Wicked Bodz in Surfers Paradise ({distanceLabel}),
+            or online from anywhere in the world.
+          </p>
+          <p className="text-base text-white/60 max-w-2xl mx-auto mb-8">
+            Local landmarks: {profile.landmarks.join(" · ")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -119,22 +142,53 @@ export default function SuburbPTPage() {
         </div>
       </section>
 
+      {/* Unique per-suburb introduction */}
       <section className="py-16 bg-gradient-to-b from-background to-card">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            Personal Training for the {suburb} Lifestyle
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+            {profile.ptAngle}
+          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Most of my {suburb} clients live a version of: {profile.lifestyle}.
+            That's a lifestyle that builds particular strengths and particular
+            blind spots — {profile.bodyToll} — and coaching is what turns the
+            blind spots into resilient strength.
+          </p>
+        </div>
+      </section>
+
+      {/* Training options */}
+      <section className="py-16 bg-card">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3">
-              Personal Training in {suburb}
+              Three Ways to Train in {suburb}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose how you train. Whether you live in {suburb} or are training remotely,
-              there's an option that fits your lifestyle and goals.
+              Whether you live around {profile.landmarks[0]} or further out, one
+              of these formats will fit your schedule.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Users, title: "In-Person Training", desc: `One-on-one sessions for clients in ${suburb} and nearby suburbs at Wicked Bodz Fitness Centre.` },
-              { icon: Monitor, title: "Online Coaching", desc: "Train remotely with custom programs, video form-checks, and weekly check-ins." },
-              { icon: Target, title: "Custom Programs", desc: "Confident training solo? Get a personalised program designed for your goals." },
+              {
+                icon: Users,
+                title: "In-Person Training",
+                desc: `One-on-one sessions for ${suburb} locals at Wicked Bodz Fitness Centre, Surfers Paradise — ${distanceLabel}.`,
+              },
+              {
+                icon: Monitor,
+                title: "Online Coaching",
+                desc: "Train remotely with a custom program, weekly video form reviews, and ongoing programming adjustments — perfect for busy schedules.",
+              },
+              {
+                icon: Target,
+                title: "Custom Programs",
+                desc: "Self-motivated and just need the plan? Get a personalised program built for your goals, equipment and schedule to run independently.",
+              },
             ].map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
@@ -149,30 +203,24 @@ export default function SuburbPTPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-card">
+      {/* Why locals — now lifestyle-specific */}
+      <section className="py-16 bg-background">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-center">
             Why {suburb} Locals Train With Angel
           </h2>
-          <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
-            <p>
-              Living in {suburb} means access to one of Australia's most active lifestyles—but
-              real, lasting results don't come from random workouts. They come from a plan
-              tailored to your body, your goals, and your schedule.
-            </p>
-            <p>
-              With 10+ years coaching clients from Jersey to the Gold Coast, Angel brings the
-              structure, accountability, and technique that turns effort into outcomes.
-            </p>
-          </div>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center max-w-2xl mx-auto">
+            The {suburb} clients who get the most out of coaching share a few
+            patterns — and a few common goals.
+          </p>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
-              "Programs tailored to your goals and experience",
-              "Build strength, lose fat, or improve performance",
+              `Programs that correct what ${profile.lifestyle.split(",")[0]} does to your body`,
+              "Real strength gains, not just sweat",
               "Weekly accountability and progress tracking",
-              "Technique coaching to train safely",
-              "Nutrition guidance to support training",
-              "Flexibility around your schedule",
+              "Technique coaching to train safely for years",
+              "Nutrition guidance that supports the training",
+              "Flexibility around shift work, commutes and family",
             ].map((t) => (
               <li key={t} className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
@@ -183,13 +231,38 @@ export default function SuburbPTPage() {
         </div>
       </section>
 
+      {/* Location context */}
+      <section className="py-16 bg-card">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <MapPin className="w-10 h-10 text-primary mx-auto mb-4" />
+          <h2 className="text-3xl font-bold mb-4">
+            Training Locations Near {suburb}
+          </h2>
+          <p className="text-muted-foreground text-lg mb-3">
+            {profile.faqLocation}
+          </p>
+          <p className="text-muted-foreground text-base mb-8 max-w-2xl mx-auto">
+            Online clients can train from anywhere — particularly handy for
+            FIFO, shift work, and {suburb} locals who'd rather not add another
+            commute to their week.
+          </p>
+          <Link
+            to="/personal-training"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full transition-all"
+          >
+            Meet Angel & See Options <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
             Personal Training {suburb} FAQ
           </h2>
           <p className="text-muted-foreground text-center mb-12">
-            Everything you need to know about training with Angel in {suburb}.
+            What {suburb} clients usually ask before getting started.
           </p>
           <div className="space-y-3">
             {faqs.map((f) => (
@@ -212,32 +285,57 @@ export default function SuburbPTPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-card">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <MapPin className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="text-3xl font-bold mb-4">Training Locations Near {suburb}</h2>
-          <p className="text-muted-foreground text-lg mb-8">
-            In-person sessions are held at Wicked Bodz Fitness Centre, 45 Cavill Ave, Surfers
-            Paradise—an easy drive from {suburb}. Prefer to train at home or overseas? Online
-            coaching and custom programs are available worldwide.
-          </p>
-          <Link
-            to="/personal-training"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full transition-all"
-          >
-            Meet Angel & See Options <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      {/* Nearby suburbs — internal linking */}
+      {neighbors.length > 0 && (
+        <section className="py-16 bg-card">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="flex items-center gap-3 mb-6 justify-center">
+              <Compass className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-center">
+                Personal training in suburbs near {suburb}
+              </h2>
+            </div>
+            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+              I also coach clients across these nearby Gold Coast suburbs —
+              in-person, online, or both:
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {neighbors.map((nslug) => {
+                const name = unslugify(nslug);
+                if (!name) return null;
+                return (
+                  <Link
+                    key={nslug}
+                    to={`/personal-training/${slugify(name)}`}
+                    className="px-4 py-2 rounded-full border border-border bg-background/50 hover:border-primary hover:bg-primary/5 transition-all text-sm text-foreground hover:text-primary"
+                  >
+                    PT in {name}
+                  </Link>
+                );
+              })}
+            </div>
+            <p className="text-center mt-8">
+              <Link
+                to="/areas-i-service"
+                className="text-primary hover:underline text-sm"
+              >
+                View all 77 Gold Coast suburbs →
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
 
+      {/* Final CTA */}
       <section className="py-16 bg-gradient-to-b from-background to-card">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Ready to Transform Your Fitness in {suburb}?
           </h2>
           <p className="text-muted-foreground text-lg mb-8">
-            Get in touch today. Whether you're new to training or looking to break through a
-            plateau, Angel will design a plan that works for you.
+            Get in touch today. Whether you're new to training or trying to
+            break through a plateau, we'll design a plan that actually fits
+            your week.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -280,6 +378,8 @@ export default function SuburbPTPage() {
             <span>•</span>
             <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
             <span>•</span>
+            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Training Guide</Link>
+            <span>•</span>
             <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
             <span>•</span>
             <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
@@ -293,48 +393,56 @@ export default function SuburbPTPage() {
   );
 }
 
-function buildFaqs(s: string) {
+function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
+  const firstLifestyle = profile.lifestyle.split(",")[0].trim();
+  const firstBodyToll = profile.bodyToll.split(",")[0].trim();
+  const landmark = profile.landmarks[0] ?? `central ${suburb}`;
+
   return [
     {
-      q: `Do you offer personal training in ${s}?`,
-      a: `Yes. Angel coaches clients from ${s} at Wicked Bodz Fitness Centre in Surfers Paradise—a short drive from most ${s} addresses—as well as online for clients who prefer to train at home or while travelling.`,
+      q: `Do you offer personal training in ${suburb}?`,
+      a: profile.faqLocation,
     },
     {
       q: "How long have you been a personal trainer?",
-      a: "Over 10 years. Angel has coached clients from Jersey to Australia and has helped hundreds of people build strength, lose fat, and rebuild confidence through structured training.",
+      a: "Over 10 years. I've coached clients from Jersey to Australia and helped hundreds of people build strength, lose fat, and rebuild confidence through structured training.",
     },
     {
-      q: `What does personal training in ${s} include?`,
-      a: `Tailored programming, one-on-one coaching, technique work, accountability check-ins, and nutrition guidance. Every plan is built around your goals, schedule, and current fitness level in ${s}.`,
+      q: `What's the most common reason ${suburb} locals start personal training?`,
+      a: `Usually one of three things: ${firstLifestyle} is starting to wear them down, they've plateaued after years of solo gym time, or they just turned 40 and realised strength is non-negotiable. Coaching solves all three.`,
+    },
+    {
+      q: `Can personal training help with ${firstBodyToll}?`,
+      a: `Yes — that's actually one of the most common things ${suburb} clients want fixed. ${firstBodyToll.charAt(0).toUpperCase() + firstBodyToll.slice(1)} usually shows up because of ${firstLifestyle}, and a coached strength program addresses both the symptom and the underlying weakness. Most clients feel a real difference inside 4-6 weeks.`,
     },
     {
       q: "Do you offer online coaching as well?",
-      a: "Absolutely. Online clients get a custom workout program, video form reviews, weekly check-ins, and ongoing programming adjustments—no matter where in the world they are.",
+      a: `Absolutely. Online clients get a custom program, weekly video form-checks, regular check-ins and ongoing programming adjustments. It's especially popular with ${suburb} clients who can't easily get to Surfers Paradise during the week — FIFO workers, shift workers, busy parents.`,
     },
     {
-      q: `What kind of results can I expect training in ${s}?`,
-      a: "Results depend on consistency and goals, but most clients see meaningful changes in strength, body composition, and confidence within the first 4–8 weeks. Long-term clients consistently report life-changing transformations.",
+      q: `Is personal training in ${suburb} suitable for total beginners?`,
+      a: `100%. Most of my ${suburb} clients are beginners or returning to training after a long break. Every program scales to your starting point — no judgement, no ego, no being thrown into the deep end.`,
     },
     {
-      q: `Is personal training in ${s} suitable for beginners?`,
-      a: `100%. Most of Angel's ${s} clients are beginners or returning to the gym after a long break. Every program scales to your starting point—no judgement, no ego.`,
+      q: "Will I get bulky if I lift weights?",
+      a: "No. Building visible muscle takes years of dedicated training and a huge calorie surplus. What lifting actually gives you is strength, shape, better posture, denser bones, faster metabolism and confidence. Nearly every female client I've ever coached has wished they started sooner.",
     },
     {
-      q: "Can I combine personal training with assisted stretching?",
-      a: "Yes—and many clients do. Assisted PNF stretching is the perfect recovery complement to strength training, helping you stay mobile, recover faster, and reduce injury risk.",
+      q: `What kind of results can ${suburb} clients expect?`,
+      a: "Most clients see meaningful changes in 4-8 weeks — strength up, body composition shifting, energy and mood noticeably better. Visible body changes typically lock in around the 8-12 week mark with consistent training and nutrition.",
     },
     {
-      q: `How do I get started in ${s}?`,
-      a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. Angel will run through your goals, recommend the right option (in-person, online, or program-only), and book you in for your first session.`,
+      q: `How do I get started from ${suburb}?`,
+      a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. I'll run through your goals, your schedule, and your current fitness level, recommend the right option (in-person, online or program-only), and book you in for your first session. Whether you're near ${landmark} or anywhere else on the coast, getting started is the same call.`,
     },
   ];
 }
 
-function buildFaqSchema(suburb: string) {
+function buildFaqSchema(suburb: string, profile: ReturnType<typeof getProfile>) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: buildFaqs(suburb).map(({ q, a }) => ({
+    mainEntity: buildFaqs(suburb, profile).map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },
