@@ -8,9 +8,9 @@
 
 ## Core pages
 
-- [Home — Assisted Stretching Gold Coast](https://stretchedbyangel.com/): Service overview, benefits of PNF stretching, single-session and 10-pack pricing, FAQs, and booking details.
-- [Personal Training Gold Coast](https://stretchedbyangel.com/personal-training): In-person and online personal training with Angel Elliott. 10+ years experience, training options, FAQs.
-- [Areas I Service](https://stretchedbyangel.com/areas-i-service): Hub linking to per-suburb stretching and personal training pages across 77 Gold Coast suburbs.
+- [Home — Assisted Stretching Gold Coast](https://www.stretchedbyangel.com/): Service overview, benefits of PNF stretching, single-session and 10-pack pricing, FAQs, and booking details.
+- [Personal Training Gold Coast](https://www.stretchedbyangel.com/personal-training): In-person and online personal training with Angel Elliott. 10+ years experience, training options, FAQs.
+- [Areas I Service](https://www.stretchedbyangel.com/areas-i-service): Hub linking to per-suburb stretching and personal training pages across 77 Gold Coast suburbs.
 
 ## Services and pricing
 
@@ -33,5 +33,5 @@
 
 ## Legal
 
-- [Terms & Disclaimer](https://stretchedbyangel.com/disclaimer)
-- [Liability Waiver](https://stretchedbyangel.com/waiver)
+- [Terms & Disclaimer](https://www.stretchedbyangel.com/disclaimer)
+- [Liability Waiver](https://www.stretchedbyangel.com/waiver)

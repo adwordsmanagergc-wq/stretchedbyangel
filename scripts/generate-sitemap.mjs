@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://stretchedbyangel.com";
+const SITE = "https://www.stretchedbyangel.com";
 const OUT = resolve(ROOT, "public/sitemap.xml");
 
 const suburbsSource = readFileSync(resolve(ROOT, "src/data/suburbs.ts"), "utf8");

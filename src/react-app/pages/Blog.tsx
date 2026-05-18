@@ -24,7 +24,7 @@ const HERO_IMG =
 const SECONDARY_IMG =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg";
 
-const URL = "https://stretchedbyangel.com/assisted-stretching-gold-coast";
+const URL = "https://www.stretchedbyangel.com/assisted-stretching-gold-coast";
 const TITLE =
   "Assisted Stretching Gold Coast: The Complete Guide to PNF Benefits | Stretched By Angel";
 const DESCRIPTION =
@@ -168,7 +168,7 @@ const BLOG_SCHEMA = {
   author: {
     "@type": "Person",
     name: "Angel Elliott",
-    url: "https://stretchedbyangel.com/",
+    url: "https://www.stretchedbyangel.com/",
   },
   publisher: {
     "@type": "Organization",

@@ -26,7 +26,7 @@ const HERO_IMG =
 const SECONDARY_IMG =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.35.28-am.png";
 
-const URL = "https://stretchedbyangel.com/personal-training-gold-coast";
+const URL = "https://www.stretchedbyangel.com/personal-training-gold-coast";
 const TITLE =
   "Personal Training Gold Coast: The Complete Guide to Training With Angel | Angel Fitness";
 const DESCRIPTION =
@@ -185,7 +185,7 @@ const BLOG_SCHEMA = {
   author: {
     "@type": "Person",
     name: "Angel Elliott",
-    url: "https://stretchedbyangel.com/personal-training",
+    url: "https://www.stretchedbyangel.com/personal-training",
   },
   publisher: {
     "@type": "Organization",

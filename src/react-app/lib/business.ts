@@ -1,7 +1,7 @@
 export const BUSINESS = {
   name: "Stretched By Angel",
   legalName: "Stretched By Angel",
-  url: "https://stretchedbyangel.com",
+  url: "https://www.stretchedbyangel.com",
   logo: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png",
   image: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/IMG-20260208-WA0012.jpg",
   description:
