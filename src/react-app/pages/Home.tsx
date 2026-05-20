@@ -28,6 +28,7 @@ const IMAGES = {
   stretching1: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg",
   stretching2: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175708_Instagram.jpg",
   promo: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/openart-image_1772760489433_e96da448_1772760489635_73d8343e.jpg",
+  heroAngel: "/assisted-stretching-gold-coast-hero.png",
 };
 
 const Logo = ({ className = "" }: { className?: string }) => (
@@ -267,9 +268,9 @@ export default function HomePage() {
             <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/30 to-cyan-500/30 rounded-3xl blur-2xl" />
             <div className="relative rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 aspect-[4/5]">
               <img
-                src={IMAGES.stretching2}
-                alt="Angel Elliott - Stretch Therapist"
-                className="w-full h-full object-cover object-[center_35%]"
+                src={IMAGES.heroAngel}
+                alt="Angel Elliott — Assisted Stretching Gold Coast stretch therapist"
+                className="w-full h-full object-cover object-top"
               />
             </div>
           </div>
