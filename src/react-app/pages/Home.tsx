@@ -13,6 +13,12 @@ import {
   Shield,
   Brain,
   ArrowRight,
+  Building2,
+  Briefcase,
+  Users,
+  TrendingUp,
+  Quote,
+  CalendarClock,
 } from "lucide-react";
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 
@@ -474,6 +480,178 @@ export default function HomePage() {
                 className="relative rounded-2xl shadow-2xl w-full ring-1 ring-white/10"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Corporate & Workplace Stretching */}
+      <section id="corporate" className="py-20 lg:py-32 bg-gradient-to-b from-background to-card">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <span className="text-primary font-medium tracking-wider uppercase text-sm">
+              Corporate & Workplace Wellness
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
+              Fewer Sick Days. Better Posture.{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
+                A Perk Your Team Will Actually Use.
+              </span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              On-site assisted stretching and mobility sessions for office and corporate
+              teams across the Gold Coast — from Bundall and Southport to Robina and
+              Broadbeach. A workplace wellness investment your staff will feel the same day.
+            </p>
+          </div>
+
+          {/* Pain points */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            {[
+              "Neck & shoulder tension from all-day screen work",
+              "Lower back pain and tight hips from sitting",
+              "Afternoon fatigue, low focus and presenteeism",
+              "Rising absenteeism and sick-leave costs",
+            ].map((point, i) => (
+              <div
+                key={i}
+                className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-5 flex items-start gap-3"
+              >
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <p className="text-muted-foreground text-sm leading-relaxed">{point}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* What we offer — 3 packages */}
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-3">
+            Office Stretching Service — Three Ways to Run It
+          </h3>
+          <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
+            Every package is delivered on-site at your workplace, or in-studio at Wicked
+            Bodz in Surfers Paradise.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {[
+              {
+                icon: Clock,
+                name: "“Desk Reset” Express",
+                detail: "30-minute on-site express sessions",
+                body: "Short, sharp resets that target the neck, shoulders, hip flexors and lower back — ideal for a lunchtime rotation through a team.",
+              },
+              {
+                icon: Briefcase,
+                name: "One-on-One On-Site",
+                detail: "60-minute assisted stretching at your office",
+                body: "A full PNF mobility session delivered to executives and key staff at their desks — no travel, no downtime out of the office.",
+              },
+              {
+                icon: CalendarClock,
+                name: "Recurring Wellness Program",
+                detail: "Weekly or fortnightly on-site visits",
+                body: "An ongoing corporate wellness program with a regular schedule — the cadence that actually shifts posture, energy and sick-leave numbers.",
+              },
+            ].map((pkg, i) => (
+              <div
+                key={i}
+                className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group"
+              >
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <pkg.icon className="w-7 h-7 text-primary" />
+                </div>
+                <h4 className="text-xl font-semibold mb-1">{pkg.name}</h4>
+                <p className="text-primary text-sm font-medium mb-3">{pkg.detail}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{pkg.body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Benefits + Who it's for */}
+          <div className="grid lg:grid-cols-2 gap-6 mb-16">
+            <div className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-7">
+              <div className="flex items-center gap-3 mb-5">
+                <TrendingUp className="w-6 h-6 text-primary" />
+                <h3 className="text-xl font-semibold">The Return for Your Business</h3>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  "Reduced absenteeism and sick-leave costs",
+                  "Improved staff retention and morale",
+                  "Better posture, energy and focus across the team",
+                  "Measurable wellbeing ROI, not just a token perk",
+                ].map((b, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-7">
+              <div className="flex items-center gap-3 mb-5">
+                <Building2 className="w-6 h-6 text-primary" />
+                <h3 className="text-xl font-semibold">Who It's For</h3>
+              </div>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                Assisted stretching for businesses of every size — from boutique firms to
+                large floors:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Gold Coast offices",
+                  "Co-working spaces",
+                  "Corporate teams",
+                  "Professional services firms",
+                  "Call centres",
+                  "SMBs with 10+ staff",
+                ].map((who, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-1.5 bg-secondary/60 border border-border rounded-full px-3 py-1.5 text-sm text-foreground"
+                  >
+                    <Users className="w-3.5 h-3.5 text-primary" />
+                    {who}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Social proof placeholder */}
+          <div className="bg-card border border-border rounded-2xl p-8 mb-12 text-center">
+            <Quote className="w-8 h-8 text-primary/60 mx-auto mb-4" />
+            <p className="text-lg text-muted-foreground italic max-w-2xl mx-auto mb-4">
+              Corporate client testimonial coming soon — be one of the first Gold Coast
+              workplaces to bring assisted stretching to your team.
+            </p>
+            <p className="text-sm text-muted-foreground/60">
+              Trusted by Gold Coast businesses in Bundall, Southport, Robina and Broadbeach.
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href={CONTACT.phoneLink}
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-105"
+              >
+                <Phone className="w-5 h-5" />
+                Book a Free On-Site Demo
+              </a>
+              <a
+                href="https://wa.me/61434773815?text=Hi%20Angel!%20I'd%20like%20to%20request%20your%20Corporate%20Wellness%20Guide%20for%20our%20Gold%20Coast%20team."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors font-medium"
+              >
+                Request our Corporate Wellness Guide
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+            <p className="text-xs text-muted-foreground/60 mt-4">
+              Free demos for your leadership team — the fastest way to see what corporate
+              stretching on the Gold Coast can do for your staff.
+            </p>
           </div>
         </div>
       </section>
