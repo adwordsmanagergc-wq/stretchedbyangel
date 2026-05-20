@@ -27,7 +27,7 @@ const IMAGES = {
   angel: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Picsart_26-03-05_07-10-49-345.jpg",
   stretching1: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg",
   stretching2: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175708_Instagram.jpg",
-  promo: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/openart-image_1772760489433_e96da448_1772760489635_73d8343e.jpg",
+  promo: "/assisted-stretching-gold-coast.webp",
   heroAngel: "/assisted-stretching-gold-coast-hero.webp",
 };
 

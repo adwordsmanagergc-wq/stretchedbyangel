@@ -20,7 +20,7 @@ import { CONTACT } from "@/data/contact";
 const LOGO =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
 const HERO_IMG =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/openart-image_1772760489433_e96da448_1772760489635_73d8343e.jpg";
+  "https://www.stretchedbyangel.com/assisted-stretching-gold-coast.webp";
 const SECONDARY_IMG =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg";
 
