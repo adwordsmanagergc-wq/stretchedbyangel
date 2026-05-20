@@ -236,7 +236,7 @@ export default function HomePage() {
               Unlock your body's full potential with assisted stretching by trained professional Angel Elliott.
               Feel better, move better, live better.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
               <a
                 href="#stretching"
                 className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-105"
@@ -251,6 +251,13 @@ export default function HomePage() {
                 Personal Training
                 <ArrowRight className="w-4 h-4" />
               </Link>
+              <a
+                href="#corporate"
+                className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-8 py-4 rounded-full hover:bg-secondary transition-all duration-300"
+              >
+                <Building2 className="w-4 h-4" />
+                Corporate Wellness
+              </a>
             </div>
             <p className="text-xs text-muted-foreground/60 mt-3">
               By booking, you agree to our <a href="/disclaimer" className="underline hover:text-muted-foreground">terms & disclaimer</a>.
