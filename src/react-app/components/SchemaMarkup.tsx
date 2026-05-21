@@ -252,16 +252,28 @@ function setMetaTag(attr: "name" | "property", key: string, value: string) {
   tag.setAttribute("content", value);
 }
 
+function setCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "canonical";
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
 export default function SchemaMarkup({ type }: { type: SchemaType }) {
   useEffect(() => {
     const meta = META[type];
+    const pageUrl = `${BUSINESS.url}${type === "home" ? "/" : "/personal-training"}`;
     document.title = meta.title;
     setMetaTag("name", "description", meta.description);
     setMetaTag("property", "og:title", meta.title);
     setMetaTag("property", "og:description", meta.description);
     setMetaTag("property", "og:image", meta.ogImage);
-    setMetaTag("property", "og:url", `${BUSINESS.url}${type === "home" ? "/" : "/personal-training"}`);
+    setMetaTag("property", "og:url", pageUrl);
     setMetaTag("name", "twitter:image", meta.ogImage);
+    setCanonical(pageUrl);
 
     const scripts = buildSchemas(type).map((data) => {
       const el = document.createElement("script");
