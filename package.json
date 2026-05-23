@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/generate-sitemap.mjs",
+    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-favicons.mjs",
     "build": "tsc -b && vite build",
     "postbuild": "node scripts/prerender.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
+    "favicons": "node scripts/generate-favicons.mjs",
     "preview": "vite preview",
     "lint": "tsc -b --noEmit"
   },
