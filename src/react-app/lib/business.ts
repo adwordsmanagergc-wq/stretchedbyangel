@@ -3,7 +3,7 @@ export const BUSINESS = {
   legalName: "Stretched By Angel",
   url: "https://www.stretchedbyangel.com",
   logo: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png",
-  image: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/IMG-20260208-WA0012.jpg",
+  image: "https://www.stretchedbyangel.com/assisted-stretching-gold-coast-hero.webp",
   description:
     "Professional assisted PNF stretching and personal training on the Gold Coast by Angel Elliott.",
   email: "angelfitnessjsyci@icloud.com",
