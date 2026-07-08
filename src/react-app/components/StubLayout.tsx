@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 
-const LOGO = "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
+const LOGO = "/stretched-by-angel-transparent-logo.png";
 
 export default function StubLayout({
   title,

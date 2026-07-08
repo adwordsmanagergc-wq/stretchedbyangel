@@ -20,7 +20,7 @@ import {
 import { CONTACT } from "@/data/contact";
 
 const LOGO =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
+  "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
 const HERO_IMG =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.55.51-am.png";
 const SECONDARY_IMG =

@@ -23,7 +23,7 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 
 const IMAGES = {
-  logo: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png",
+  logo: "/stretched-by-angel-transparent-logo.png",
   angel: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Picsart_26-03-05_07-10-49-345.jpg",
   stretching1: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg",
   stretching2: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175708_Instagram.jpg",

@@ -15,7 +15,7 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 
 const IMAGES = {
-  logo: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png",
+  logo: "/stretched-by-angel-transparent-logo.png",
   onlineCoaching: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.34.41-am.png",
   gymTraining: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.35.28-am.png",
   professional: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.36.27-am.png",

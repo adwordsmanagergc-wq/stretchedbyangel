@@ -5,7 +5,7 @@ import { SUBURBS, slugify } from "@/data/suburbs";
 import { CONTACT } from "@/data/contact";
 
 const LOGO =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
+  "/stretched-by-angel-transparent-logo.png";
 
 function setMeta(name: string, content: string) {
   let tag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);

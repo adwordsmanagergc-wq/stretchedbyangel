@@ -18,7 +18,7 @@ import {
 import { CONTACT } from "@/data/contact";
 
 const LOGO =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
+  "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
 const HERO_IMG =
   "https://www.stretchedbyangel.com/assisted-stretching-gold-coast.webp";
 const SECONDARY_IMG =

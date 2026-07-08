@@ -22,6 +22,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = resolve(ROOT, "public");
 
 const SOURCE_CANDIDATES = [
+  resolve(PUBLIC, "stretched-by-angel-transparent-logo.png"),
   resolve(ROOT, "stretched-by-angel-transparent-logo.png"),
   resolve(PUBLIC, "source-logo.png"),
   resolve(ROOT, "source-logo.png"),

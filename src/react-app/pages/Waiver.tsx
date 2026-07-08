@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { CheckCircle2, AlertCircle, ArrowLeft, Download } from "lucide-react";
 
 const LOGO_URL =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/stretched-by-angel-transparent.png";
+  "/stretched-by-angel-transparent-logo.png";
 
 const HEALTH_QUESTIONS = [
   "Heart condition requiring restricted activity?",
