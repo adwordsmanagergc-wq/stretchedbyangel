@@ -29,6 +29,7 @@ const IMAGES = {
   stretching2: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175708_Instagram.jpg",
   promo: "/assisted-stretching-gold-coast.webp",
   heroAngel: "/assisted-stretching-gold-coast-hero.webp",
+  studio1: "/assisted-stretching-gold-coast-1.webp",
 };
 
 const Logo = ({ className = "" }: { className?: string }) => (
@@ -269,8 +270,8 @@ export default function HomePage() {
             <div className="relative rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 aspect-[4/5]">
               <img
                 src={IMAGES.heroAngel}
-                alt="Angel Elliott — Assisted Stretching Gold Coast stretch therapist"
-                className="w-full h-full object-cover object-top"
+                alt="Angel Elliott delivering an assisted PNF stretching session on the Gold Coast"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
@@ -707,7 +708,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
-            {[IMAGES.promo, IMAGES.stretching1].map((img, index) => (
+            {[IMAGES.studio1, IMAGES.promo, IMAGES.stretching1].map((img, index) => (
               <a
                 key={index}
                 href={CONTACT.instagramLink}
