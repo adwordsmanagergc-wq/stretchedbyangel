@@ -24,9 +24,6 @@ import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 
 const IMAGES = {
   logo: "/stretched-by-angel-transparent-logo.png",
-  angel: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Picsart_26-03-05_07-10-49-345.jpg",
-  stretching1: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg",
-  stretching2: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175708_Instagram.jpg",
   promo: "/assisted-stretching-gold-coast.webp",
   heroAngel: "/assisted-stretching-gold-coast-hero.webp",
   studio1: "/assisted-stretching-gold-coast-1.webp",
@@ -484,7 +481,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/25 to-pink-500/25 rounded-3xl blur-2xl" />
               <img
-                src={IMAGES.stretching1}
+                src={IMAGES.studio1}
                 alt="PNF stretching session"
                 className="relative rounded-2xl shadow-2xl w-full ring-1 ring-white/10"
               />
@@ -708,7 +705,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
-            {[IMAGES.studio1, IMAGES.promo, IMAGES.stretching1].map((img, index) => (
+            {[IMAGES.studio1, IMAGES.promo, IMAGES.heroAngel].map((img, index) => (
               <a
                 key={index}
                 href={CONTACT.instagramLink}
