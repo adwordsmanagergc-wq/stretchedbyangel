@@ -104,8 +104,8 @@ const FAQS = [
 
 const PRICING = [
   { duration: "30 mins", price: "$60", description: "Perfect for targeting specific problem areas" },
-  { duration: "50 mins", price: "$90", description: "Full body stretch for complete relief" },
-  { duration: "50 mins (Home Visit)", price: "$110", description: "Full body stretch in the comfort of your home" },
+  { duration: "60 mins", price: "$90", description: "Full body stretch for complete relief" },
+  { duration: "60 mins (Home Visit)", price: "$130", description: "Full body stretch in the comfort of your home" },
 ];
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
@@ -397,7 +397,7 @@ export default function HomePage() {
 
             <div className="relative bg-gradient-to-br from-rose-500/10 to-pink-600/5 border-2 border-rose-500/30 rounded-3xl p-6 sm:p-8 overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-3xl" />
-              <h3 className="text-2xl font-bold text-center mb-6 text-rose-400">50 Minute Sessions</h3>
+              <h3 className="text-2xl font-bold text-center mb-6 text-rose-400">60 Minute Sessions</h3>
 
               <div className="flex items-center justify-center gap-4 bg-background/50 rounded-xl p-6 border border-border mb-6">
                 <div className="w-14 h-14 rounded-full bg-rose-900 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">10x</div>
@@ -408,7 +408,7 @@ export default function HomePage() {
               </div>
 
               <div className="text-sm text-muted-foreground border-t border-border pt-4">
-                <p className="flex items-center gap-2 text-rose-400">+ $20 per session for home visit</p>
+                <p className="flex items-center gap-2 text-rose-400">+ $30 per session for home visit</p>
               </div>
 
               <div className="mt-6">

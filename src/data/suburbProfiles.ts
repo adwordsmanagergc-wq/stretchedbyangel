@@ -41,7 +41,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 18,
     stretchAngle: "Arundel days are spent in motion — school runs, weekend sport, walks at Coombabah — but rarely in the kind of slow, deliberate stretching that the body actually needs. Assisted PNF unwinds the small daily strains before they become chronic.",
     ptAngle: "Most Arundel parents I coach don't have hours to spare — but two structured 45-minute sessions a week, in-person or online, produce better results than five aimless gym visits ever did.",
-    faqLocation: "Arundel is about 18 minutes from the Wicked Bodz studio in Surfers Paradise. Home visits across Arundel are also available for the 50-minute session.",
+    faqLocation: "Arundel is about 18 minutes from the Wicked Bodz studio in Surfers Paradise. Home visits across Arundel are also available for the 60-minute session.",
   },
   "ashmore": {
     vibe: "a middle-Gold-Coast family suburb with leafy streets and the Nerang River curling through it",
@@ -140,7 +140,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 17,
     stretchAngle: "Burleigh is one of the most active patches of coastline in Australia, and the bodies here pay for it. Surf paddling overworks the same shoulder and lat patterns every day; stair work and beach running lock up the calves. Assisted PNF stretching is what keeps Burleigh locals surfing into their 60s.",
     ptAngle: "Burleigh's fitness scene is excellent, but surfing and CrossFit and HIIT alone won't build the deep structural strength that protects your back and shoulders long-term. Pairing your usual routine with proper barbell coaching is what shifts the needle.",
-    faqLocation: "Burleigh Heads is 17 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Burleigh are also a popular option for the 50-minute session.",
+    faqLocation: "Burleigh Heads is 17 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Burleigh are also a popular option for the 60-minute session.",
   },
   "burleigh-waters": {
     vibe: "the established residential and canal pocket inland from Burleigh Heads, all leafy streets and weekend lifestyle",
@@ -206,7 +206,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 30,
     stretchAngle: "Coolangatta is a surfer's town — and a surfer's body, after 20 years of paddling Snapper, needs serious recovery work. Assisted PNF stretching for the shoulders, lats and thoracic spine is what keeps Coolangatta locals in the water through their 50s and 60s.",
     ptAngle: "Surfers tend to neglect lower-body and posterior chain strength, which catches up to them in the form of hip and lower back issues by their 40s. A simple programmed two-day-a-week strength routine fixes most of it.",
-    faqLocation: "Coolangatta is 30 minutes south of the Wicked Bodz studio. Most Coolangatta clients prefer the 50-minute mobile home visit, especially for regular weekly sessions.",
+    faqLocation: "Coolangatta is 30 minutes south of the Wicked Bodz studio. Most Coolangatta clients prefer the 60-minute mobile home visit, especially for regular weekly sessions.",
   },
   "coombabah": {
     vibe: "a large estuary suburb wrapped around the Coombabah Lakelands wetlands and wildlife reserve",
@@ -217,7 +217,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 20,
     stretchAngle: "Coombabah locals walk and run more than almost any other suburb on the coast — and pay for it in tight calves, hips and IT bands. Assisted PNF stretching is the recovery tool runners genuinely need but rarely make time for.",
     ptAngle: "Walking and running build cardiovascular fitness, not strength. Adding two structured strength sessions a week is the difference between staying a runner forever and breaking down at 50.",
-    faqLocation: "Coombabah is around 20 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Coombabah are popular for the 50-minute session.",
+    faqLocation: "Coombabah is around 20 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Coombabah are popular for the 60-minute session.",
   },
   "coomera": {
     vibe: "the fast-growing northern Gold Coast family corridor, with a train station, Westfield, and new estates everywhere",
@@ -272,7 +272,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 25,
     stretchAngle: "Elanora life is full of small, repeated movements — bending into car seats, lifting kids, sitting at desks — and they all compound. Assisted PNF stretching unwinds the daily grind in a way no foam roller can.",
     ptAngle: "Elanora is a coaching-friendly suburb because most clients have a real reason to train — keeping up with their kids, looking after their backs, feeling 35 again at 50. A structured program delivers on all three.",
-    faqLocation: "Elanora is 25 minutes south of the Wicked Bodz studio in Surfers Paradise. Home visits to Elanora are available for the 50-minute mobile session.",
+    faqLocation: "Elanora is 25 minutes south of the Wicked Bodz studio in Surfers Paradise. Home visits to Elanora are available for the 60-minute mobile session.",
   },
   "gaven": {
     vibe: "a newer family estate suburb west of Helensvale, with green corridors and easy access to the M1",
@@ -294,7 +294,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 25,
     stretchAngle: "Gilston's lifestyle is genuinely physical — riding, building, fencing — and the body shows it in deep hip and lower back tightness that solo stretching never quite reaches. Mobile assisted PNF stretching is the answer most acreage locals don't realise exists.",
     ptAngle: "Acreage work keeps you fit but skews you sideways — one-side dominant, posteriorly weak. A coached program corrects the imbalances before they turn into the chronic injuries that retire you from the property work.",
-    faqLocation: "Gilston is about 25 minutes from the Wicked Bodz studio in Surfers Paradise. Home visits across Gilston are the most popular option for the 50-minute session.",
+    faqLocation: "Gilston is about 25 minutes from the Wicked Bodz studio in Surfers Paradise. Home visits across Gilston are the most popular option for the 60-minute session.",
   },
   "guanaba": {
     vibe: "true bush hinterland — large acreage blocks, rainforest pockets, and a sense of being a long way from anywhere",
@@ -349,7 +349,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 25,
     stretchAngle: "Hope Island is one of the most golf-obsessed pockets on the coast, and the rotational load of even 9 holes a few times a week catches up with the lower back. Assisted PNF stretching for the obliques, hip flexors and thoracic spine is what keeps Hope Island golfers swinging into their 70s.",
     ptAngle: "Golf rewards rotational strength and stability, not endurance — and most of my Hope Island clients shave strokes within weeks of starting a proper coached strength program built around their game.",
-    faqLocation: "Hope Island is 25 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Hope Island estates are a popular option for the 50-minute session.",
+    faqLocation: "Hope Island is 25 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Hope Island estates are a popular option for the 60-minute session.",
   },
   "isle-of-capri": {
     vibe: "an exclusive canal-estate island in the Nerang River, all big waterfront homes and quiet leafy streets",
@@ -382,7 +382,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 30,
     stretchAngle: "Kirra is a surfer's suburb in the deepest sense — and the body of a surfer who's been paddling the point for thirty years needs serious recovery work. Assisted PNF stretching for the shoulders, lats, hips and thoracic spine is what keeps Kirra locals out the back into their 60s.",
     ptAngle: "Lifelong surfers tend to be lats-and-shoulders strong but lower-body weak. A simple structured posterior chain and squat program two days a week protects the hips and lower back that surfing alone won't.",
-    faqLocation: "Kirra is 30 minutes south of the Wicked Bodz studio in Surfers Paradise. Most Kirra clients prefer mobile home visits for the 50-minute session.",
+    faqLocation: "Kirra is 30 minutes south of the Wicked Bodz studio in Surfers Paradise. Most Kirra clients prefer mobile home visits for the 60-minute session.",
   },
   "labrador": {
     vibe: "the established Broadwater family suburb just south of the Spit bridges, all parks, schools and beachfront paths",
@@ -426,7 +426,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 27,
     stretchAngle: "Maudsland's lifestyle blends acreage work with long commutes — both lock up the hip flexors and lower back in patterns solo stretching can't reach. Mobile assisted PNF home visits make recovery work realistic out here.",
     ptAngle: "Maudsland tradies and equestrians benefit from a coached strength program built around the imbalances their work creates. Whether that's online or in-studio, the principle is the same — correct what your work is doing to you.",
-    faqLocation: "Maudsland is 27 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Maudsland acreage are popular for the 50-minute session.",
+    faqLocation: "Maudsland is 27 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Maudsland acreage are popular for the 60-minute session.",
   },
   "mermaid-beach": {
     vibe: "the long, low-key beachfront strip between Broadbeach and Burleigh, including Hedges Avenue — the Gold Coast's millionaires' row",
@@ -459,7 +459,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 15,
     stretchAngle: "Merrimac is a busy, sport-heavy family suburb, and the parents' bodies cop the same wear-and-tear the kids barely notice. Assisted PNF stretching is the recovery work most parents skip because they think they don't have time.",
     ptAngle: "Two structured 45-minute sessions a week, in-studio or online, is enough to completely shift how a busy Merrimac parent's body feels by month two. The trick is structure, not volume.",
-    faqLocation: "Merrimac is 15 minutes from the Wicked Bodz studio in Surfers Paradise. Home visits across Merrimac are available for the 50-minute session.",
+    faqLocation: "Merrimac is 15 minutes from the Wicked Bodz studio in Surfers Paradise. Home visits across Merrimac are available for the 60-minute session.",
   },
   "miami": {
     vibe: "the rising café-and-creative pocket between Burleigh and Mermaid Beach, with the Marketta, James Street energy and great surf",
@@ -470,7 +470,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 13,
     stretchAngle: "Miami's the new Burleigh — café-strip mornings, surf at lunch, Marketta at night. The body pays for it in tight shoulders and hip flexors no matter how good the lifestyle looks. Assisted PNF stretching is what makes it sustainable.",
     ptAngle: "Most Miami creatives I work with don't need motivation — they need structure that fits a non-linear schedule. Online coaching plus weekly in-studio sessions is the format that finally produces consistent strength gains.",
-    faqLocation: "Miami is 13 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Miami are a popular option for the 50-minute session.",
+    faqLocation: "Miami is 13 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Miami are a popular option for the 60-minute session.",
   },
   "midway": {
     vibe: "a small, quiet residential locality along the Gold Coast's connecting corridors",
@@ -514,7 +514,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 18,
     stretchAngle: "Nerang is full of working families with bodies that get used hard six days a week. Assisted PNF stretching is the recovery system most tradies and shift workers genuinely need but never make time for.",
     ptAngle: "A coached strength program built around real work demands is what keeps Nerang's tradies and shift workers on the tools well into their 50s and 60s. Structure beats willpower every time.",
-    faqLocation: "Nerang is 18 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Nerang are available for the 50-minute session.",
+    faqLocation: "Nerang is 18 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Nerang are available for the 60-minute session.",
   },
   "neranwood": {
     vibe: "a tiny rural enclave in the western hinterland, all acreage blocks and bush corridors",
@@ -569,7 +569,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 25,
     stretchAngle: "Oxenford runs on shift work and parenting — both leave the lower back and hip flexors locked up by the end of the week. Mobile assisted PNF stretching at home is the recovery work that fits the schedule.",
     ptAngle: "Oxenford families benefit from coaching that respects a real schedule. Online programming plus the occasional in-studio session is what finally produces consistent strength gains around shift work and school runs.",
-    faqLocation: "Oxenford is 25 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Oxenford are popular for the 50-minute session.",
+    faqLocation: "Oxenford is 25 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Oxenford are popular for the 60-minute session.",
   },
   "pacific-pines": {
     vibe: "a green, family-focused suburb wrapped around Nerang National Park with leafy streets, schools and parks everywhere",
@@ -591,7 +591,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 22,
     stretchAngle: "Palm Beach is one of the most lifestyle-rich pockets on the coast — but the body still pays for the early surfs, the long café laptop days, and the weekend kid wrangling. Assisted PNF stretching is what makes the whole rhythm sustainable.",
     ptAngle: "Palm Beach creatives and professionals tend to be active but unstructured — surfing, running, the odd gym class. Adding two coached strength sessions a week shifts everything: stronger surfs, easier recovery, better posture.",
-    faqLocation: "Palm Beach is 22 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Palm Beach are a popular option for the 50-minute session.",
+    faqLocation: "Palm Beach is 22 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Palm Beach are a popular option for the 60-minute session.",
   },
   "paradise-point": {
     vibe: "an exclusive Broadwater point at the northern tip of the coast, with waterfront homes, marinas and a tight-knit feel",
@@ -657,7 +657,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 18,
     stretchAngle: "Robina's biggest workforces are healthcare, retail and uni — all of which leave the body chronically tight in ways solo stretching can't reach. Assisted PNF stretching for the lower back, hips and neck is the maintenance work most Robina locals genuinely need.",
     ptAngle: "Coached strength training is what keeps healthcare workers and retail staff on the floor without quietly breaking down. A structured program built around your shift roster delivers genuine results without burnout.",
-    faqLocation: "Robina is 18 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Robina are available for the 50-minute session.",
+    faqLocation: "Robina is 18 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Robina are available for the 60-minute session.",
   },
   "runaway-bay": {
     vibe: "a large established Broadwater family suburb, home to the Runaway Bay Sports Centre and the islands across the bridge",
@@ -668,7 +668,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 20,
     stretchAngle: "Runaway Bay is one of the most sport-active family suburbs on the coast — and the parents who taxi, coach and play alongside their kids pay the same price as the kids. Assisted PNF stretching is the recovery piece most parents skip.",
     ptAngle: "Coached strength training built around the body's actual needs — backs, hips, shoulders — is what keeps Runaway Bay parents in the sport and out of the physio's office. Structure beats more sport every time.",
-    faqLocation: "Runaway Bay is 20 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Runaway Bay are a popular option for the 50-minute session.",
+    faqLocation: "Runaway Bay is 20 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Runaway Bay are a popular option for the 60-minute session.",
   },
   "sanctuary-cove": {
     vibe: "the exclusive gated resort estate with two golf courses, a marina, and some of the most premium homes on the coast",
@@ -679,7 +679,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 27,
     stretchAngle: "Sanctuary Cove is golf-dense, and the rotational load of even three rounds a week catches up with the lower back. Assisted PNF stretching for the obliques, hip flexors and thoracic spine is what keeps Sanctuary Cove golfers swinging at 75.",
     ptAngle: "Strength training in your 60s, 70s and 80s is the single best predictor of staying mobile and independent. Sanctuary Cove clients benefit most from coached sessions that build durable strength without injury risk.",
-    faqLocation: "Sanctuary Cove is 27 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Sanctuary Cove are the most popular option for the 50-minute session.",
+    faqLocation: "Sanctuary Cove is 27 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Sanctuary Cove are the most popular option for the 60-minute session.",
   },
   "south-stradbroke-island": {
     vibe: "the long, narrow island stretching north from the Broadwater — no roads, no shops, just lodges, kangaroos and beach",
@@ -701,7 +701,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 12,
     stretchAngle: "Southport is one of the most working suburbs on the coast — healthcare and office work, all day, every day. Assisted PNF stretching for the lower back, hips and neck is the recovery piece most Southport professionals genuinely need but never get to.",
     ptAngle: "Lunch-hour cardio is great, but it won't fix what eight hours of sitting did. A coached strength program built around a busy work day — three short sessions a week — is what keeps Southport professionals out of the physio's office.",
-    faqLocation: "Southport is 12 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Southport are available for the 50-minute session.",
+    faqLocation: "Southport is 12 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Southport are available for the 60-minute session.",
   },
   "springbrook": {
     vibe: "the World Heritage rainforest mountain village at the top of the hinterland, with waterfalls, lookouts and serious altitude",
@@ -767,7 +767,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 20,
     stretchAngle: "Tallebudgera's lifestyle is water-heavy — surfing the bar, paddling the creek, swimming the inlet — and the upper body pays the price. Assisted PNF stretching for the shoulders, lats and thoracic spine is what keeps Tallebudgera locals in the water week after week.",
     ptAngle: "Swimming and paddling build upper-body endurance but neglect the legs and posterior chain. Two structured strength sessions a week is what keeps the body keeping up with the lungs.",
-    faqLocation: "Tallebudgera is 20 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Tallebudgera are a popular option for the 50-minute session.",
+    faqLocation: "Tallebudgera is 20 minutes from the Wicked Bodz studio in Surfers Paradise. Mobile home visits across Tallebudgera are a popular option for the 60-minute session.",
   },
   "tallebudgera-valley": {
     vibe: "the rural hinterland valley up from Tallebudgera Beach, all rainforest properties and creek-side acreage",
@@ -789,7 +789,7 @@ export const PROFILES: Record<string, SuburbProfile> = {
     studioMin: 27,
     stretchAngle: "Tugun's body is a surf-and-shift-work body — paddling shoulders, hill calves, long-shift back. Assisted PNF stretching for the shoulders, lats and posterior chain is the recovery piece that keeps the whole rhythm working.",
     ptAngle: "Shift work and surfing don't mix easily with a structured gym schedule. Online coaching or short focused in-person sessions work around your roster, not against it.",
-    faqLocation: "Tugun is 27 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Tugun are a popular option for the 50-minute session.",
+    faqLocation: "Tugun is 27 minutes south of the Wicked Bodz studio in Surfers Paradise. Mobile home visits to Tugun are a popular option for the 60-minute session.",
   },
   "upper-coomera": {
     vibe: "the fast-growing family corridor west of Coomera, full of new estates, schools and the M1 access for work",

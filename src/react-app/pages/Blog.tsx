@@ -144,7 +144,7 @@ const FAQS = [
   },
   {
     q: "How is this different from stretching at home?",
-    a: "When you stretch alone, your nervous system reflexively limits how far you go to protect the muscle. With a trained partner applying gentle pressure and guiding contraction–relaxation cycles (PNF), that brake releases and you access genuinely new range. You'll get more out of a single 50-minute session than weeks of unguided stretching.",
+    a: "When you stretch alone, your nervous system reflexively limits how far you go to protect the muscle. With a trained partner applying gentle pressure and guiding contraction–relaxation cycles (PNF), that brake releases and you access genuinely new range. You'll get more out of a single 60-minute session than weeks of unguided stretching.",
   },
   {
     q: "How soon will I notice results?",
@@ -512,7 +512,7 @@ export default function BlogPage() {
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
               No experience needed. You don't have to be flexible. You don't
-              need to "prep". Here's how a typical 50-minute session runs:
+              need to "prep". Here's how a typical 60-minute session runs:
             </p>
             <ol className="space-y-3 text-lg text-muted-foreground">
               <li className="flex gap-3">

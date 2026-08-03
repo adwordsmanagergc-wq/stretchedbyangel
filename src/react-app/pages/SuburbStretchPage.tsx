@@ -234,8 +234,8 @@ export default function SuburbStretchPage() {
             {profile.faqLocation}
           </p>
           <p className="text-muted-foreground text-base mb-8 max-w-2xl mx-auto">
-            Mobile home visits across {suburb} are $110 for the 50-minute
-            session, or $100 per session as part of a 10-pack. Just provide a
+            Mobile home visits across {suburb} are $130 for the 60-minute
+            session, or $110 per session as part of a 10-pack. Just provide a
             quiet space and a yoga mat — everything else comes with me.
           </p>
           <Link
@@ -399,7 +399,7 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
     },
     {
       q: `How much does stretching cost in ${suburb}?`,
-      a: `Single sessions are $60 (30 minutes), $90 (50 minutes in-studio), or $110 for a 50-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 50-minute session — with home visits adding $20 per session.`,
+      a: `Single sessions are $60 (30 minutes), $90 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
     },
     {
       q: `What does assisted stretching specifically help with for ${suburb} residents?`,
@@ -419,7 +419,7 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
     },
     {
       q: `Do you offer mobile stretching home visits in ${suburb}?`,
-      a: `Yes — mobile home visits to ${suburb} are one of the most popular options. Sessions are 50 minutes for $110, or $100 per session as part of a 10-pack. Just provide a quiet space and a yoga mat. Especially handy if you're based near ${landmark} and would rather not drive into Surfers.`,
+      a: `Yes — mobile home visits to ${suburb} are one of the most popular options. Sessions are 60 minutes for $130, or $110 per session as part of a 10-pack. Just provide a quiet space and a yoga mat. Especially handy if you're based near ${landmark} and would rather not drive into Surfers.`,
     },
     {
       q: "Do I need to be flexible to start?",
