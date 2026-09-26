@@ -19,6 +19,7 @@ import {
   getNeighbors,
   studioDistanceLabel,
 } from "@/data/suburbProfiles";
+import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
 
 const LOGO =
   "/stretched-by-angel-transparent-logo.png";
@@ -33,15 +34,18 @@ export default function SuburbStretchPage() {
 function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
   const profile = getProfile(slug);
   const neighbors = getNeighbors(slug);
+  const tier = getTier(slug);
+  const copy = getTier1Copy(slug, "stretch");
 
   usePageHead({
     title: `Assisted Stretching ${suburb} | Stretched By Angel`,
     description: `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`,
     canonical: `/assisted-stretching/${slug}`,
-    jsonLd: [buildFaqSchema(suburb, profile)],
+    robots: tier === 2 ? TIER2_ROBOTS : undefined,
+    jsonLd: [buildFaqSchema(suburb, profile, copy)],
   });
 
-  const faqs = buildFaqs(suburb, profile);
+  const faqs = buildFaqs(suburb, profile, copy);
   const distanceLabel = studioDistanceLabel(profile.studioMin);
 
   return (
@@ -115,13 +119,19 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             Assisted Stretching for the {suburb} Lifestyle
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            {profile.stretchAngle}
+            {copy ? copy.intro : profile.stretchAngle}
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {suburb} life means {profile.lifestyle}. The body pays for it in{" "}
-            {profile.bodyToll} — none of which solo stretching ever quite
-            reaches. Targeted assisted PNF stretching does.
-          </p>
+          {copy ? (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {profile.stretchAngle}
+            </p>
+          ) : (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {suburb} life means {profile.lifestyle}. The body pays for it in{" "}
+              {profile.bodyToll} — none of which solo stretching ever quite
+              reaches. Targeted assisted PNF stretching does.
+            </p>
+          )}
         </div>
       </section>
 
@@ -175,12 +185,18 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             Why {suburb} Locals Book Assisted Stretching
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center max-w-2xl mx-auto">
-            The specific bodies I work with in {suburb} share a recognisable
-            pattern — and a recognisable set of wins.
+            {copy ? (
+              <>Who typically books in {suburb}: {copy.whoBooks}</>
+            ) : (
+              <>
+                The specific bodies I work with in {suburb} share a recognisable
+                pattern — and a recognisable set of wins.
+              </>
+            )}
           </p>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
-              `Release the ${profile.bodyToll.split(",")[0]} that comes with ${profile.lifestyle.split(",")[0]}`,
+              `Release the ${profile.bodyToll.split(",")[0]} that come with ${profile.lifestyle.split(",")[0]}`,
               "Improve flexibility faster than stretching alone ever will",
               "Recover faster from training, work and weekend activity",
               "Reduce lower back, neck and shoulder pain",
@@ -356,7 +372,16 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
   );
 }
 
-function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
+function buildFaqs(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
+  if (copy) {
+    // Tier 1: suburb-specific FAQs plus the pricing question.
+    return [...copy.faqs, pricingFaq(suburb)];
+  }
+
   const firstLifestyle = profile.lifestyle.split(",")[0].trim();
   const firstBodyToll = profile.bodyToll.split(",")[0].trim();
   const landmark = profile.landmarks[0] ?? `central ${suburb}`;
@@ -370,10 +395,7 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
       q: "What is assisted stretching and how does PNF work?",
       a: "Assisted stretching uses PNF (Proprioceptive Neuromuscular Facilitation) techniques — a trained therapist guides your body into deeper, safer stretches than you could achieve alone. It combines passive stretching with brief isometric contractions to release the nervous system's protective brake and access genuinely new range of motion.",
     },
-    {
-      q: `How much does stretching cost in ${suburb}?`,
-      a: `Single sessions are $60 (30 minutes), $90 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
-    },
+    pricingFaq(suburb),
     {
       q: `What does assisted stretching specifically help with for ${suburb} residents?`,
       a: `In ${suburb}, the most common things I work on are ${profile.bodyToll}. The lifestyle here — ${profile.lifestyle} — loads up the same muscle patterns repeatedly, and PNF stretching is the most efficient way I've found to undo it.`,
@@ -401,11 +423,22 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
   ];
 }
 
-function buildFaqSchema(suburb: string, profile: ReturnType<typeof getProfile>) {
+function pricingFaq(suburb: string) {
+  return {
+    q: `How much does stretching cost in ${suburb}?`,
+    a: `Single sessions are $60 (30 minutes), $90 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
+  };
+}
+
+function buildFaqSchema(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: buildFaqs(suburb, profile).map(({ q, a }) => ({
+    mainEntity: buildFaqs(suburb, profile, copy).map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },

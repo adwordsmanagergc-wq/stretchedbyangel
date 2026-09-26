@@ -20,6 +20,7 @@ import {
   getNeighbors,
   studioDistanceLabel,
 } from "@/data/suburbProfiles";
+import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
 
 const LOGO =
   "/stretched-by-angel-transparent-logo.png";
@@ -34,15 +35,18 @@ export default function SuburbPTPage() {
 function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
   const profile = getProfile(slug);
   const neighbors = getNeighbors(slug);
+  const tier = getTier(slug);
+  const copy = getTier1Copy(slug, "pt");
 
   usePageHead({
     title: `Personal Training ${suburb} | Angel Fitness Gold Coast`,
     description: `Personal Training ${suburb} — qualified trainer Angel Elliott with 10+ years experience. Strength training for ${profile.lifestyle.split(",")[0]}. In-person, online and custom programs. Book today.`,
     canonical: `/personal-training/${slug}`,
-    jsonLd: [buildFaqSchema(suburb, profile)],
+    robots: tier === 2 ? TIER2_ROBOTS : undefined,
+    jsonLd: [buildFaqSchema(suburb, profile, copy)],
   });
 
-  const faqs = buildFaqs(suburb, profile);
+  const faqs = buildFaqs(suburb, profile, copy);
   const distanceLabel = studioDistanceLabel(profile.studioMin);
 
   return (
@@ -122,14 +126,20 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             Personal Training for the {suburb} Lifestyle
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            {profile.ptAngle}
+            {copy ? copy.intro : profile.ptAngle}
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Most of my {suburb} clients live a version of: {profile.lifestyle}.
-            That's a lifestyle that builds particular strengths and particular
-            blind spots — {profile.bodyToll} — and coaching is what turns the
-            blind spots into resilient strength.
-          </p>
+          {copy ? (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {profile.ptAngle}
+            </p>
+          ) : (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Most of my {suburb} clients live a version of: {profile.lifestyle}.
+              That's a lifestyle that builds particular strengths and particular
+              blind spots — {profile.bodyToll} — and coaching is what turns the
+              blind spots into resilient strength.
+            </p>
+          )}
         </div>
       </section>
 
@@ -183,8 +193,14 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             Why {suburb} Locals Train With Angel
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center max-w-2xl mx-auto">
-            The {suburb} clients who get the most out of coaching share a few
-            patterns — and a few common goals.
+            {copy ? (
+              <>Who typically books in {suburb}: {copy.whoBooks}</>
+            ) : (
+              <>
+                The {suburb} clients who get the most out of coaching share a few
+                patterns — and a few common goals.
+              </>
+            )}
           </p>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
@@ -366,10 +382,22 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
   );
 }
 
-function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
+function buildFaqs(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
   const firstLifestyle = profile.lifestyle.split(",")[0].trim();
   const firstBodyToll = profile.bodyToll.split(",")[0].trim();
   const landmark = profile.landmarks[0] ?? `central ${suburb}`;
+  const gettingStarted = {
+    q: `How do I get started from ${suburb}?`,
+    a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. I'll run through your goals, your schedule, and your current fitness level, recommend the right option (in-person, online or program-only), and book you in for your first session. Whether you're near ${landmark} or anywhere else on the coast, getting started is the same call.`,
+  };
+  if (copy) {
+    // Tier 1: suburb-specific FAQs plus how to get started.
+    return [...copy.faqs, gettingStarted];
+  }
 
   return [
     {
@@ -404,18 +432,19 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
       q: `What kind of results can ${suburb} clients expect?`,
       a: "Most clients see meaningful changes in 4-8 weeks — strength up, body composition shifting, energy and mood noticeably better. Visible body changes typically lock in around the 8-12 week mark with consistent training and nutrition.",
     },
-    {
-      q: `How do I get started from ${suburb}?`,
-      a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. I'll run through your goals, your schedule, and your current fitness level, recommend the right option (in-person, online or program-only), and book you in for your first session. Whether you're near ${landmark} or anywhere else on the coast, getting started is the same call.`,
-    },
+    gettingStarted,
   ];
 }
 
-function buildFaqSchema(suburb: string, profile: ReturnType<typeof getProfile>) {
+function buildFaqSchema(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: buildFaqs(suburb, profile).map(({ q, a }) => ({
+    mainEntity: buildFaqs(suburb, profile, copy).map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },
