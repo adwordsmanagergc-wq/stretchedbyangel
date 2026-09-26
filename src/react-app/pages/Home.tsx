@@ -804,7 +804,7 @@ export default function HomePage() {
                 Liability Waiver
               </a>
               <span className="text-muted-foreground/60 text-xs">
-                Website by Metatap Pty Ltd
+                Website provided by <a href="https://metatapdigital.com" target="_blank" rel="noopener" className="hover:text-primary transition-colors">metatapdigital.com</a>
               </span>
             </div>
             <div className="flex items-center gap-4">

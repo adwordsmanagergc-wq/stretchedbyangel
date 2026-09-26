@@ -479,7 +479,7 @@ export default function PersonalTrainingPage() {
             </Link>
           </div>
           <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Stretched By Angel. All rights reserved. Website by Metatap Pty Ltd.
+            © {new Date().getFullYear()} Stretched By Angel. All rights reserved. Website provided by <a href="https://metatapdigital.com" target="_blank" rel="noopener" className="hover:text-primary transition-colors">metatapdigital.com</a>
           </p>
         </div>
       </footer>
