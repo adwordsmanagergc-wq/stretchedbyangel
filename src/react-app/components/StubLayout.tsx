@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
-
-const LOGO = "/stretched-by-angel-transparent-logo.png";
+import { IMG } from "@/data/images";
 
 export default function StubLayout({
   title,
@@ -21,7 +20,7 @@ export default function StubLayout({
             <span className="text-sm">Back to home</span>
           </Link>
           <Link to="/">
-            <img src={LOGO} alt="Stretched By Angel" className="h-10 w-10" />
+            <img {...IMG.logo} alt="Stretched By Angel" className="h-10 w-10" />
           </Link>
         </div>
       </nav>

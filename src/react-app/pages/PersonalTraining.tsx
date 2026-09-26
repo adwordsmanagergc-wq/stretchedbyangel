@@ -13,14 +13,15 @@ import {
   ArrowRight,
 } from "lucide-react";
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
+import { PersonalTrainingGuide, PT_GUIDE_FAQS } from "@/react-app/components/PersonalTrainingGuide";
+import { IMG } from "@/data/images";
 
 const IMAGES = {
-  logo: "/stretched-by-angel-transparent-logo.png",
-  onlineCoaching: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.34.41-am.png",
-  gymTraining: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.35.28-am.png",
-  professional: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.36.27-am.png",
-  physique: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.36.51-am.png",
-  transformation: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.55.51-am.png",
+  logo: IMG.logo,
+  onlineCoaching: IMG.ptOnlineCoaching,
+  gymTraining: IMG.ptGymSession,
+  physique: IMG.ptPhysique,
+  transformation: IMG.ptTransformation,
 };
 
 const CONTACT = {
@@ -54,21 +55,15 @@ const FAQS = [
     answer: "I've been a qualified personal trainer for over 10 years. Helping people transform their lives through fitness is my passion, and I've worked with clients all over the world—from Jersey to Australia and everywhere in between.",
   },
   {
-    question: "Do you offer online coaching?",
-    answer: "Absolutely! For those who can't train with me in person, I offer online coaching options and custom program-only plans for anyone confident following a plan on their own. No matter where you are in the world, I can help you reach your goals.",
-  },
-  {
     question: "Where do you train clients on the Gold Coast?",
     answer: "I train clients at Wicked Bodz Fitness Centre in Surfers Paradise, or I can come to your location for home visits. Whatever works best for your lifestyle!",
-  },
-  {
-    question: "What kind of results can I expect?",
-    answer: "Results depend on your commitment and goals, but my clients typically see improvements in strength, body composition, confidence, and overall fitness within the first few weeks. I'll be with you every step of the way to keep you accountable and motivated.",
   },
   {
     question: "Do you also offer stretching services?",
     answer: "Yes! In addition to personal training, I'm also a certified stretch therapist. Assisted PNF stretching is a great complement to your training—helping with recovery, flexibility, and injury prevention.",
   },
+  // Merged in from the former personal training guide page.
+  ...PT_GUIDE_FAQS.map(({ q, a }) => ({ question: q, answer: a })),
 ];
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
@@ -87,11 +82,10 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
           <ChevronDown className="w-5 h-5 text-muted-foreground shrink-0" />
         )}
       </button>
-      {isOpen && (
-        <div className="px-6 pb-5">
-          <p className="text-muted-foreground leading-relaxed">{answer}</p>
-        </div>
-      )}
+      {/* Always in the DOM (hidden when closed) so the answer is in the prerendered HTML. */}
+      <div className="px-6 pb-5" hidden={!isOpen}>
+        <p className="text-muted-foreground leading-relaxed">{answer}</p>
+      </div>
     </div>
   );
 }
@@ -122,17 +116,17 @@ export default function PersonalTrainingPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SchemaMarkup type="personal-training" />
+      <SchemaMarkup type="personal-training" faqs={FAQS.map(({ question, answer }) => ({ q: question, a: answer }))} />
       {/* Navigation */}
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3">
             <img
-              src={IMAGES.logo}
-              alt="Angel Fitness"
+              {...IMAGES.logo}
+              alt="Stretched By Angel"
               className="h-12 w-12"
             />
-            <span className="font-semibold text-lg">Angel Fitness</span>
+            <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
             <a
@@ -209,7 +203,8 @@ export default function PersonalTrainingPage() {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-xl" />
               <img
-                src={IMAGES.onlineCoaching}
+                {...IMAGES.onlineCoaching}
+                loading="lazy"
                 alt="Angel Elliott - Personal Trainer Gold Coast"
                 className="relative rounded-2xl shadow-2xl w-full"
               />
@@ -301,7 +296,8 @@ export default function PersonalTrainingPage() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden group">
               <img
-                src={IMAGES.gymTraining}
+                {...IMAGES.gymTraining}
+                loading="lazy"
                 alt="Angel training at the gym"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -313,7 +309,8 @@ export default function PersonalTrainingPage() {
             </div>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden group">
               <img
-                src={IMAGES.transformation}
+                {...IMAGES.transformation}
+                loading="lazy"
                 alt="Client body transformation results"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -325,7 +322,8 @@ export default function PersonalTrainingPage() {
             </div>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden group">
               <img
-                src={IMAGES.physique}
+                {...IMAGES.physique}
+                loading="lazy"
                 alt="Angel doing online coaching"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -337,6 +335,11 @@ export default function PersonalTrainingPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Personal training guide (merged from the former /personal-training-gold-coast guide) */}
+      <section className="bg-background">
+        <PersonalTrainingGuide />
       </section>
 
       {/* FAQ Section */}
@@ -444,8 +447,9 @@ export default function PersonalTrainingPage() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <Link to="/" className="inline-block mb-4">
             <img
-              src={IMAGES.logo}
-              alt="Angel Fitness"
+              {...IMAGES.logo}
+              alt="Stretched By Angel"
+              loading="lazy"
               className="h-12 w-12 mx-auto"
             />
           </Link>
@@ -475,7 +479,7 @@ export default function PersonalTrainingPage() {
             </Link>
           </div>
           <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Angel Fitness. All rights reserved. Website by Metatap Pty Ltd.
+            © {new Date().getFullYear()} Stretched By Angel. All rights reserved. Website by Metatap Pty Ltd.
           </p>
         </div>
       </footer>

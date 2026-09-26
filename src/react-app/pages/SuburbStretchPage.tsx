@@ -1,5 +1,8 @@
-import { useEffect } from "react";
-import { Link, useParams, Navigate } from "react-router";
+import { usePageHead } from "@/seo/head";
+import { breadcrumbSchema, suburbServiceSchema } from "@/seo/schema";
+import { suburbStretchDescription } from "@/seo/describe";
+import { Link, useParams } from "react-router";
+import NotFoundPage from "@/react-app/pages/NotFound";
 import {
   Phone,
   Instagram,
@@ -18,57 +21,38 @@ import {
   getNeighbors,
   studioDistanceLabel,
 } from "@/data/suburbProfiles";
-
-const LOGO =
-  "/stretched-by-angel-transparent-logo.png";
-
-function setMeta(name: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute("name", name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
+import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
+import { IMG } from "@/data/images";
 
 export default function SuburbStretchPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
-  const profile = suburb ? getProfile(slug) : null;
-  const neighbors = suburb ? getNeighbors(slug) : [];
+  if (!suburb) return <NotFoundPage />;
+  return <SuburbPage key={slug} slug={slug} suburb={suburb} />;
+}
 
-  useEffect(() => {
-    if (!suburb || !profile) return;
-    document.title = `Assisted Stretching ${suburb} | Stretched By Angel`;
-    setMeta(
-      "description",
-      `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`
-    );
-    setCanonical(`https://www.stretchedbyangel.com/assisted-stretching/${slug}`);
+function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
+  const profile = getProfile(slug);
+  const neighbors = getNeighbors(slug);
+  const tier = getTier(slug);
+  const copy = getTier1Copy(slug, "stretch");
 
-    const ld = document.createElement("script");
-    ld.type = "application/ld+json";
-    ld.text = JSON.stringify(buildFaqSchema(suburb, profile));
-    document.head.appendChild(ld);
-    return () => {
-      ld.remove();
-    };
-  }, [suburb, profile, slug]);
+  usePageHead({
+    title: `Assisted Stretching ${suburb} | Stretched By Angel`,
+    description: suburbStretchDescription(suburb, profile.studioMin),
+    canonical: `/assisted-stretching/${slug}`,
+    robots: tier === 2 ? TIER2_ROBOTS : undefined,
+    jsonLd: [
+      suburbServiceSchema({ service: "stretch", suburb, path: `/assisted-stretching/${slug}` }),
+      breadcrumbSchema([
+        ["Areas I Service", "/areas-i-service"],
+        [`Assisted Stretching ${suburb}`, `/assisted-stretching/${slug}`],
+      ]),
+      buildFaqSchema(suburb, profile, copy),
+    ],
+  });
 
-  if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
-
-  const faqs = buildFaqs(suburb, profile);
+  const faqs = buildFaqs(suburb, profile, copy);
   const distanceLabel = studioDistanceLabel(profile.studioMin);
 
   return (
@@ -76,7 +60,7 @@ export default function SuburbStretchPage() {
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12" />
+            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
             <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
@@ -142,13 +126,19 @@ export default function SuburbStretchPage() {
             Assisted Stretching for the {suburb} Lifestyle
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            {profile.stretchAngle}
+            {copy ? copy.intro : profile.stretchAngle}
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {suburb} life means {profile.lifestyle}. The body pays for it in{" "}
-            {profile.bodyToll} — none of which solo stretching ever quite
-            reaches. Targeted assisted PNF stretching does.
-          </p>
+          {copy ? (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {profile.stretchAngle}
+            </p>
+          ) : (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {suburb} life means {profile.lifestyle}. The body pays for it in{" "}
+              {profile.bodyToll} — none of which solo stretching ever quite
+              reaches. Targeted assisted PNF stretching does.
+            </p>
+          )}
         </div>
       </section>
 
@@ -202,12 +192,18 @@ export default function SuburbStretchPage() {
             Why {suburb} Locals Book Assisted Stretching
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center max-w-2xl mx-auto">
-            The specific bodies I work with in {suburb} share a recognisable
-            pattern — and a recognisable set of wins.
+            {copy ? (
+              <>Who typically books in {suburb}: {copy.whoBooks}</>
+            ) : (
+              <>
+                The specific bodies I work with in {suburb} share a recognisable
+                pattern — and a recognisable set of wins.
+              </>
+            )}
           </p>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
-              `Release the ${profile.bodyToll.split(",")[0]} that comes with ${profile.lifestyle.split(",")[0]}`,
+              `Release the ${profile.bodyToll.split(",")[0]} that come with ${profile.lifestyle.split(",")[0]}`,
               "Improve flexibility faster than stretching alone ever will",
               "Recover faster from training, work and weekend activity",
               "Reduce lower back, neck and shoulder pain",
@@ -383,7 +379,16 @@ export default function SuburbStretchPage() {
   );
 }
 
-function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
+function buildFaqs(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
+  if (copy) {
+    // Tier 1: suburb-specific FAQs plus the pricing question.
+    return [...copy.faqs, pricingFaq(suburb)];
+  }
+
   const firstLifestyle = profile.lifestyle.split(",")[0].trim();
   const firstBodyToll = profile.bodyToll.split(",")[0].trim();
   const landmark = profile.landmarks[0] ?? `central ${suburb}`;
@@ -397,10 +402,7 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
       q: "What is assisted stretching and how does PNF work?",
       a: "Assisted stretching uses PNF (Proprioceptive Neuromuscular Facilitation) techniques — a trained therapist guides your body into deeper, safer stretches than you could achieve alone. It combines passive stretching with brief isometric contractions to release the nervous system's protective brake and access genuinely new range of motion.",
     },
-    {
-      q: `How much does stretching cost in ${suburb}?`,
-      a: `Single sessions are $60 (30 minutes), $90 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
-    },
+    pricingFaq(suburb),
     {
       q: `What does assisted stretching specifically help with for ${suburb} residents?`,
       a: `In ${suburb}, the most common things I work on are ${profile.bodyToll}. The lifestyle here — ${profile.lifestyle} — loads up the same muscle patterns repeatedly, and PNF stretching is the most efficient way I've found to undo it.`,
@@ -428,11 +430,22 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
   ];
 }
 
-function buildFaqSchema(suburb: string, profile: ReturnType<typeof getProfile>) {
+function pricingFaq(suburb: string) {
+  return {
+    q: `How much does stretching cost in ${suburb}?`,
+    a: `Single sessions are $60 (30 minutes), $90 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
+  };
+}
+
+function buildFaqSchema(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: buildFaqs(suburb, profile).map(({ q, a }) => ({
+    mainEntity: buildFaqs(suburb, profile, copy).map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },

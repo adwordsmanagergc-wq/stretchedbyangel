@@ -1,5 +1,8 @@
-import { useEffect } from "react";
-import { Link, useParams, Navigate } from "react-router";
+import { usePageHead } from "@/seo/head";
+import { breadcrumbSchema, suburbServiceSchema } from "@/seo/schema";
+import { suburbPTDescription } from "@/seo/describe";
+import { Link, useParams } from "react-router";
+import NotFoundPage from "@/react-app/pages/NotFound";
 import {
   Phone,
   Instagram,
@@ -19,57 +22,38 @@ import {
   getNeighbors,
   studioDistanceLabel,
 } from "@/data/suburbProfiles";
-
-const LOGO =
-  "/stretched-by-angel-transparent-logo.png";
-
-function setMeta(name: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute("name", name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
+import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
+import { IMG } from "@/data/images";
 
 export default function SuburbPTPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
-  const profile = suburb ? getProfile(slug) : null;
-  const neighbors = suburb ? getNeighbors(slug) : [];
+  if (!suburb) return <NotFoundPage />;
+  return <SuburbPage key={slug} slug={slug} suburb={suburb} />;
+}
 
-  useEffect(() => {
-    if (!suburb || !profile) return;
-    document.title = `Personal Training ${suburb} | Angel Fitness Gold Coast`;
-    setMeta(
-      "description",
-      `Personal Training ${suburb} — qualified trainer Angel Elliott with 10+ years experience. Strength training for ${profile.lifestyle.split(",")[0]}. In-person, online and custom programs. Book today.`
-    );
-    setCanonical(`https://www.stretchedbyangel.com/personal-training/${slug}`);
+function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
+  const profile = getProfile(slug);
+  const neighbors = getNeighbors(slug);
+  const tier = getTier(slug);
+  const copy = getTier1Copy(slug, "pt");
 
-    const ld = document.createElement("script");
-    ld.type = "application/ld+json";
-    ld.text = JSON.stringify(buildFaqSchema(suburb, profile));
-    document.head.appendChild(ld);
-    return () => {
-      ld.remove();
-    };
-  }, [suburb, profile, slug]);
+  usePageHead({
+    title: `Personal Training ${suburb} | Stretched By Angel`,
+    description: suburbPTDescription(suburb, profile.studioMin),
+    canonical: `/personal-training/${slug}`,
+    robots: tier === 2 ? TIER2_ROBOTS : undefined,
+    jsonLd: [
+      suburbServiceSchema({ service: "pt", suburb, path: `/personal-training/${slug}` }),
+      breadcrumbSchema([
+        ["Areas I Service", "/areas-i-service"],
+        [`Personal Training ${suburb}`, `/personal-training/${slug}`],
+      ]),
+      buildFaqSchema(suburb, profile, copy),
+    ],
+  });
 
-  if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
-
-  const faqs = buildFaqs(suburb, profile);
+  const faqs = buildFaqs(suburb, profile, copy);
   const distanceLabel = studioDistanceLabel(profile.studioMin);
 
   return (
@@ -77,8 +61,8 @@ export default function SuburbPTPage() {
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={LOGO} alt="Angel Fitness" className="h-12 w-12" />
-            <span className="font-semibold text-lg">Angel Fitness</span>
+            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
+            <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
             <a
@@ -149,14 +133,20 @@ export default function SuburbPTPage() {
             Personal Training for the {suburb} Lifestyle
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            {profile.ptAngle}
+            {copy ? copy.intro : profile.ptAngle}
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Most of my {suburb} clients live a version of: {profile.lifestyle}.
-            That's a lifestyle that builds particular strengths and particular
-            blind spots — {profile.bodyToll} — and coaching is what turns the
-            blind spots into resilient strength.
-          </p>
+          {copy ? (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {profile.ptAngle}
+            </p>
+          ) : (
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Most of my {suburb} clients live a version of: {profile.lifestyle}.
+              That's a lifestyle that builds particular strengths and particular
+              blind spots — {profile.bodyToll} — and coaching is what turns the
+              blind spots into resilient strength.
+            </p>
+          )}
         </div>
       </section>
 
@@ -210,8 +200,14 @@ export default function SuburbPTPage() {
             Why {suburb} Locals Train With Angel
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center max-w-2xl mx-auto">
-            The {suburb} clients who get the most out of coaching share a few
-            patterns — and a few common goals.
+            {copy ? (
+              <>Who typically books in {suburb}: {copy.whoBooks}</>
+            ) : (
+              <>
+                The {suburb} clients who get the most out of coaching share a few
+                patterns — and a few common goals.
+              </>
+            )}
           </p>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
@@ -247,7 +243,7 @@ export default function SuburbPTPage() {
             commute to their week.
           </p>
           <Link
-            to="/personal-training"
+            to="/personal-training-gold-coast"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full transition-all"
           >
             Meet Angel & See Options <ArrowRight className="w-4 h-4" />
@@ -374,18 +370,16 @@ export default function SuburbPTPage() {
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             <span>•</span>
-            <Link to="/personal-training" className="hover:text-primary transition-colors">Personal Training</Link>
+            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
             <span>•</span>
             <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
-            <span>•</span>
-            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Training Guide</Link>
             <span>•</span>
             <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
             <span>•</span>
             <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
           </div>
           <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Angel Fitness. All rights reserved.
+            © {new Date().getFullYear()} Stretched By Angel. All rights reserved.
           </p>
         </div>
       </footer>
@@ -393,10 +387,22 @@ export default function SuburbPTPage() {
   );
 }
 
-function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
+function buildFaqs(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
   const firstLifestyle = profile.lifestyle.split(",")[0].trim();
   const firstBodyToll = profile.bodyToll.split(",")[0].trim();
   const landmark = profile.landmarks[0] ?? `central ${suburb}`;
+  const gettingStarted = {
+    q: `How do I get started from ${suburb}?`,
+    a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. I'll run through your goals, your schedule, and your current fitness level, recommend the right option (in-person, online or program-only), and book you in for your first session. Whether you're near ${landmark} or anywhere else on the coast, getting started is the same call.`,
+  };
+  if (copy) {
+    // Tier 1: suburb-specific FAQs plus how to get started.
+    return [...copy.faqs, gettingStarted];
+  }
 
   return [
     {
@@ -431,18 +437,19 @@ function buildFaqs(suburb: string, profile: ReturnType<typeof getProfile>) {
       q: `What kind of results can ${suburb} clients expect?`,
       a: "Most clients see meaningful changes in 4-8 weeks — strength up, body composition shifting, energy and mood noticeably better. Visible body changes typically lock in around the 8-12 week mark with consistent training and nutrition.",
     },
-    {
-      q: `How do I get started from ${suburb}?`,
-      a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. I'll run through your goals, your schedule, and your current fitness level, recommend the right option (in-person, online or program-only), and book you in for your first session. Whether you're near ${landmark} or anywhere else on the coast, getting started is the same call.`,
-    },
+    gettingStarted,
   ];
 }
 
-function buildFaqSchema(suburb: string, profile: ReturnType<typeof getProfile>) {
+function buildFaqSchema(
+  suburb: string,
+  profile: ReturnType<typeof getProfile>,
+  copy?: ServiceCopy
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: buildFaqs(suburb, profile).map(({ q, a }) => ({
+    mainEntity: buildFaqs(suburb, profile, copy).map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },

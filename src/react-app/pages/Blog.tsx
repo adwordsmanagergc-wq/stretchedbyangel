@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
+import { breadcrumbSchema } from "@/seo/schema";
 import { Link } from "react-router";
 import {
   Phone,
@@ -16,42 +17,16 @@ import {
   MapPin,
 } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { IMG, absoluteImage } from "@/data/images";
 
-const LOGO =
-  "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
-const HERO_IMG =
-  "https://www.stretchedbyangel.com/assisted-stretching-gold-coast.webp";
-const SECONDARY_IMG =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg";
+const LOGO = "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
+const HERO_IMG = absoluteImage(IMG.promo);
 
 const URL = "https://www.stretchedbyangel.com/assisted-stretching-gold-coast";
-const TITLE =
-  "Assisted Stretching Gold Coast: The Complete Guide to PNF Benefits | Stretched By Angel";
+const TITLE = "What Is PNF Stretching? Benefits and Who It Helps | Stretched By Angel";
 const DESCRIPTION =
-  "Assisted Stretching Gold Coast — the complete guide to PNF stretching benefits, who it helps, and what to expect. Covering pain relief, flexibility, recovery, injury prevention, posture, sleep and more from Gold Coast stretch therapist Angel Elliott.";
+  "What is PNF stretching? How assisted PNF stretching works, its benefits for flexibility, pain relief and recovery, and who it helps most, by Angel Elliott.";
 const PUBLISHED = "2026-05-17";
-
-function setMeta(attr: "name" | "property", key: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(
-    `meta[${attr}="${key}"]`
-  );
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute(attr, key);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
 
 const PHYSICAL_BENEFITS = [
   "Dramatically increased flexibility",
@@ -159,8 +134,7 @@ const FAQS = [
 const BLOG_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  headline:
-    "Assisted Stretching Gold Coast: The Complete Guide to PNF Stretching Benefits",
+  headline: "What Is PNF Stretching? Benefits and Who It Helps",
   description: DESCRIPTION,
   image: HERO_IMG,
   datePublished: PUBLISHED,
@@ -193,43 +167,29 @@ const ARTICLE_FAQ_SCHEMA = {
 };
 
 export default function BlogPage() {
-  useEffect(() => {
-    document.title = TITLE;
-    setMeta("name", "description", DESCRIPTION);
-    setMeta("name", "keywords",
-      "assisted stretching Gold Coast, PNF stretching Gold Coast, mobile stretching Gold Coast, stretch therapy, flexibility training, sports recovery, pain relief, Surfers Paradise stretching, Burleigh stretching, Broadbeach stretching"
-    );
-    setMeta("property", "og:type", "article");
-    setMeta("property", "og:title", TITLE);
-    setMeta("property", "og:description", DESCRIPTION);
-    setMeta("property", "og:image", HERO_IMG);
-    setMeta("property", "og:url", URL);
-    setMeta("property", "article:published_time", PUBLISHED);
-    setMeta("property", "article:author", "Angel Elliott");
-    setMeta("name", "twitter:card", "summary_large_image");
-    setMeta("name", "twitter:title", TITLE);
-    setMeta("name", "twitter:description", DESCRIPTION);
-    setMeta("name", "twitter:image", HERO_IMG);
-    setCanonical(URL);
-
-    const scripts = [BLOG_SCHEMA, ARTICLE_FAQ_SCHEMA].map((data) => {
-      const el = document.createElement("script");
-      el.type = "application/ld+json";
-      el.text = JSON.stringify(data);
-      document.head.appendChild(el);
-      return el;
-    });
-    return () => {
-      scripts.forEach((el) => el.remove());
-    };
-  }, []);
+  usePageHead({
+    title: TITLE,
+    description: DESCRIPTION,
+    canonical: URL,
+    ogType: "article",
+    ogImage: HERO_IMG,
+    meta: [
+      { attr: "property", key: "article:published_time", content: PUBLISHED },
+      { attr: "property", key: "article:author", content: "Angel Elliott" },
+    ],
+    jsonLd: [
+      BLOG_SCHEMA,
+      breadcrumbSchema([["What Is PNF Stretching?", "/assisted-stretching-gold-coast"]]),
+      ARTICLE_FAQ_SCHEMA,
+    ],
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12" />
+            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
             <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
@@ -264,11 +224,11 @@ export default function BlogPage() {
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-400 bg-clip-text text-transparent">
-                Assisted Stretching Gold Coast
+                What Is PNF Stretching?
               </span>
               <br />
               <span className="text-white text-3xl sm:text-4xl lg:text-5xl">
-                The Complete Guide to PNF Stretching Benefits
+                Benefits and Who It Helps
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-6">
@@ -295,7 +255,7 @@ export default function BlogPage() {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/20 to-cyan-500/20 rounded-3xl blur-2xl" />
             <img
-              src={HERO_IMG}
+              {...IMG.promo}
               alt="Assisted stretching Gold Coast — PNF stretch therapy with Angel Elliott"
               className="relative rounded-2xl shadow-2xl w-full object-cover ring-1 ring-white/10"
             />
@@ -499,7 +459,8 @@ export default function BlogPage() {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-2xl" />
             <img
-              src={SECONDARY_IMG}
+              {...IMG.pnfSession}
+              loading="lazy"
               alt="PNF stretching session on the Gold Coast"
               className="relative rounded-2xl shadow-2xl w-full ring-1 ring-white/10"
             />
@@ -646,7 +607,7 @@ export default function BlogPage() {
                 find your suburb
               </Link>{" "}
               ·{" "}
-              <Link to="/personal-training" className="text-primary hover:underline">
+              <Link to="/personal-training-gold-coast" className="text-primary hover:underline">
                 check out personal training
               </Link>
             </p>
@@ -670,7 +631,7 @@ export default function BlogPage() {
       <footer className="py-8 bg-card border-t border-border">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <Link to="/" className="inline-block mb-4">
-            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12 mx-auto" />
+            <img {...IMG.logo} alt="Stretched By Angel" loading="lazy" className="h-12 w-12 mx-auto" />
           </Link>
           <p className="text-muted-foreground text-sm mb-4">
             Professional Assisted Stretching across the Gold Coast
@@ -678,7 +639,7 @@ export default function BlogPage() {
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             <span>•</span>
-            <Link to="/personal-training" className="hover:text-primary transition-colors">Personal Training</Link>
+            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
             <span>•</span>
             <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
             <span>•</span>

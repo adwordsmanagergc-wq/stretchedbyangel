@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import StubLayout from "@/react-app/components/StubLayout";
 
 export default function DisclaimerPage() {
-  useEffect(() => {
-    document.title = "Terms & Disclaimer | Stretched By Angel";
-  }, []);
+  usePageHead({
+    title: "Terms & Disclaimer | Stretched By Angel",
+    description:
+      "Terms and disclaimer for assisted stretching and personal training with Stretched By Angel on the Gold Coast, covering health, safety and cancellations.",
+    canonical: "/disclaimer",
+  });
 
   return (
     <StubLayout

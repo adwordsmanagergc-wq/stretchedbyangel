@@ -76,8 +76,8 @@ export const ANGEL = {
   name: "Angel Elliott",
   jobTitle: "Certified Stretch Therapist & Personal Trainer",
   yearsExperience: 10,
-  image:
-    "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Picsart_26-03-05_07-10-49-345.jpg",
+  // Self-hosted copy of the original portrait (see scripts/localize-remote-images.mjs).
+  image: "https://www.stretchedbyangel.com/images/angel-elliott-stretch-therapist-gold-coast.webp",
   knowsAbout: [
     "PNF Stretching",
     "Assisted Stretching",

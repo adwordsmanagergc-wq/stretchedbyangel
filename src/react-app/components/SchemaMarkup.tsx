@@ -1,12 +1,17 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
+import { IMG } from "@/data/images";
+import { breadcrumbSchema } from "@/seo/schema";
 import { ANGEL, AREAS_SERVED, BUSINESS } from "@/react-app/lib/business";
 
 type SchemaType = "home" | "personal-training";
 
+/** Canonical personal training URL (/personal-training 301-redirects here). */
+const PT_PATH = "/personal-training-gold-coast";
+
 const STRETCHING_FAQS = [
   {
     q: "What is PNF stretching?",
-    a: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. It's scientifically proven to be more effective than traditional stretching methods, helping you achieve greater flexibility gains in less time.",
+    a: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. Research suggests it can produce greater flexibility gains than traditional static stretching, often in less time.",
   },
   {
     q: "How is assisted stretching different from stretching on my own?",
@@ -181,11 +186,13 @@ function ptServiceSchema() {
   };
 }
 
-function faqSchema() {
+type Faq = { q: string; a: string };
+
+function faqSchema(faqs: Faq[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: STRETCHING_FAQS.map(({ q, a }) => ({
+    mainEntity: faqs.map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },
@@ -198,24 +205,24 @@ function webPageSchema(type: SchemaType) {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${BUSINESS.url}${isHome ? "/" : "/personal-training"}#webpage`,
-    url: `${BUSINESS.url}${isHome ? "/" : "/personal-training"}`,
+    "@id": `${BUSINESS.url}${isHome ? "/" : PT_PATH}#webpage`,
+    url: `${BUSINESS.url}${isHome ? "/" : PT_PATH}`,
     name: isHome
       ? "Assisted Stretching Gold Coast | Stretched By Angel"
-      : "Personal Training Gold Coast | Angel Fitness",
+      : "Personal Training Gold Coast | Stretched By Angel",
     isPartOf: { "@id": `${BUSINESS.url}/#website` },
     about: { "@id": `${BUSINESS.url}/#business` },
     primaryImageOfPage: BUSINESS.image,
   };
 }
 
-function buildSchemas(type: SchemaType) {
+function buildSchemas(type: SchemaType, faqs?: Faq[]) {
   if (type === "home") {
     return [
       businessSchema(),
       personSchema(),
       stretchingServiceSchema(),
-      faqSchema(),
+      faqSchema(STRETCHING_FAQS),
       webPageSchema("home"),
     ];
   }
@@ -223,6 +230,8 @@ function buildSchemas(type: SchemaType) {
     businessSchema(),
     personSchema(),
     ptServiceSchema(),
+    ...(faqs?.length ? [faqSchema(faqs)] : []),
+    breadcrumbSchema([["Personal Training Gold Coast", PT_PATH]]),
     webPageSchema("personal-training"),
   ];
 }
@@ -231,63 +240,26 @@ const META = {
   home: {
     title: "Assisted Stretching Gold Coast | Stretched By Angel",
     description:
-      "Assisted Stretching Gold Coast — professional PNF stretching by Angel Elliott. Increase flexibility, improve range of motion, reduce pain and muscle tension. Sessions at Wicked Bodz Fitness Centre, Surfers Paradise, or in the comfort of your home. Book now.",
+      "Assisted stretching Gold Coast with Angel Elliott. PNF stretching for flexibility, pain relief and recovery at Wicked Bodz, Surfers Paradise, or at home.",
     ogImage: BUSINESS.image,
   },
   "personal-training": {
-    title: "Personal Training Gold Coast | Angel Fitness",
+    title: "Personal Training Gold Coast | Stretched By Angel",
     description:
-      "Personal Training Gold Coast — qualified personal trainer Angel Elliott with 10+ years experience. In-person sessions on the Gold Coast, online coaching, and custom programs available worldwide. Transform your body today.",
+      "Personal training Gold Coast with Angel Elliott, 10+ years experience. In-person sessions at Wicked Bodz, Surfers Paradise, online coaching and custom programs.",
     ogImage: BUSINESS.image,
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;
 
-function setMetaTag(attr: "name" | "property", key: string, value: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute(attr, key);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", value);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
-
-export default function SchemaMarkup({ type }: { type: SchemaType }) {
-  useEffect(() => {
-    const meta = META[type];
-    const pageUrl = `${BUSINESS.url}${type === "home" ? "/" : "/personal-training"}`;
-    document.title = meta.title;
-    setMetaTag("name", "description", meta.description);
-    setMetaTag("property", "og:title", meta.title);
-    setMetaTag("property", "og:description", meta.description);
-    setMetaTag("property", "og:image", meta.ogImage);
-    setMetaTag("property", "og:url", pageUrl);
-    setMetaTag("name", "twitter:image", meta.ogImage);
-    setCanonical(pageUrl);
-
-    const scripts = buildSchemas(type).map((data) => {
-      const el = document.createElement("script");
-      el.type = "application/ld+json";
-      el.dataset.schemaPage = type;
-      el.text = JSON.stringify(data);
-      document.head.appendChild(el);
-      return el;
-    });
-
-    return () => {
-      scripts.forEach((el) => el.remove());
-    };
-  }, [type]);
-
+export default function SchemaMarkup({ type, faqs }: { type: SchemaType; faqs?: Faq[] }) {
+  const meta = META[type];
+  usePageHead({
+    title: meta.title,
+    description: meta.description,
+    canonical: type === "home" ? "/" : PT_PATH,
+    ogImage: meta.ogImage,
+    preloadImage: type === "home" ? IMG.heroAngel.src : undefined,
+    jsonLd: buildSchemas(type, faqs),
+  });
   return null;
 }

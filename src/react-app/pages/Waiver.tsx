@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
 import { CheckCircle2, AlertCircle, ArrowLeft, Download } from "lucide-react";
-
-const LOGO_URL =
-  "/stretched-by-angel-transparent-logo.png";
+import { IMG } from "@/data/images";
 
 const HEALTH_QUESTIONS = [
   "Heart condition requiring restricted activity?",
@@ -36,9 +35,12 @@ export default function WaiverPage() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    document.title = "Liability Waiver | Stretched By Angel";
-  }, []);
+  usePageHead({
+    title: "Liability Waiver | Stretched By Angel",
+    description:
+      "Complete the client intake and liability waiver (PAR-Q) before your assisted stretching or personal training session with Angel Elliott on the Gold Coast.",
+    canonical: "/waiver",
+  });
 
   const handleAnswerChange = (index: number, value: boolean) => {
     const newAnswers = [...formData.answers];
@@ -155,7 +157,7 @@ export default function WaiverPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <Link to="/">
-            <img src={LOGO_URL} alt="Stretched By Angel" className="h-24 w-24 mx-auto mb-4" />
+            <img {...IMG.logo} alt="Stretched By Angel" className="h-24 w-24 mx-auto mb-4" />
           </Link>
           <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
             ANGEL FITNESS & STRETCHED BY ANGEL
