@@ -54,6 +54,14 @@ robots, JSON-LD) is declared per page with `usePageHead()` from
 `src/seo/head.tsx`, which works both during prerender and client-side
 navigation.
 
+To audit every sitemap URL (200, one H1, unique title and description,
+self-canonical, valid JSON-LD), plus noindex on Tier 2 pages, the 404 page
+and the /personal-training redirect:
+
+```bash
+npm run build && npm run audit:seo
+```
+
 To check the output locally the way Vercel serves it:
 
 ```bash
