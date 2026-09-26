@@ -27,7 +27,7 @@ export default function NotFoundPage() {
           </Link>
         </li>
         <li>
-          <Link to="/personal-training" className="text-primary hover:underline">
+          <Link to="/personal-training-gold-coast" className="text-primary hover:underline">
             Personal training
           </Link>
         </li>

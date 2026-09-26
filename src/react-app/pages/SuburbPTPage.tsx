@@ -236,7 +236,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             commute to their week.
           </p>
           <Link
-            to="/personal-training"
+            to="/personal-training-gold-coast"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-full transition-all"
           >
             Meet Angel & See Options <ArrowRight className="w-4 h-4" />
@@ -363,11 +363,9 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             <span>•</span>
-            <Link to="/personal-training" className="hover:text-primary transition-colors">Personal Training</Link>
+            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
             <span>•</span>
             <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
-            <span>•</span>
-            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Training Guide</Link>
             <span>•</span>
             <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
             <span>•</span>

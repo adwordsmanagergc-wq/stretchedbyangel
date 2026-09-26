@@ -25,10 +25,9 @@ const SECONDARY_IMG =
   "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg";
 
 const URL = "https://www.stretchedbyangel.com/assisted-stretching-gold-coast";
-const TITLE =
-  "Assisted Stretching Gold Coast: The Complete Guide to PNF Benefits | Stretched By Angel";
+const TITLE = "What Is PNF Stretching? Benefits and Who It Helps | Stretched By Angel";
 const DESCRIPTION =
-  "Assisted Stretching Gold Coast — the complete guide to PNF stretching benefits, who it helps, and what to expect. Covering pain relief, flexibility, recovery, injury prevention, posture, sleep and more from Gold Coast stretch therapist Angel Elliott.";
+  "What is PNF stretching? How assisted PNF stretching works, its benefits for flexibility, pain relief and recovery, and who it helps most, by Angel Elliott.";
 const PUBLISHED = "2026-05-17";
 
 const PHYSICAL_BENEFITS = [
@@ -137,8 +136,7 @@ const FAQS = [
 const BLOG_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  headline:
-    "Assisted Stretching Gold Coast: The Complete Guide to PNF Stretching Benefits",
+  headline: "What Is PNF Stretching? Benefits and Who It Helps",
   description: DESCRIPTION,
   image: HERO_IMG,
   datePublished: PUBLISHED,
@@ -224,11 +222,11 @@ export default function BlogPage() {
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-400 bg-clip-text text-transparent">
-                Assisted Stretching Gold Coast
+                What Is PNF Stretching?
               </span>
               <br />
               <span className="text-white text-3xl sm:text-4xl lg:text-5xl">
-                The Complete Guide to PNF Stretching Benefits
+                Benefits and Who It Helps
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-6">
@@ -606,7 +604,7 @@ export default function BlogPage() {
                 find your suburb
               </Link>{" "}
               ·{" "}
-              <Link to="/personal-training" className="text-primary hover:underline">
+              <Link to="/personal-training-gold-coast" className="text-primary hover:underline">
                 check out personal training
               </Link>
             </p>
@@ -638,7 +636,7 @@ export default function BlogPage() {
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             <span>•</span>
-            <Link to="/personal-training" className="hover:text-primary transition-colors">Personal Training</Link>
+            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
             <span>•</span>
             <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
             <span>•</span>

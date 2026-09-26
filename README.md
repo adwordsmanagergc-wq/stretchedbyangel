@@ -156,12 +156,12 @@ from her inbox.
 | Route | Page |
 |---|---|
 | `/` | Home — assisted stretching landing page |
-| `/personal-training` | Personal training landing page |
+| `/personal-training` | 301 redirect to `/personal-training-gold-coast` (vercel.json) |
 | `/areas-i-service` | Hub of all 77 Gold Coast suburbs (two grids — stretching + PT) |
 | `/assisted-stretching/:slug` | Dynamic per-suburb stretching page (77 suburbs) |
 | `/personal-training/:slug` | Dynamic per-suburb personal training page (77 suburbs) |
-| `/assisted-stretching-gold-coast` | Long-form SEO blog: stretching benefits guide |
-| `/personal-training-gold-coast` | Long-form SEO blog: personal training guide |
+| `/assisted-stretching-gold-coast` | Informational guide: What Is PNF Stretching? (the homepage targets "Assisted Stretching Gold Coast") |
+| `/personal-training-gold-coast` | Canonical personal training page (landing page + merged training guide) |
 | `/disclaimer` | Terms & disclaimer |
 | `/waiver` | PAR-Q intake & liability waiver form |
 
@@ -202,7 +202,7 @@ HTTP 404.
 | Home page copy | `src/react-app/pages/Home.tsx` |
 | Personal training page copy | `src/react-app/pages/PersonalTraining.tsx` |
 | Stretching blog | `src/react-app/pages/Blog.tsx` |
-| Personal training blog | `src/react-app/pages/PersonalTrainingBlog.tsx` |
+| Personal training guide section | `src/react-app/components/PersonalTrainingGuide.tsx` |
 | Waiver questions / acknowledgements | `src/react-app/pages/Waiver.tsx` (front-end) and `api/waiver.ts` (email) |
 | Waiver recipient email | `api/waiver.ts` — `TO_EMAIL` constant |
 | JSON-LD schema | `src/react-app/components/SchemaMarkup.tsx` |

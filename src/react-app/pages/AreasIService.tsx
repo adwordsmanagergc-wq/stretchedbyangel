@@ -94,7 +94,7 @@ export default function AreasIServicePage() {
         }
         subtitle="Click on your suburb to learn more about personal training services in your area."
         basePath="/personal-training"
-        viewAllHref="/personal-training"
+        viewAllHref="/personal-training-gold-coast"
         viewAllLabel="View General Personal Training Page"
         alt
       />
@@ -131,7 +131,7 @@ export default function AreasIServicePage() {
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             <span>•</span>
-            <Link to="/personal-training" className="hover:text-primary transition-colors">Personal Training</Link>
+            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
             <span>•</span>
             <Link to="/" className="hover:text-primary transition-colors">Stretching</Link>
             <span>•</span>

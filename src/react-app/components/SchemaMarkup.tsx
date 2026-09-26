@@ -3,6 +3,9 @@ import { ANGEL, AREAS_SERVED, BUSINESS } from "@/react-app/lib/business";
 
 type SchemaType = "home" | "personal-training";
 
+/** Canonical personal training URL (/personal-training 301-redirects here). */
+const PT_PATH = "/personal-training-gold-coast";
+
 const STRETCHING_FAQS = [
   {
     q: "What is PNF stretching?",
@@ -181,11 +184,13 @@ function ptServiceSchema() {
   };
 }
 
-function faqSchema() {
+type Faq = { q: string; a: string };
+
+function faqSchema(faqs: Faq[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: STRETCHING_FAQS.map(({ q, a }) => ({
+    mainEntity: faqs.map(({ q, a }) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a },
@@ -198,8 +203,8 @@ function webPageSchema(type: SchemaType) {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${BUSINESS.url}${isHome ? "/" : "/personal-training"}#webpage`,
-    url: `${BUSINESS.url}${isHome ? "/" : "/personal-training"}`,
+    "@id": `${BUSINESS.url}${isHome ? "/" : PT_PATH}#webpage`,
+    url: `${BUSINESS.url}${isHome ? "/" : PT_PATH}`,
     name: isHome
       ? "Assisted Stretching Gold Coast | Stretched By Angel"
       : "Personal Training Gold Coast | Angel Fitness",
@@ -209,13 +214,13 @@ function webPageSchema(type: SchemaType) {
   };
 }
 
-function buildSchemas(type: SchemaType) {
+function buildSchemas(type: SchemaType, faqs?: Faq[]) {
   if (type === "home") {
     return [
       businessSchema(),
       personSchema(),
       stretchingServiceSchema(),
-      faqSchema(),
+      faqSchema(STRETCHING_FAQS),
       webPageSchema("home"),
     ];
   }
@@ -223,6 +228,7 @@ function buildSchemas(type: SchemaType) {
     businessSchema(),
     personSchema(),
     ptServiceSchema(),
+    ...(faqs?.length ? [faqSchema(faqs)] : []),
     webPageSchema("personal-training"),
   ];
 }
@@ -242,14 +248,14 @@ const META = {
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;
 
-export default function SchemaMarkup({ type }: { type: SchemaType }) {
+export default function SchemaMarkup({ type, faqs }: { type: SchemaType; faqs?: Faq[] }) {
   const meta = META[type];
   usePageHead({
     title: meta.title,
     description: meta.description,
-    canonical: type === "home" ? "/" : "/personal-training",
+    canonical: type === "home" ? "/" : PT_PATH,
     ogImage: meta.ogImage,
-    jsonLd: buildSchemas(type),
+    jsonLd: buildSchemas(type, faqs),
   });
   return null;
 }

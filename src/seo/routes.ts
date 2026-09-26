@@ -3,7 +3,6 @@ import { SUBURBS, slugify } from "@/data/suburbs";
 /** Every indexable-or-not route the site serves, used by the prerender. */
 export const STATIC_ROUTES = [
   "/",
-  "/personal-training",
   "/areas-i-service",
   "/assisted-stretching-gold-coast",
   "/personal-training-gold-coast",

@@ -244,7 +244,7 @@ export default function HomePage() {
                 Assisted Stretching
               </a>
               <Link
-                to="/personal-training"
+                to="/personal-training-gold-coast"
                 className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-8 py-4 rounded-full hover:bg-secondary transition-all duration-300"
               >
                 Personal Training
@@ -316,7 +316,7 @@ export default function HomePage() {
                 <p>
                   I'm also a <strong className="text-foreground">qualified personal trainer</strong> with over
                   10 years of experience helping people transform their bodies and lives.{" "}
-                  <Link to="/personal-training" className="text-primary hover:text-primary/80 underline transition-colors">
+                  <Link to="/personal-training-gold-coast" className="text-primary hover:text-primary/80 underline transition-colors">
                     Learn more about personal training →
                   </Link>
                 </p>
@@ -791,7 +791,7 @@ export default function HomePage() {
               <a href="/assisted-stretching-gold-coast" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                 Blog
               </a>
-              <a href="/personal-training" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+              <a href="/personal-training-gold-coast" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                 Personal Training
               </a>
               <a href="/areas-i-service" className="text-muted-foreground hover:text-primary text-sm transition-colors">

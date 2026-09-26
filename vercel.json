@@ -1,6 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/personal-training",
+      "destination": "/personal-training-gold-coast",
+      "statusCode": 301
+    }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
