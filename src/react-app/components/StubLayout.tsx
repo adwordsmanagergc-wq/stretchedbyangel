@@ -35,6 +35,8 @@ export default function StubLayout({
 
       <footer className="py-8 border-t border-border text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.
+        <br />
+        Website provided by <a href="https://metatapdigital.com" target="_blank" rel="noopener" className="hover:text-primary transition-colors">metatapdigital.com</a>
       </footer>
     </div>
   );
