@@ -10,8 +10,11 @@
  *   data to document.head in an effect (for client-side navigation).
  */
 import { createContext, useContext, useEffect, type ReactNode } from "react";
+import { websiteSchema } from "@/seo/schema";
 
-export const SITE_URL = "https://www.stretchedbyangel.com";
+import { SITE_URL } from "@/seo/site";
+
+export { SITE_URL };
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/assisted-stretching-gold-coast-hero.webp`;
 
 export type HeadData = {
@@ -58,7 +61,10 @@ function toTags(head: HeadData) {
   ];
   if (canonical) metas.push({ attr: "property", key: "og:url", content: canonical });
   if (head.robots) metas.push({ attr: "name", key: "robots", content: head.robots });
-  return { canonical, metas };
+  // Every real page (anything with a canonical) carries the site-level
+  // WebSite node that WebPage nodes reference via isPartOf.
+  const jsonLd = canonical ? [websiteSchema(), ...(head.jsonLd ?? [])] : head.jsonLd ?? [];
+  return { canonical, metas, jsonLd };
 }
 
 export function usePageHead(head: HeadData) {
@@ -76,7 +82,7 @@ export function usePageHead(head: HeadData) {
 
 function applyHead(head: HeadData) {
   if (typeof document === "undefined") return;
-  const { canonical, metas } = toTags(head);
+  const { canonical, metas, jsonLd } = toTags(head);
   document.title = head.title;
 
   // Remove tags a previous page may have added that this page does not set.
@@ -107,7 +113,7 @@ function applyHead(head: HeadData) {
   }
 
   document.head.querySelectorAll('script[type="application/ld+json"]').forEach((el) => el.remove());
-  for (const data of head.jsonLd ?? []) {
+  for (const data of jsonLd) {
     const el = document.createElement("script");
     el.type = "application/ld+json";
     el.text = JSON.stringify(data);
@@ -124,7 +130,7 @@ const escAttr = (s: string) =>
 const escJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
 
 export function renderHeadTags(head: HeadData): string {
-  const { canonical, metas } = toTags(head);
+  const { canonical, metas, jsonLd } = toTags(head);
   const lines = [
     `<title>${escAttr(head.title)}</title>`,
     ...metas.map(
@@ -137,7 +143,7 @@ export function renderHeadTags(head: HeadData): string {
       `<link rel="preload" as="image" href="${escAttr(head.preloadImage)}" fetchpriority="high" />`
     );
   }
-  for (const data of head.jsonLd ?? []) {
+  for (const data of jsonLd) {
     lines.push(`<script type="application/ld+json">${escJson(data)}</script>`);
   }
   return lines.map((l) => `    ${l}`).join("\n");

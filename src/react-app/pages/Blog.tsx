@@ -1,4 +1,5 @@
 import { usePageHead } from "@/seo/head";
+import { breadcrumbSchema } from "@/seo/schema";
 import { Link } from "react-router";
 import {
   Phone,
@@ -176,7 +177,11 @@ export default function BlogPage() {
       { attr: "property", key: "article:published_time", content: PUBLISHED },
       { attr: "property", key: "article:author", content: "Angel Elliott" },
     ],
-    jsonLd: [BLOG_SCHEMA, ARTICLE_FAQ_SCHEMA],
+    jsonLd: [
+      BLOG_SCHEMA,
+      breadcrumbSchema([["What Is PNF Stretching?", "/assisted-stretching-gold-coast"]]),
+      ARTICLE_FAQ_SCHEMA,
+    ],
   });
 
   return (

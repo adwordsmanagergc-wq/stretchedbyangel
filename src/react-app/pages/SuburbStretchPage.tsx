@@ -1,4 +1,5 @@
 import { usePageHead } from "@/seo/head";
+import { breadcrumbSchema, suburbServiceSchema } from "@/seo/schema";
 import { suburbStretchDescription } from "@/seo/describe";
 import { Link, useParams } from "react-router";
 import NotFoundPage from "@/react-app/pages/NotFound";
@@ -41,7 +42,14 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
     description: suburbStretchDescription(suburb, profile.studioMin),
     canonical: `/assisted-stretching/${slug}`,
     robots: tier === 2 ? TIER2_ROBOTS : undefined,
-    jsonLd: [buildFaqSchema(suburb, profile, copy)],
+    jsonLd: [
+      suburbServiceSchema({ service: "stretch", suburb, path: `/assisted-stretching/${slug}` }),
+      breadcrumbSchema([
+        ["Areas I Service", "/areas-i-service"],
+        [`Assisted Stretching ${suburb}`, `/assisted-stretching/${slug}`],
+      ]),
+      buildFaqSchema(suburb, profile, copy),
+    ],
   });
 
   const faqs = buildFaqs(suburb, profile, copy);

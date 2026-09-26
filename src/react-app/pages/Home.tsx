@@ -74,7 +74,7 @@ const BENEFITS = [
 const FAQS = [
   {
     question: "What is PNF stretching?",
-    answer: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. It's scientifically proven to be more effective than traditional stretching methods, helping you achieve greater flexibility gains in less time.",
+    answer: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. Research suggests it can produce greater flexibility gains than traditional static stretching, often in less time.",
   },
   {
     question: "How is assisted stretching different from stretching on my own?",
@@ -299,7 +299,7 @@ export default function HomePage() {
               <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                 <p>
                   I'm a certified stretch therapist passionate about helping people move and feel their best.
-                  Based on the beautiful Gold Coast, I specialise in PNF stretching—a proven technique that
+                  Based on the beautiful Gold Coast, I specialise in PNF stretching—a well-researched technique that
                   delivers results you can feel from your very first session.
                 </p>
                 <p>

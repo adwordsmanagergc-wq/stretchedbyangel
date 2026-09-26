@@ -1,5 +1,6 @@
 import { usePageHead } from "@/seo/head";
 import { IMG } from "@/data/images";
+import { breadcrumbSchema } from "@/seo/schema";
 import { ANGEL, AREAS_SERVED, BUSINESS } from "@/react-app/lib/business";
 
 type SchemaType = "home" | "personal-training";
@@ -10,7 +11,7 @@ const PT_PATH = "/personal-training-gold-coast";
 const STRETCHING_FAQS = [
   {
     q: "What is PNF stretching?",
-    a: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. It's scientifically proven to be more effective than traditional stretching methods, helping you achieve greater flexibility gains in less time.",
+    a: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. Research suggests it can produce greater flexibility gains than traditional static stretching, often in less time.",
   },
   {
     q: "How is assisted stretching different from stretching on my own?",
@@ -230,6 +231,7 @@ function buildSchemas(type: SchemaType, faqs?: Faq[]) {
     personSchema(),
     ptServiceSchema(),
     ...(faqs?.length ? [faqSchema(faqs)] : []),
+    breadcrumbSchema([["Personal Training Gold Coast", PT_PATH]]),
     webPageSchema("personal-training"),
   ];
 }
