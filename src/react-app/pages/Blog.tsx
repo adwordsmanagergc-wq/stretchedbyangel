@@ -648,7 +648,7 @@ export default function BlogPage() {
             <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
           </div>
           <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.
+            © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia. Website provided by <a href="https://metatapdigital.com" target="_blank" rel="noopener" className="hover:text-primary transition-colors">metatapdigital.com</a>
           </p>
         </div>
       </footer>
