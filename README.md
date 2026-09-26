@@ -73,8 +73,8 @@ automatically on every build.
 The project is configured to deploy to Vercel out of the box. `vercel.json`
 handles:
 
-- **SPA rewrites** — deep links like `/assisted-stretching/burleigh-heads`
-  render the React app instead of 404'ing.
+- **No SPA catch-all rewrite**: every real route is a prerendered static
+  file, so anything else falls through to `404.html` with a real 404 status.
 - **Content-Type headers** for `sitemap.xml`, `robots.txt`, `llms.txt`.
 - **`/api/*` bypass** so the waiver function is reachable.
 - **Immutable caching** on `/assets/*`.
@@ -158,7 +158,9 @@ from her inbox.
 | `/disclaimer` | Terms & disclaimer |
 | `/waiver` | PAR-Q intake & liability waiver form |
 
-Unknown suburb slugs redirect to `/areas-i-service`.
+Unknown URLs (including unknown suburb slugs) render the NotFound page. The
+prerender writes it to `dist/404.html` with `noindex`, and Vercel serves it with
+HTTP 404.
 
 ---
 

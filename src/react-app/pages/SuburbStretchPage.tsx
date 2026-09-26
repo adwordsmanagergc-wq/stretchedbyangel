@@ -1,5 +1,6 @@
 import { usePageHead } from "@/seo/head";
-import { Link, useParams, Navigate } from "react-router";
+import { Link, useParams } from "react-router";
+import NotFoundPage from "@/react-app/pages/NotFound";
 import {
   Phone,
   Instagram,
@@ -25,21 +26,20 @@ const LOGO =
 export default function SuburbStretchPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
-  const profile = suburb ? getProfile(slug) : null;
-  const neighbors = suburb ? getNeighbors(slug) : [];
+  if (!suburb) return <NotFoundPage />;
+  return <SuburbPage key={slug} slug={slug} suburb={suburb} />;
+}
 
-  usePageHead(
-    suburb && profile
-      ? {
-          title: `Assisted Stretching ${suburb} | Stretched By Angel`,
-          description: `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`,
-          canonical: `/assisted-stretching/${slug}`,
-          jsonLd: [buildFaqSchema(suburb, profile)],
-        }
-      : { title: "Page not found | Stretched By Angel", description: "", robots: "noindex" }
-  );
+function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
+  const profile = getProfile(slug);
+  const neighbors = getNeighbors(slug);
 
-  if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
+  usePageHead({
+    title: `Assisted Stretching ${suburb} | Stretched By Angel`,
+    description: `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`,
+    canonical: `/assisted-stretching/${slug}`,
+    jsonLd: [buildFaqSchema(suburb, profile)],
+  });
 
   const faqs = buildFaqs(suburb, profile);
   const distanceLabel = studioDistanceLabel(profile.studioMin);

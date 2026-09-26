@@ -8,6 +8,7 @@ import WaiverPage from "@/react-app/pages/Waiver";
 import AreasIServicePage from "@/react-app/pages/AreasIService";
 import BlogPage from "@/react-app/pages/Blog";
 import PersonalTrainingBlogPage from "@/react-app/pages/PersonalTrainingBlog";
+import NotFoundPage from "@/react-app/pages/NotFound";
 
 /** Route table shared by the browser app and the build-time prerender. */
 export default function AppRoutes() {
@@ -22,6 +23,7 @@ export default function AppRoutes() {
       <Route path="/areas-i-service" element={<AreasIServicePage />} />
       <Route path="/assisted-stretching-gold-coast" element={<BlogPage />} />
       <Route path="/personal-training-gold-coast" element={<PersonalTrainingBlogPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

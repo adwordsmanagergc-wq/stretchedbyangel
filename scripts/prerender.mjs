@@ -55,6 +55,10 @@ for (const route of ALL_ROUTES) {
   count++;
 }
 
+// 404 page: any path with no route renders <NotFoundPage>. Vercel serves
+// dist/404.html with HTTP 404 for every URL that has no static file.
+writeFileSync(resolve(DIST, "404.html"), toDocument(render("/__not-found__")), "utf8");
+
 // The SSR bundle is a build-time tool only; never deploy it.
 rmSync(SSR_DIR, { recursive: true, force: true });
 
