@@ -1,4 +1,5 @@
 import { usePageHead } from "@/seo/head";
+import { suburbStretchDescription } from "@/seo/describe";
 import { Link, useParams } from "react-router";
 import NotFoundPage from "@/react-app/pages/NotFound";
 import {
@@ -39,7 +40,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
 
   usePageHead({
     title: `Assisted Stretching ${suburb} | Stretched By Angel`,
-    description: `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`,
+    description: suburbStretchDescription(suburb, profile.studioMin),
     canonical: `/assisted-stretching/${slug}`,
     robots: tier === 2 ? TIER2_ROBOTS : undefined,
     jsonLd: [buildFaqSchema(suburb, profile, copy)],

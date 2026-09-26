@@ -10,7 +10,7 @@ export default function NotFoundPage() {
   usePageHead({
     title: "Page Not Found | Stretched By Angel",
     description:
-      "Sorry, this page could not be found. Head back to Stretched By Angel for assisted stretching and personal training on the Gold Coast.",
+      "Sorry, this page could not be found. Head back to Stretched By Angel for assisted stretching and personal training in Surfers Paradise and the Gold Coast.",
     robots: "noindex",
   });
 

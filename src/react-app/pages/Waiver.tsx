@@ -40,7 +40,7 @@ export default function WaiverPage() {
   usePageHead({
     title: "Liability Waiver | Stretched By Angel",
     description:
-      "Client intake and liability waiver for assisted stretching and personal training with Angel Elliott, Gold Coast.",
+      "Complete the client intake and liability waiver (PAR-Q) before your assisted stretching or personal training session with Angel Elliott on the Gold Coast.",
     canonical: "/waiver",
   });
 

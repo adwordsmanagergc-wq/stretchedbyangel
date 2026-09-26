@@ -207,7 +207,7 @@ function webPageSchema(type: SchemaType) {
     url: `${BUSINESS.url}${isHome ? "/" : PT_PATH}`,
     name: isHome
       ? "Assisted Stretching Gold Coast | Stretched By Angel"
-      : "Personal Training Gold Coast | Angel Fitness",
+      : "Personal Training Gold Coast | Stretched By Angel",
     isPartOf: { "@id": `${BUSINESS.url}/#website` },
     about: { "@id": `${BUSINESS.url}/#business` },
     primaryImageOfPage: BUSINESS.image,
@@ -237,13 +237,13 @@ const META = {
   home: {
     title: "Assisted Stretching Gold Coast | Stretched By Angel",
     description:
-      "Assisted Stretching Gold Coast — professional PNF stretching by Angel Elliott. Increase flexibility, improve range of motion, reduce pain and muscle tension. Sessions at Wicked Bodz Fitness Centre, Surfers Paradise, or in the comfort of your home. Book now.",
+      "Assisted stretching Gold Coast with Angel Elliott. PNF stretching for flexibility, pain relief and recovery at Wicked Bodz, Surfers Paradise, or at home.",
     ogImage: BUSINESS.image,
   },
   "personal-training": {
-    title: "Personal Training Gold Coast | Angel Fitness",
+    title: "Personal Training Gold Coast | Stretched By Angel",
     description:
-      "Personal Training Gold Coast — qualified personal trainer Angel Elliott with 10+ years experience. In-person sessions on the Gold Coast, online coaching, and custom programs available worldwide. Transform your body today.",
+      "Personal training Gold Coast with Angel Elliott, 10+ years experience. In-person sessions at Wicked Bodz, Surfers Paradise, online coaching and custom programs.",
     ogImage: BUSINESS.image,
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;

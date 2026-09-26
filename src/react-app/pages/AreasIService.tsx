@@ -11,7 +11,7 @@ export default function AreasIServicePage() {
   usePageHead({
     title: "Areas I Service | Stretched By Angel Gold Coast",
     description:
-      "Professional personal training & assisted stretching across the entire Gold Coast. Home visits and online coaching available in 77+ suburbs.",
+      "Assisted stretching and personal training across the Gold Coast. Find your suburb for home visits, studio sessions in Surfers Paradise and online coaching.",
     canonical: "/areas-i-service",
   });
 
@@ -20,8 +20,8 @@ export default function AreasIServicePage() {
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={LOGO} alt="Angel Fitness" className="h-12 w-12" />
-            <span className="font-semibold text-lg">Angel Fitness</span>
+            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12" />
+            <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
             <a
@@ -124,7 +124,7 @@ export default function AreasIServicePage() {
 
       <footer className="py-8 bg-card border-t border-border">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <img src={LOGO} alt="Angel Fitness" className="h-12 w-12 mx-auto mb-4" />
+          <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12 mx-auto mb-4" />
           <p className="text-muted-foreground text-sm mb-4">
             Personal Training & Assisted Stretching on the Gold Coast
           </p>

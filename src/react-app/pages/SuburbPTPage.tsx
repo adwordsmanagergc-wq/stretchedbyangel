@@ -1,4 +1,5 @@
 import { usePageHead } from "@/seo/head";
+import { suburbPTDescription } from "@/seo/describe";
 import { Link, useParams } from "react-router";
 import NotFoundPage from "@/react-app/pages/NotFound";
 import {
@@ -39,8 +40,8 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
   const copy = getTier1Copy(slug, "pt");
 
   usePageHead({
-    title: `Personal Training ${suburb} | Angel Fitness Gold Coast`,
-    description: `Personal Training ${suburb} — qualified trainer Angel Elliott with 10+ years experience. Strength training for ${profile.lifestyle.split(",")[0]}. In-person, online and custom programs. Book today.`,
+    title: `Personal Training ${suburb} | Stretched By Angel`,
+    description: suburbPTDescription(suburb, profile.studioMin),
     canonical: `/personal-training/${slug}`,
     robots: tier === 2 ? TIER2_ROBOTS : undefined,
     jsonLd: [buildFaqSchema(suburb, profile, copy)],
@@ -54,8 +55,8 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={LOGO} alt="Angel Fitness" className="h-12 w-12" />
-            <span className="font-semibold text-lg">Angel Fitness</span>
+            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12" />
+            <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
             <a
@@ -372,7 +373,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
           </div>
           <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Angel Fitness. All rights reserved.
+            © {new Date().getFullYear()} Stretched By Angel. All rights reserved.
           </p>
         </div>
       </footer>

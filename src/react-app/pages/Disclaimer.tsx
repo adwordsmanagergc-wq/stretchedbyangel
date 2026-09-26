@@ -5,7 +5,7 @@ export default function DisclaimerPage() {
   usePageHead({
     title: "Terms & Disclaimer | Stretched By Angel",
     description:
-      "Terms and disclaimer for assisted stretching and personal training sessions with Stretched By Angel on the Gold Coast.",
+      "Terms and disclaimer for assisted stretching and personal training with Stretched By Angel on the Gold Coast, covering health, safety and cancellations.",
     canonical: "/disclaimer",
   });
 

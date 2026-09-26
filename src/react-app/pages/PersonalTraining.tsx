@@ -123,10 +123,10 @@ export default function PersonalTrainingPage() {
           <Link to="/" className="flex items-center gap-3">
             <img
               src={IMAGES.logo}
-              alt="Angel Fitness"
+              alt="Stretched By Angel"
               className="h-12 w-12"
             />
-            <span className="font-semibold text-lg">Angel Fitness</span>
+            <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
             <a
@@ -444,7 +444,7 @@ export default function PersonalTrainingPage() {
           <Link to="/" className="inline-block mb-4">
             <img
               src={IMAGES.logo}
-              alt="Angel Fitness"
+              alt="Stretched By Angel"
               className="h-12 w-12 mx-auto"
             />
           </Link>
@@ -474,7 +474,7 @@ export default function PersonalTrainingPage() {
             </Link>
           </div>
           <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Angel Fitness. All rights reserved. Website by Metatap Pty Ltd.
+            © {new Date().getFullYear()} Stretched By Angel. All rights reserved. Website by Metatap Pty Ltd.
           </p>
         </div>
       </footer>

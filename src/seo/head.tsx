@@ -49,6 +49,8 @@ function toTags(head: HeadData) {
     { attr: "property", key: "og:description", content: head.description },
     { attr: "property", key: "og:image", content: ogImage },
     { attr: "name", key: "twitter:card", content: "summary_large_image" },
+    { attr: "name", key: "twitter:title", content: head.title },
+    { attr: "name", key: "twitter:description", content: head.description },
     { attr: "name", key: "twitter:image", content: ogImage },
     ...(head.meta ?? []),
   ];
