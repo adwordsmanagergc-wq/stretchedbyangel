@@ -14,14 +14,14 @@ import {
 } from "lucide-react";
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { PersonalTrainingGuide, PT_GUIDE_FAQS } from "@/react-app/components/PersonalTrainingGuide";
+import { IMG } from "@/data/images";
 
 const IMAGES = {
-  logo: "/stretched-by-angel-transparent-logo.png",
-  onlineCoaching: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.34.41-am.png",
-  gymTraining: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.35.28-am.png",
-  professional: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.36.27-am.png",
-  physique: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.36.51-am.png",
-  transformation: "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.55.51-am.png",
+  logo: IMG.logo,
+  onlineCoaching: IMG.ptOnlineCoaching,
+  gymTraining: IMG.ptGymSession,
+  physique: IMG.ptPhysique,
+  transformation: IMG.ptTransformation,
 };
 
 const CONTACT = {
@@ -122,7 +122,7 @@ export default function PersonalTrainingPage() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3">
             <img
-              src={IMAGES.logo}
+              {...IMAGES.logo}
               alt="Stretched By Angel"
               className="h-12 w-12"
             />
@@ -203,7 +203,8 @@ export default function PersonalTrainingPage() {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-xl" />
               <img
-                src={IMAGES.onlineCoaching}
+                {...IMAGES.onlineCoaching}
+                loading="lazy"
                 alt="Angel Elliott - Personal Trainer Gold Coast"
                 className="relative rounded-2xl shadow-2xl w-full"
               />
@@ -295,7 +296,8 @@ export default function PersonalTrainingPage() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden group">
               <img
-                src={IMAGES.gymTraining}
+                {...IMAGES.gymTraining}
+                loading="lazy"
                 alt="Angel training at the gym"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -307,7 +309,8 @@ export default function PersonalTrainingPage() {
             </div>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden group">
               <img
-                src={IMAGES.transformation}
+                {...IMAGES.transformation}
+                loading="lazy"
                 alt="Client body transformation results"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -319,7 +322,8 @@ export default function PersonalTrainingPage() {
             </div>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden group">
               <img
-                src={IMAGES.physique}
+                {...IMAGES.physique}
+                loading="lazy"
                 alt="Angel doing online coaching"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -443,8 +447,9 @@ export default function PersonalTrainingPage() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <Link to="/" className="inline-block mb-4">
             <img
-              src={IMAGES.logo}
+              {...IMAGES.logo}
               alt="Stretched By Angel"
+              loading="lazy"
               className="h-12 w-12 mx-auto"
             />
           </Link>

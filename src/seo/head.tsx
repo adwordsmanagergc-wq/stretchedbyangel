@@ -25,6 +25,8 @@ export type HeadData = {
   /** Extra <meta> tags, e.g. article:published_time. */
   meta?: { attr: "name" | "property"; key: string; content: string }[];
   jsonLd?: object[];
+  /** Above-the-fold image (LCP) to preload in the static HTML. */
+  preloadImage?: string;
 };
 
 type Collector = { head?: HeadData };
@@ -130,6 +132,11 @@ export function renderHeadTags(head: HeadData): string {
     ),
   ];
   if (canonical) lines.push(`<link rel="canonical" href="${escAttr(canonical)}" />`);
+  if (head.preloadImage) {
+    lines.push(
+      `<link rel="preload" as="image" href="${escAttr(head.preloadImage)}" fetchpriority="high" />`
+    );
+  }
   for (const data of head.jsonLd ?? []) {
     lines.push(`<script type="application/ld+json">${escJson(data)}</script>`);
   }

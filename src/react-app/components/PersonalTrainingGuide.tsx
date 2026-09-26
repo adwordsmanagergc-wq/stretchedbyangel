@@ -12,9 +12,8 @@ import {
   Flame,
 } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { IMG } from "@/data/images";
 
-const SECONDARY_IMG =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot-2026-03-23-at-10.35.28-am.png";
 
 /**
  * Long-form personal training guide content. It used to live on its own
@@ -377,7 +376,8 @@ export function PersonalTrainingGuide() {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-2xl" />
             <img
-              src={SECONDARY_IMG}
+              {...IMG.ptGymSession}
+              loading="lazy"
               alt="Personal trainer Angel Elliott coaching a strength session on the Gold Coast"
               className="relative rounded-2xl shadow-2xl w-full ring-1 ring-white/10"
             />

@@ -16,13 +16,10 @@ import {
   MapPin,
 } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { IMG, absoluteImage } from "@/data/images";
 
-const LOGO =
-  "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
-const HERO_IMG =
-  "https://www.stretchedbyangel.com/assisted-stretching-gold-coast.webp";
-const SECONDARY_IMG =
-  "https://019cb84d-8ead-73c3-a40b-714550aaa6fe.mochausercontent.com/Screenshot_20260304_175606_Instagram.jpg";
+const LOGO = "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
+const HERO_IMG = absoluteImage(IMG.promo);
 
 const URL = "https://www.stretchedbyangel.com/assisted-stretching-gold-coast";
 const TITLE = "What Is PNF Stretching? Benefits and Who It Helps | Stretched By Angel";
@@ -187,7 +184,7 @@ export default function BlogPage() {
       <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12" />
+            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
             <span className="font-semibold text-lg">Stretched By Angel</span>
           </Link>
           <div className="flex items-center gap-4">
@@ -253,7 +250,7 @@ export default function BlogPage() {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/20 to-cyan-500/20 rounded-3xl blur-2xl" />
             <img
-              src={HERO_IMG}
+              {...IMG.promo}
               alt="Assisted stretching Gold Coast — PNF stretch therapy with Angel Elliott"
               className="relative rounded-2xl shadow-2xl w-full object-cover ring-1 ring-white/10"
             />
@@ -457,7 +454,8 @@ export default function BlogPage() {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-2xl" />
             <img
-              src={SECONDARY_IMG}
+              {...IMG.pnfSession}
+              loading="lazy"
               alt="PNF stretching session on the Gold Coast"
               className="relative rounded-2xl shadow-2xl w-full ring-1 ring-white/10"
             />
@@ -628,7 +626,7 @@ export default function BlogPage() {
       <footer className="py-8 bg-card border-t border-border">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <Link to="/" className="inline-block mb-4">
-            <img src={LOGO} alt="Stretched By Angel" className="h-12 w-12 mx-auto" />
+            <img {...IMG.logo} alt="Stretched By Angel" loading="lazy" className="h-12 w-12 mx-auto" />
           </Link>
           <p className="text-muted-foreground text-sm mb-4">
             Professional Assisted Stretching across the Gold Coast

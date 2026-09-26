@@ -1,4 +1,5 @@
 import { usePageHead } from "@/seo/head";
+import { IMG } from "@/data/images";
 import { ANGEL, AREAS_SERVED, BUSINESS } from "@/react-app/lib/business";
 
 type SchemaType = "home" | "personal-training";
@@ -255,6 +256,7 @@ export default function SchemaMarkup({ type, faqs }: { type: SchemaType; faqs?: 
     description: meta.description,
     canonical: type === "home" ? "/" : PT_PATH,
     ogImage: meta.ogImage,
+    preloadImage: type === "home" ? IMG.heroAngel.src : undefined,
     jsonLd: buildSchemas(type, faqs),
   });
   return null;

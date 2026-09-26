@@ -21,16 +21,12 @@ import {
   CalendarClock,
 } from "lucide-react";
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
+import { IMG } from "@/data/images";
 
-const IMAGES = {
-  logo: "/stretched-by-angel-transparent-logo.png",
-  promo: "/assisted-stretching-gold-coast.webp",
-  heroAngel: "/assisted-stretching-gold-coast-hero.webp",
-  studio1: "/assisted-stretching-gold-coast-1.webp",
-};
+const IMAGES = IMG;
 
-const Logo = ({ className = "" }: { className?: string }) => (
-  <img src={IMAGES.logo} alt="Stretched By Angel" className={className} />
+const Logo = ({ className = "", lazy = false }: { className?: string; lazy?: boolean }) => (
+  <img {...IMG.logo} alt="Stretched By Angel" loading={lazy ? "lazy" : undefined} className={className} />
 );
 
 const CONTACT = {
@@ -266,7 +262,8 @@ export default function HomePage() {
             <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/30 to-cyan-500/30 rounded-3xl blur-2xl" />
             <div className="relative rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 aspect-[4/5]">
               <img
-                src={IMAGES.heroAngel}
+                {...IMAGES.heroAngel}
+                fetchPriority="high"
                 alt="Angel Elliott delivering an assisted PNF stretching session on the Gold Coast"
                 className="w-full h-full object-cover object-center"
               />
@@ -286,7 +283,8 @@ export default function HomePage() {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-gradient-to-br from-pink-500/20 via-purple-500/10 to-cyan-500/20 rounded-3xl blur-2xl" />
               <img
-                src={IMAGES.promo}
+                {...IMAGES.promo}
+                loading="lazy"
                 alt="Stretched By Angel - PNF Stretching Services"
                 className="relative rounded-2xl shadow-2xl w-full max-w-md mx-auto object-contain ring-1 ring-white/10"
               />
@@ -481,7 +479,8 @@ export default function HomePage() {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/25 to-pink-500/25 rounded-3xl blur-2xl" />
               <img
-                src={IMAGES.studio1}
+                {...IMAGES.studio1}
+                loading="lazy"
                 alt="PNF stretching session"
                 className="relative rounded-2xl shadow-2xl w-full ring-1 ring-white/10"
               />
@@ -714,7 +713,8 @@ export default function HomePage() {
                 className="relative flex-shrink-0 w-[280px] sm:w-auto aspect-square rounded-xl overflow-hidden group snap-center"
               >
                 <img
-                  src={img}
+                  {...img}
+                  loading="lazy"
                   alt={`Instagram post ${index + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -783,7 +783,7 @@ export default function HomePage() {
       <footer ref={footerRef} className="py-8 bg-card border-t border-border">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Logo className="h-10 w-10" />
+            <Logo className="h-10 w-10" lazy />
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
               <p className="text-muted-foreground text-sm">
                 © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.

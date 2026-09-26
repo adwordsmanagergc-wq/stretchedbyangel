@@ -65,6 +65,20 @@ The prerender also regenerates `sitemap.xml` (in `dist/` and `public/`) from
 the rendered pages: a route is listed only if it is indexable (no `noindex`)
 and its canonical points to itself, with today's date as `lastmod`.
 
+### Images
+
+Page images are listed with their intrinsic width/height in
+`src/data/images.ts` (spread into `<img>` to prevent layout shift). The hero
+image on the homepage is preloaded with `fetchpriority="high"`; everything
+below the fold uses `loading="lazy"`.
+
+Six images that used to be hot-linked from mochausercontent.com (Angel's
+portrait used in the Person schema, the personal training screenshots and
+one Instagram shot) are downloaded and converted to WebP into
+`public/images/` by `scripts/localize-remote-images.mjs` during `prebuild`,
+so the site serves them from its own domain. On Vercel a failed download
+fails the build; locally it only warns. `public/images/` is git-ignored.
+
 ### Suburb tiers
 
 `src/data/suburbContent.ts` lists every suburb with a `tier`. Tier 1 suburbs
