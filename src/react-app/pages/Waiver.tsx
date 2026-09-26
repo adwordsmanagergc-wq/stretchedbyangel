@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
 import { CheckCircle2, AlertCircle, ArrowLeft, Download } from "lucide-react";
 
@@ -36,9 +37,12 @@ export default function WaiverPage() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    document.title = "Liability Waiver | Stretched By Angel";
-  }, []);
+  usePageHead({
+    title: "Liability Waiver | Stretched By Angel",
+    description:
+      "Client intake and liability waiver for assisted stretching and personal training with Angel Elliott, Gold Coast.",
+    canonical: "/waiver",
+  });
 
   const handleAnswerChange = (index: number, value: boolean) => {
     const newAnswers = [...formData.answers];

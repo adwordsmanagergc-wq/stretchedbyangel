@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
 import {
   Phone,
@@ -32,28 +32,6 @@ const TITLE =
 const DESCRIPTION =
   "Personal Training Gold Coast — the complete guide to what personal training actually does, who it helps, results to expect, and how to choose between in-person, online and custom programs. Written by qualified trainer Angel Elliott (10+ years).";
 const PUBLISHED = "2026-05-17";
-
-function setMeta(attr: "name" | "property", key: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(
-    `meta[${attr}="${key}"]`
-  );
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute(attr, key);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
 
 const PHYSICAL_RESULTS = [
   "Build genuine, lasting strength",
@@ -210,38 +188,18 @@ const ARTICLE_FAQ_SCHEMA = {
 };
 
 export default function PersonalTrainingBlogPage() {
-  useEffect(() => {
-    document.title = TITLE;
-    setMeta("name", "description", DESCRIPTION);
-    setMeta(
-      "name",
-      "keywords",
-      "personal training Gold Coast, personal trainer Gold Coast, online personal trainer, strength training Gold Coast, Surfers Paradise personal training, female personal trainer Gold Coast, Burleigh personal trainer, Broadbeach personal trainer"
-    );
-    setMeta("property", "og:type", "article");
-    setMeta("property", "og:title", TITLE);
-    setMeta("property", "og:description", DESCRIPTION);
-    setMeta("property", "og:image", HERO_IMG);
-    setMeta("property", "og:url", URL);
-    setMeta("property", "article:published_time", PUBLISHED);
-    setMeta("property", "article:author", "Angel Elliott");
-    setMeta("name", "twitter:card", "summary_large_image");
-    setMeta("name", "twitter:title", TITLE);
-    setMeta("name", "twitter:description", DESCRIPTION);
-    setMeta("name", "twitter:image", HERO_IMG);
-    setCanonical(URL);
-
-    const scripts = [BLOG_SCHEMA, ARTICLE_FAQ_SCHEMA].map((data) => {
-      const el = document.createElement("script");
-      el.type = "application/ld+json";
-      el.text = JSON.stringify(data);
-      document.head.appendChild(el);
-      return el;
-    });
-    return () => {
-      scripts.forEach((el) => el.remove());
-    };
-  }, []);
+  usePageHead({
+    title: TITLE,
+    description: DESCRIPTION,
+    canonical: URL,
+    ogType: "article",
+    ogImage: HERO_IMG,
+    meta: [
+      { attr: "property", key: "article:published_time", content: PUBLISHED },
+      { attr: "property", key: "article:author", content: "Angel Elliott" },
+    ],
+    jsonLd: [BLOG_SCHEMA, ARTICLE_FAQ_SCHEMA],
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">

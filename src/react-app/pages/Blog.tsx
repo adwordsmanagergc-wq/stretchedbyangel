@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
 import {
   Phone,
@@ -30,28 +30,6 @@ const TITLE =
 const DESCRIPTION =
   "Assisted Stretching Gold Coast — the complete guide to PNF stretching benefits, who it helps, and what to expect. Covering pain relief, flexibility, recovery, injury prevention, posture, sleep and more from Gold Coast stretch therapist Angel Elliott.";
 const PUBLISHED = "2026-05-17";
-
-function setMeta(attr: "name" | "property", key: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(
-    `meta[${attr}="${key}"]`
-  );
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute(attr, key);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
 
 const PHYSICAL_BENEFITS = [
   "Dramatically increased flexibility",
@@ -193,36 +171,18 @@ const ARTICLE_FAQ_SCHEMA = {
 };
 
 export default function BlogPage() {
-  useEffect(() => {
-    document.title = TITLE;
-    setMeta("name", "description", DESCRIPTION);
-    setMeta("name", "keywords",
-      "assisted stretching Gold Coast, PNF stretching Gold Coast, mobile stretching Gold Coast, stretch therapy, flexibility training, sports recovery, pain relief, Surfers Paradise stretching, Burleigh stretching, Broadbeach stretching"
-    );
-    setMeta("property", "og:type", "article");
-    setMeta("property", "og:title", TITLE);
-    setMeta("property", "og:description", DESCRIPTION);
-    setMeta("property", "og:image", HERO_IMG);
-    setMeta("property", "og:url", URL);
-    setMeta("property", "article:published_time", PUBLISHED);
-    setMeta("property", "article:author", "Angel Elliott");
-    setMeta("name", "twitter:card", "summary_large_image");
-    setMeta("name", "twitter:title", TITLE);
-    setMeta("name", "twitter:description", DESCRIPTION);
-    setMeta("name", "twitter:image", HERO_IMG);
-    setCanonical(URL);
-
-    const scripts = [BLOG_SCHEMA, ARTICLE_FAQ_SCHEMA].map((data) => {
-      const el = document.createElement("script");
-      el.type = "application/ld+json";
-      el.text = JSON.stringify(data);
-      document.head.appendChild(el);
-      return el;
-    });
-    return () => {
-      scripts.forEach((el) => el.remove());
-    };
-  }, []);
+  usePageHead({
+    title: TITLE,
+    description: DESCRIPTION,
+    canonical: URL,
+    ogType: "article",
+    ogImage: HERO_IMG,
+    meta: [
+      { attr: "property", key: "article:published_time", content: PUBLISHED },
+      { attr: "property", key: "article:author", content: "Angel Elliott" },
+    ],
+    jsonLd: [BLOG_SCHEMA, ARTICLE_FAQ_SCHEMA],
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">

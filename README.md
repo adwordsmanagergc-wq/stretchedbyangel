@@ -45,7 +45,23 @@ npm run preview      # serve dist/ locally
 npm run sitemap      # regenerate public/sitemap.xml manually
 ```
 
-`npm run build` runs `prebuild` first, which executes
+`npm run build` builds the client bundle, then an SSR bundle
+(`src/entry-server.tsx`), and `postbuild` (`scripts/prerender.mjs`) renders
+every route to static HTML in `dist/<route>/index.html`. Crawlers get the full
+page (H1, copy, internal links, JSON-LD) without running JavaScript; the
+browser hydrates it. Page `<head>` data (title, description, canonical,
+robots, JSON-LD) is declared per page with `usePageHead()` from
+`src/seo/head.tsx`, which works both during prerender and client-side
+navigation.
+
+To check the output locally the way Vercel serves it:
+
+```bash
+node scripts/serve-dist.mjs 4173
+curl -s http://localhost:4173/assisted-stretching/robina | grep -c "<h1"
+```
+
+`npm run build` also runs `prebuild` first, which executes
 `scripts/generate-sitemap.mjs` to regenerate `public/sitemap.xml` from
 `src/data/suburbs.ts`. If you add or remove suburbs, the sitemap stays in sync
 automatically on every build.

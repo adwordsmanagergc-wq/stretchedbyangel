@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import { ANGEL, AREAS_SERVED, BUSINESS } from "@/react-app/lib/business";
 
 type SchemaType = "home" | "personal-training";
@@ -242,52 +242,14 @@ const META = {
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;
 
-function setMetaTag(attr: "name" | "property", key: string, value: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute(attr, key);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", value);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
-
 export default function SchemaMarkup({ type }: { type: SchemaType }) {
-  useEffect(() => {
-    const meta = META[type];
-    const pageUrl = `${BUSINESS.url}${type === "home" ? "/" : "/personal-training"}`;
-    document.title = meta.title;
-    setMetaTag("name", "description", meta.description);
-    setMetaTag("property", "og:title", meta.title);
-    setMetaTag("property", "og:description", meta.description);
-    setMetaTag("property", "og:image", meta.ogImage);
-    setMetaTag("property", "og:url", pageUrl);
-    setMetaTag("name", "twitter:image", meta.ogImage);
-    setCanonical(pageUrl);
-
-    const scripts = buildSchemas(type).map((data) => {
-      const el = document.createElement("script");
-      el.type = "application/ld+json";
-      el.dataset.schemaPage = type;
-      el.text = JSON.stringify(data);
-      document.head.appendChild(el);
-      return el;
-    });
-
-    return () => {
-      scripts.forEach((el) => el.remove());
-    };
-  }, [type]);
-
+  const meta = META[type];
+  usePageHead({
+    title: meta.title,
+    description: meta.description,
+    canonical: type === "home" ? "/" : "/personal-training",
+    ogImage: meta.ogImage,
+    jsonLd: buildSchemas(type),
+  });
   return null;
 }

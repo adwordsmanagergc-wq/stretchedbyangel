@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-favicons.mjs",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr",
     "postbuild": "node scripts/prerender.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "favicons": "node scripts/generate-favicons.mjs",

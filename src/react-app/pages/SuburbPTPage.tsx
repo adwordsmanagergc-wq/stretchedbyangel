@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link, useParams, Navigate } from "react-router";
 import {
   Phone,
@@ -23,49 +23,22 @@ import {
 const LOGO =
   "/stretched-by-angel-transparent-logo.png";
 
-function setMeta(name: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute("name", name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
-
 export default function SuburbPTPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
   const profile = suburb ? getProfile(slug) : null;
   const neighbors = suburb ? getNeighbors(slug) : [];
 
-  useEffect(() => {
-    if (!suburb || !profile) return;
-    document.title = `Personal Training ${suburb} | Angel Fitness Gold Coast`;
-    setMeta(
-      "description",
-      `Personal Training ${suburb} — qualified trainer Angel Elliott with 10+ years experience. Strength training for ${profile.lifestyle.split(",")[0]}. In-person, online and custom programs. Book today.`
-    );
-    setCanonical(`https://www.stretchedbyangel.com/personal-training/${slug}`);
-
-    const ld = document.createElement("script");
-    ld.type = "application/ld+json";
-    ld.text = JSON.stringify(buildFaqSchema(suburb, profile));
-    document.head.appendChild(ld);
-    return () => {
-      ld.remove();
-    };
-  }, [suburb, profile, slug]);
+  usePageHead(
+    suburb && profile
+      ? {
+          title: `Personal Training ${suburb} | Angel Fitness Gold Coast`,
+          description: `Personal Training ${suburb} — qualified trainer Angel Elliott with 10+ years experience. Strength training for ${profile.lifestyle.split(",")[0]}. In-person, online and custom programs. Book today.`,
+          canonical: `/personal-training/${slug}`,
+          jsonLd: [buildFaqSchema(suburb, profile)],
+        }
+      : { title: "Page not found | Stretched By Angel", description: "", robots: "noindex" }
+  );
 
   if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
 

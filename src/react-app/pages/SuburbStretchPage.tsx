@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link, useParams, Navigate } from "react-router";
 import {
   Phone,
@@ -22,49 +22,22 @@ import {
 const LOGO =
   "/stretched-by-angel-transparent-logo.png";
 
-function setMeta(name: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute("name", name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
-function setCanonical(href: string) {
-  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "canonical";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
-
 export default function SuburbStretchPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
   const profile = suburb ? getProfile(slug) : null;
   const neighbors = suburb ? getNeighbors(slug) : [];
 
-  useEffect(() => {
-    if (!suburb || !profile) return;
-    document.title = `Assisted Stretching ${suburb} | Stretched By Angel`;
-    setMeta(
-      "description",
-      `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`
-    );
-    setCanonical(`https://www.stretchedbyangel.com/assisted-stretching/${slug}`);
-
-    const ld = document.createElement("script");
-    ld.type = "application/ld+json";
-    ld.text = JSON.stringify(buildFaqSchema(suburb, profile));
-    document.head.appendChild(ld);
-    return () => {
-      ld.remove();
-    };
-  }, [suburb, profile, slug]);
+  usePageHead(
+    suburb && profile
+      ? {
+          title: `Assisted Stretching ${suburb} | Stretched By Angel`,
+          description: `Assisted Stretching ${suburb} — professional PNF stretching with Angel Elliott for ${profile.lifestyle.split(",")[0]}. Mobile home visits and in-studio sessions. Improve flexibility, reduce pain, book today.`,
+          canonical: `/assisted-stretching/${slug}`,
+          jsonLd: [buildFaqSchema(suburb, profile)],
+        }
+      : { title: "Page not found | Stretched By Angel", description: "", robots: "noindex" }
+  );
 
   if (!suburb || !profile) return <Navigate to="/areas-i-service" replace />;
 

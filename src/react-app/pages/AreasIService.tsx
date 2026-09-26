@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
 import { Phone, Instagram, MapPin, Sparkles, Dumbbell, ArrowRight } from "lucide-react";
 import { SUBURBS, slugify } from "@/data/suburbs";
@@ -7,24 +7,13 @@ import { CONTACT } from "@/data/contact";
 const LOGO =
   "/stretched-by-angel-transparent-logo.png";
 
-function setMeta(name: string, content: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute("name", name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
-}
-
 export default function AreasIServicePage() {
-  useEffect(() => {
-    document.title = "Areas I Service | Stretched By Angel Gold Coast";
-    setMeta(
-      "description",
-      "Professional personal training & assisted stretching across the entire Gold Coast. Home visits and online coaching available in 77+ suburbs."
-    );
-  }, []);
+  usePageHead({
+    title: "Areas I Service | Stretched By Angel Gold Coast",
+    description:
+      "Professional personal training & assisted stretching across the entire Gold Coast. Home visits and online coaching available in 77+ suburbs.",
+    canonical: "/areas-i-service",
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
