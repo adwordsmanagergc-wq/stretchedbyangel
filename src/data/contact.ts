@@ -8,5 +8,5 @@ export const CONTACT = {
   instagram: "@angelfitnessau",
   instagramLink: "https://instagram.com/angelfitnessau",
   email: "angelfitnessjsyci@icloud.com",
-  address: "Wicked Bodz Fitness Centre, 45 Cavill Ave, Surfers Paradise QLD 4217",
+  address: "Level 1, 45 Cavill Ave, Surfers Paradise QLD 4217",
 };
