@@ -59,13 +59,12 @@ function businessSchema() {
       latitude: BUSINESS.geo.latitude,
       longitude: BUSINESS.geo.longitude,
     },
-    openingHoursSpecification: {
+    hasMap: BUSINESS.googleMapsUrl,
+    openingHoursSpecification: BUSINESS.openingHours.map((h) => ({
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: BUSINESS.openingHours.dayOfWeek,
-      opens: BUSINESS.openingHours.opens,
-      closes: BUSINESS.openingHours.closes,
-    },
-    sameAs: [BUSINESS.instagram],
+      ...h,
+    })),
+    sameAs: [BUSINESS.instagram, BUSINESS.googleMapsUrl],
     areaServed: AREAS_SERVED.map((name) => ({
       "@type": "City",
       name,
@@ -240,13 +239,13 @@ const META = {
   home: {
     title: "Assisted Stretching Gold Coast | Stretched By Angel",
     description:
-      "Assisted stretching Gold Coast with Angel Elliott. PNF stretching for flexibility, pain relief and recovery at Wicked Bodz, Surfers Paradise, or at home.",
+      "Assisted stretching Gold Coast with Angel Elliott. PNF stretching for flexibility, pain relief and recovery at 45 Cavill Ave, Surfers Paradise, or at home.",
     ogImage: BUSINESS.image,
   },
   "personal-training": {
     title: "Personal Training Gold Coast | Stretched By Angel",
     description:
-      "Personal training Gold Coast with Angel Elliott, 10+ years experience. In-person sessions at Wicked Bodz, Surfers Paradise, online coaching and custom programs.",
+      "Personal training Gold Coast with Angel Elliott, 10+ years experience. In-person sessions in Surfers Paradise, plus online coaching and custom programs.",
     ogImage: BUSINESS.image,
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;

@@ -19,8 +19,10 @@ import {
   TrendingUp,
   Quote,
   CalendarClock,
+  MapPin,
 } from "lucide-react";
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
+import { BUSINESS } from "@/react-app/lib/business";
 import { IMG } from "@/data/images";
 
 const IMAGES = IMG;
@@ -34,8 +36,11 @@ const CONTACT = {
   phoneLink: "tel:0434773815",
   instagram: "@angelfitnessau",
   instagramLink: "https://instagram.com/angelfitnessau",
-  address: "Wicked Bodz Fitness Centre, Gold Coast, QLD",
-  mapQuery: "Wicked+Bodz+Fitness+Centre%2C+45+Cavill+Ave%2C+Surfers+Paradise+QLD+4217",
+  address: BUSINESS.addressLine,
+  mapEmbed: `https://www.google.com/maps?q=${encodeURIComponent(
+    `${BUSINESS.venue}, ${BUSINESS.addressLine}`
+  )}&output=embed`,
+  directions: BUSINESS.googleMapsUrl,
 };
 
 const BENEFITS = [
@@ -727,6 +732,92 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Studio location */}
+      <section id="location" className="py-20 lg:py-32 bg-background">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+              Assisted Stretching Studio in{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
+                Surfers Paradise
+              </span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Studio sessions run inside {BUSINESS.venue} on Cavill Avenue, a short walk from
+              the Surfers Paradise light rail station and the beach. Can&apos;t make it in? Angel
+              also comes to you with mobile assisted stretching across the Gold Coast.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
+              <div className="flex items-start gap-4">
+                <MapPin className="w-6 h-6 text-primary shrink-0 mt-1" />
+                <address className="not-italic">
+                  <p className="font-semibold text-lg">{BUSINESS.name}</p>
+                  <p className="text-muted-foreground">{BUSINESS.venue}</p>
+                  <p className="text-muted-foreground">{BUSINESS.address.streetAddress}</p>
+                  <p className="text-muted-foreground">
+                    {BUSINESS.address.addressLocality} {BUSINESS.address.addressRegion}{" "}
+                    {BUSINESS.address.postalCode}
+                  </p>
+                </address>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Phone className="w-6 h-6 text-primary shrink-0 mt-1" />
+                <a href={CONTACT.phoneLink} className="text-lg hover:text-primary transition-colors">
+                  {CONTACT.phone}
+                </a>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Clock className="w-6 h-6 text-primary shrink-0 mt-1" />
+                <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-muted-foreground">
+                  {BUSINESS.hoursDisplay.map(([day, hours]) => (
+                    <div key={day} className="contents">
+                      <dt className="font-medium text-foreground">{day}</dt>
+                      <dd>{hours}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                <a
+                  href={CONTACT.directions}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <MapPin className="w-5 h-5" />
+                  Get Directions
+                </a>
+                <a
+                  href="/areas-i-service"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border font-semibold hover:border-primary hover:text-primary transition-colors"
+                >
+                  Mobile Service Areas
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-border min-h-[320px] bg-card">
+              <iframe
+                title={`Map to ${BUSINESS.name}, ${BUSINESS.addressLine}`}
+                src={CONTACT.mapEmbed}
+                className="block w-full h-full min-h-[320px] border-0"
+                style={{ width: "100%" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="py-20 lg:py-32 bg-gradient-to-b from-background to-card relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-pink-500/15 via-cyan-500/5 to-transparent" />
@@ -785,8 +876,15 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <Logo className="h-10 w-10" lazy />
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-              <p className="text-muted-foreground text-sm">
-                © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.
+              <p className="text-muted-foreground text-sm text-center sm:text-left">
+                © {new Date().getFullYear()} Stretched By Angel.{" "}
+                <a href={CONTACT.directions} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  {CONTACT.address}
+                </a>
+                .{" "}
+                <a href={CONTACT.phoneLink} className="hover:text-primary transition-colors">
+                  {CONTACT.phone}
+                </a>
               </p>
               <a href="/assisted-stretching-gold-coast" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                 Blog

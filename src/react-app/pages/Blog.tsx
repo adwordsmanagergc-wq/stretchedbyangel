@@ -127,7 +127,7 @@ const FAQS = [
   },
   {
     q: "Where on the Gold Coast can I book?",
-    a: "Studio sessions are at Wicked Bodz Fitness Centre, 45 Cavill Ave, Surfers Paradise. Mobile home visits are available across all Gold Coast suburbs — from Coolangatta in the south to Coomera in the north and everywhere in between.",
+    a: "Studio sessions are at Wicked Bodz Fitness Centre, Level 1, 45 Cavill Ave, Surfers Paradise. Mobile home visits are available across all Gold Coast suburbs — from Coolangatta in the south to Coomera in the north and everywhere in between.",
   },
 ];
 

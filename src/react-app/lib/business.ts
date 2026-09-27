@@ -14,27 +14,33 @@ export const BUSINESS = {
   instagramHandle: "@angelfitnessau",
   priceRange: "$$",
   currency: "AUD",
+  /** Studio venue (Angel trains out of this gym). */
+  venue: "Wicked Bodz Fitness Centre",
   address: {
-    streetAddress: "Wicked Bodz Fitness Centre, 45 Cavill Ave",
+    streetAddress: "Level 1, 45 Cavill Ave",
     addressLocality: "Surfers Paradise",
     addressRegion: "QLD",
     postalCode: "4217",
     addressCountry: "AU",
   },
-  geo: { latitude: -28.0027, longitude: 153.431 },
-  openingHours: {
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "06:00",
-    closes: "20:00",
-  },
+  /** Display versions of the address. Must match the Google Business Profile exactly. */
+  addressLine: "Level 1, 45 Cavill Ave, Surfers Paradise QLD 4217",
+  geo: { latitude: -28.0014685, longitude: 153.4277109 },
+  /** Google Business Profile (Maps) listing. */
+  googleMapsUrl: "https://maps.google.com/?cid=10841806488396252302",
+  /** Opening hours, kept in sync with the Google Business Profile. */
+  openingHours: [
+    { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"], opens: "05:30", closes: "19:00" },
+    { dayOfWeek: ["Friday"], opens: "05:30", closes: "14:00" },
+    { dayOfWeek: ["Saturday"], opens: "06:00", closes: "12:00" },
+  ],
+  /** Human-readable hours for the page. */
+  hoursDisplay: [
+    ["Mon to Thu", "5:30am to 7pm"],
+    ["Friday", "5:30am to 2pm"],
+    ["Saturday", "6am to 12pm"],
+    ["Sunday", "Closed"],
+  ] as [string, string][],
 };
 
 export const AREAS_SERVED = [
