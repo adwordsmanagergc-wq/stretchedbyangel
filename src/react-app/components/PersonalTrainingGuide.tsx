@@ -434,7 +434,7 @@ export function PersonalTrainingGuide() {
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               The single biggest accelerator I see for clients is adding{" "}
-              <Link to="/assisted-stretching-gold-coast" className="text-primary underline hover:text-primary/80">
+              <Link to="/pnf-stretching" className="text-primary underline hover:text-primary/80">
                 assisted PNF stretching
               </Link>{" "}
               to their training week. It accelerates recovery, reduces

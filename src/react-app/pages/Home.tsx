@@ -24,6 +24,7 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { BUSINESS } from "@/react-app/lib/business";
 import { IMG } from "@/data/images";
+import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
 
 const IMAGES = IMG;
 
@@ -182,36 +183,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-background text-foreground">
       <SchemaMarkup type="home" />
       {/* Navigation */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-4 py-2 sm:py-4 flex items-center justify-between">
-          <a
-            href={CONTACT.instagramLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Instagram className="w-6 h-6" />
-          </a>
-          <Logo className="h-20 w-20 sm:h-16 sm:w-16" />
-          <div className="flex items-center gap-4">
-            <a
-              href={CONTACT.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="w-6 h-6" />
-            </a>
-            <BookButton className="hidden sm:inline-flex text-sm px-6 py-3">
-              Call Now
-            </BookButton>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader overlay scrolled={scrolled} />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-20">
@@ -886,21 +858,8 @@ export default function HomePage() {
                   {CONTACT.phone}
                 </a>
               </p>
-              <a href="/assisted-stretching-gold-coast" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                Blog
-              </a>
-              <a href="/personal-training-gold-coast" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                Personal Training
-              </a>
-              <a href="/areas-i-service" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                Areas I Service
-              </a>
-              <a href="/disclaimer" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                Terms & Disclaimer
-              </a>
-              <a href="/waiver" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                Liability Waiver
-              </a>
+              {/* The phone number is already in the line above. */}
+              <FooterLinks phone={false} />
               <span className="text-muted-foreground/60 text-xs">
                 Website by Metatap Pty Ltd
               </span>

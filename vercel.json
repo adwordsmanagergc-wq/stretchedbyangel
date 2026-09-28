@@ -3,7 +3,32 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/assisted-stretching-gold-coast",
+      "destination": "/pnf-stretching",
+      "statusCode": 301
+    },
+    {
+      "source": "/assisted-stretching-gold-coast/",
+      "destination": "/pnf-stretching",
+      "statusCode": 301
+    },
+    {
+      "source": "/assisted-stretching",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/assisted-stretching/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
       "source": "/personal-training",
+      "destination": "/personal-training-gold-coast",
+      "statusCode": 301
+    },
+    {
+      "source": "/personal-training/",
       "destination": "/personal-training-gold-coast",
       "statusCode": 301
     }
@@ -11,6 +36,15 @@
   "headers": [
     {
       "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap-noindex-recrawl.xml",
       "headers": [
         {
           "key": "Content-Type",

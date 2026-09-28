@@ -15,6 +15,7 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { PersonalTrainingGuide, PT_GUIDE_FAQS } from "@/react-app/components/PersonalTrainingGuide";
 import { IMG } from "@/data/images";
+import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
 
 const IMAGES = {
   logo: IMG.logo,
@@ -118,35 +119,7 @@ export default function PersonalTrainingPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SchemaMarkup type="personal-training" faqs={FAQS.map(({ question, answer }) => ({ q: question, a: answer }))} />
       {/* Navigation */}
-      <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-3">
-            <img
-              {...IMAGES.logo}
-              alt="Stretched By Angel"
-              className="h-12 w-12"
-            />
-            <span className="font-semibold text-lg">Stretched By Angel</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <a
-              href={CONTACT.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a
-              href={CONTACT.phoneLink}
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2 rounded-full transition-all"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">Book Now</span>
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader />
 
       {/* Hero Section */}
       <section className="relative pt-8 sm:pt-12 pb-16 sm:pb-24 overflow-hidden">
@@ -456,28 +429,7 @@ export default function PersonalTrainingPage() {
           <p className="text-muted-foreground text-sm mb-4">
             Personal Training & Assisted Stretching on the Gold Coast
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-primary transition-colors">
-              Stretching Services
-            </Link>
-            <span>•</span>
-            <Link to="/areas-i-service" className="hover:text-primary transition-colors">
-              Areas I Service
-            </Link>
-            <span>•</span>
-            <a
-              href={CONTACT.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-            >
-              Instagram
-            </a>
-            <span>•</span>
-            <Link to="/waiver" className="hover:text-primary transition-colors">
-              Liability Waiver
-            </Link>
-          </div>
+          <FooterLinks />
           <p className="text-muted-foreground/60 text-xs mt-6">
             © {new Date().getFullYear()} Stretched By Angel. All rights reserved. Website by Metatap Pty Ltd.
           </p>

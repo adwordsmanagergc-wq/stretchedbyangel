@@ -62,6 +62,15 @@ and the /personal-training redirect:
 npm run build && npm run audit:seo
 ```
 
+For a quick static check of `dist/` without starting a server (titles <= 60 chars,
+descriptions 150 to 160 chars, one H1, self-canonical, valid JSON-LD, sitemap
+matches the indexable pages, no internal links to redirects or 404s, no
+"Angel Fitness" brand text):
+
+```bash
+npm run build && npm run seo:check
+```
+
 To check the output locally the way Vercel serves it:
 
 ```bash
@@ -179,10 +188,12 @@ from her inbox.
 |---|---|
 | `/` | Home — assisted stretching landing page |
 | `/personal-training` | 301 redirect to `/personal-training-gold-coast` (vercel.json) |
+| `/assisted-stretching` | 301 redirect to `/` (vercel.json) |
+| `/assisted-stretching-gold-coast` | 301 redirect to `/pnf-stretching` (old URL of the PNF guide) |
 | `/areas-i-service` | Hub of all 77 Gold Coast suburbs (two grids — stretching + PT) |
 | `/assisted-stretching/:slug` | Dynamic per-suburb stretching page (77 suburbs) |
 | `/personal-training/:slug` | Dynamic per-suburb personal training page (77 suburbs) |
-| `/assisted-stretching-gold-coast` | Informational guide: What Is PNF Stretching? (the homepage targets "Assisted Stretching Gold Coast") |
+| `/pnf-stretching` | Informational guide: What Is PNF Stretching? (the homepage targets "Assisted Stretching Gold Coast") |
 | `/personal-training-gold-coast` | Canonical personal training page (landing page + merged training guide) |
 | `/disclaimer` | Terms & disclaimer |
 | `/waiver` | PAR-Q intake & liability waiver form |
@@ -195,7 +206,12 @@ HTTP 404.
 
 ## SEO setup
 
-- **Sitemap**: `/sitemap.xml` (auto-generated at build, 161 URLs)
+- **Sitemap**: `/sitemap.xml` (auto-generated at build; indexable pages only: 6 core pages + 30 Tier 1 suburb pages)
+- **Temporary recrawl sitemap**: `/sitemap-noindex-recrawl.xml` lists the 124 noindex (Tier 2)
+  suburb pages so Google recrawls them and drops them from the index. It is NOT referenced in
+  `robots.txt` or `sitemap.xml`; it was submitted by hand in Search Console on 2026-09-28.
+  **Delete `public/sitemap-noindex-recrawl.xml` (and remove it in Search Console) around
+  2026-11-09**, about 6 weeks later, once the Tier 2 pages show as excluded by noindex.
 - **Robots**: `/robots.txt`
 - **AI crawlers**: `/llms.txt` (per [llmstxt.org](https://llmstxt.org/))
 - **JSON-LD schemas emitted**:
@@ -208,8 +224,8 @@ HTTP 404.
 
 1. Verify ownership via the existing `google-site-verification` TXT record at
    IONOS (already in place from the previous host — should pass instantly).
-2. Sitemaps → Submit `https://stretchedbyangel.com/sitemap.xml`.
-3. Should report **"Success — 161 URLs discovered"** within minutes.
+2. Sitemaps → Submit `https://www.stretchedbyangel.com/sitemap.xml`.
+3. Should report **"Success"** with 36 URLs discovered within minutes.
 
 ---
 

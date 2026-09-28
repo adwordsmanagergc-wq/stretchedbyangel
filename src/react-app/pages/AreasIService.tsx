@@ -1,9 +1,12 @@
 import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
-import { Phone, Instagram, MapPin, Sparkles, Dumbbell, ArrowRight } from "lucide-react";
-import { SUBURBS, slugify } from "@/data/suburbs";
+import { Phone, MapPin, Sparkles, Dumbbell, ArrowRight } from "lucide-react";
+import { SUBURBS, slugify, unslugify } from "@/data/suburbs";
+import { getTier } from "@/data/suburbContent";
+import { BUSINESS } from "@/react-app/lib/business";
 import { CONTACT } from "@/data/contact";
 import { IMG } from "@/data/images";
+import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
 
 export default function AreasIServicePage() {
   usePageHead({
@@ -15,31 +18,7 @@ export default function AreasIServicePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
-            <span className="font-semibold text-lg">Stretched By Angel</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <a
-              href={CONTACT.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a
-              href={CONTACT.phoneLink}
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2 rounded-full transition-all"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">Book Now</span>
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
@@ -56,46 +35,76 @@ export default function AreasIServicePage() {
         </div>
       </section>
 
-      <SuburbGrid
-        kicker={
-          <>
-            <Sparkles className="w-4 h-4" /> Assisted Stretching
-          </>
-        }
-        title={
-          <>
-            Stretching by{" "}
-            <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
-              Suburb
-            </span>
-          </>
-        }
-        subtitle="Click on your suburb to learn more about assisted stretching services in your area."
-        basePath="/assisted-stretching"
-        viewAllHref="/"
-        viewAllLabel="View General Gold Coast Stretching Page"
-      />
+      <section className="py-16 bg-background">
+        <div className="max-w-3xl mx-auto px-4 space-y-10 text-lg text-muted-foreground leading-relaxed">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Where I work</h2>
+            <p className="mb-4">
+              I'm Angel Elliott, and I run Stretched By Angel from {BUSINESS.venue},{" "}
+              {BUSINESS.addressLine}. Studio sessions of 30 or 60 minutes happen there, close to
+              the Cavill Avenue light rail station and a short walk from the beach.
+            </p>
+            <p>
+              If getting to Surfers Paradise doesn't suit you, I come to you. Mobile sessions run
+              right across the Gold Coast, from Ormeau and Jacobs Well in the north to Coolangatta
+              in the south, and out into the hinterland. Personal training is available in person
+              at the studio or online from anywhere.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">How mobile sessions work</h2>
+            <p className="mb-4">
+              A mobile session is a 60 minute assisted stretching session at your home, unit or
+              office, priced at $130. To book, call or message me on{" "}
+              <a href={CONTACT.phoneLink} className="text-primary hover:underline">{CONTACT.phone}</a>{" "}
+              (WhatsApp works too) with your suburb and a few times that suit you.
+            </p>
+            <p>
+              Before your first session, please fill in the online{" "}
+              <Link to="/waiver" className="text-primary hover:underline">liability waiver</Link>{" "}
+              so I know about any injuries or health conditions. On the day, wear comfortable
+              clothes you can move in. The session itself is the same full body PNF stretch you
+              would get in the studio, just without the drive or the parking.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">How far I travel</h2>
+            <p className="mb-4">
+              Suburbs close to the studio, such as Main Beach, Broadbeach, Bundall and Southport,
+              are usually a 5 to 15 minute drive, so they are the easiest to fit in at short
+              notice. The southern beaches and the northern growth corridor are 15 to 40 minutes
+              away, and hinterland areas such as Springbrook and Lower Beechmont are available by
+              arrangement.
+            </p>
+            <p>
+              Each suburb page below shows the typical drive time from Surfers Paradise, along
+              with local details and answers to common questions. If your suburb isn't listed,
+              call me anyway. If you're on the Gold Coast, I can usually get to you.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <SuburbGrid
-        kicker={
-          <>
-            <Dumbbell className="w-4 h-4" /> Personal Training
-          </>
-        }
-        title={
-          <>
-            Personal Training by{" "}
-            <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
-              Suburb
-            </span>
-          </>
-        }
-        subtitle="Click on your suburb to learn more about personal training services in your area."
-        basePath="/personal-training"
-        viewAllHref="/personal-training-gold-coast"
-        viewAllLabel="View General Personal Training Page"
-        alt
-      />
+      {REGIONS.map((region, i) => (
+        <RegionSection key={region.name} region={region} alt={i % 2 === 0} />
+      ))}
+
+      <section className="py-12 bg-background">
+        <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+          >
+            <Sparkles className="w-4 h-4" /> View General Gold Coast Stretching Page <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            to="/personal-training-gold-coast"
+            className="inline-flex items-center justify-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+          >
+            <Dumbbell className="w-4 h-4" /> View General Personal Training Page <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
 
       <section className="py-20 bg-gradient-to-b from-card to-background">
         <div className="max-w-3xl mx-auto px-4 text-center">
@@ -126,17 +135,7 @@ export default function AreasIServicePage() {
           <p className="text-muted-foreground text-sm mb-4">
             Personal Training & Assisted Stretching on the Gold Coast
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-            <span>•</span>
-            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
-            <span>•</span>
-            <Link to="/" className="hover:text-primary transition-colors">Stretching</Link>
-            <span>•</span>
-            <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
-            <span>•</span>
-            <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
-          </div>
+          <FooterLinks />
           <p className="text-muted-foreground/60 text-xs mt-6">
             © {new Date().getFullYear()} Stretched By Angel. All rights reserved.
           </p>
@@ -146,53 +145,110 @@ export default function AreasIServicePage() {
   );
 }
 
-function SuburbGrid({
-  kicker,
-  title,
-  subtitle,
-  basePath,
-  viewAllHref,
-  viewAllLabel,
-  alt,
-}: {
-  kicker: React.ReactNode;
-  title: React.ReactNode;
-  subtitle: string;
-  basePath: string;
-  viewAllHref: string;
-  viewAllLabel: string;
-  alt?: boolean;
-}) {
+type Region = { name: string; blurb: string; slugs: string[] };
+
+/**
+ * Suburbs grouped by region. Within each region the Tier 1 (indexed)
+ * suburbs come first, then the rest alphabetically.
+ */
+const REGION_SLUGS: { name: string; blurb: string; slugs: string[] }[] = [
+  {
+    name: "Central Gold Coast",
+    blurb: "Surfers Paradise and the suburbs around it, all within about 20 minutes of the studio.",
+    slugs: [
+      "surfers-paradise", "main-beach", "broadbeach", "bundall", "broadbeach-waters", "benowa",
+      "mermaid-beach", "mermaid-waters", "southport", "ashmore",
+      "carrara", "chevron-island", "clear-island-waters", "highland-park", "isle-of-capri",
+      "merrimac", "midway", "molendinar", "nerang", "paradise-waters", "parkwood",
+    ],
+  },
+  {
+    name: "Northern Gold Coast",
+    blurb: "The Broadwater suburbs and the northern corridor up to Ormeau and Jacobs Well.",
+    slugs: [
+      "labrador",
+      "arundel", "biggera-waters", "coombabah", "coomera", "gaven", "helensvale", "hollywell",
+      "hope-island", "jacobs-well", "maudsland", "norwell", "ormeau", "ormeau-hills", "oxenford",
+      "pacific-pines", "paradise-point", "pimpama", "runaway-bay", "sanctuary-cove",
+      "south-stradbroke-island", "stapylton", "steiglitz", "upper-coomera", "willow-vale",
+      "woongoolba", "yatala",
+    ],
+  },
+  {
+    name: "Southern Gold Coast",
+    blurb: "From Miami and Burleigh down the beaches to Coolangatta, plus Robina and Varsity Lakes.",
+    slugs: [
+      "miami", "burleigh-heads", "robina", "varsity-lakes",
+      "bilinga", "burleigh-waters", "coolangatta", "currumbin", "currumbin-waters", "elanora",
+      "kirra", "palm-beach", "reedy-creek", "tallebudgera", "tugun",
+    ],
+  },
+  {
+    name: "Gold Coast Hinterland",
+    blurb: "Mudgeeraba and the acreage and rainforest suburbs to the west, available by arrangement.",
+    slugs: [
+      "advancetown", "bonogin", "clagiraba", "currumbin-valley", "gilston", "guanaba",
+      "lower-beechmont", "mudgeeraba", "neranwood", "springbrook", "tallai",
+      "tallebudgera-valley", "wongawallan", "worongary",
+    ],
+  },
+];
+
+const REGIONS: (Region & { tier1: Set<string> })[] = REGION_SLUGS.map((r) => ({
+  ...r,
+  tier1: new Set(r.slugs.filter((slug) => getTier(slug) === 1)),
+}));
+
+// Every suburb must appear in exactly one region, or its links would drop off this page.
+{
+  const listed = REGION_SLUGS.flatMap((r) => r.slugs);
+  const all = SUBURBS.map(slugify);
+  const missing = all.filter((s) => !listed.includes(s));
+  const extra = listed.filter((s) => !all.includes(s));
+  if (missing.length || extra.length || listed.length !== all.length) {
+    throw new Error(`Areas regions out of sync. Missing: ${missing}. Unknown: ${extra}`);
+  }
+}
+
+function RegionSection({ region, alt }: { region: Region & { tier1: Set<string> }; alt?: boolean }) {
+  const suburbs = region.slugs.map((slug) => ({ slug, name: unslugify(slug)! }));
+  const ordered = [
+    ...suburbs.filter((s) => region.tier1.has(s.slug)),
+    ...suburbs.filter((s) => !region.tier1.has(s.slug)).sort((a, b) => a.name.localeCompare(b.name)),
+  ];
+  const columns = [
+    { label: "Assisted stretching", icon: Sparkles, base: "/assisted-stretching" },
+    { label: "Personal training", icon: Dumbbell, base: "/personal-training" },
+  ];
+
   return (
-    <section className={`py-20 ${alt ? "bg-card" : "bg-background"}`}>
+    <section className={`py-16 ${alt ? "bg-card" : "bg-background"}`}>
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-            {kicker}
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-3">{title}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3">{region.name}</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{region.blurb}</p>
         </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {SUBURBS.map((name) => (
-            <Link
-              key={name}
-              to={`${basePath}/${slugify(name)}`}
-              className="px-4 py-3 rounded-xl border border-border bg-background/50 hover:border-primary hover:bg-primary/5 transition-all text-sm text-center text-foreground hover:text-primary"
-            >
-              {name}
-            </Link>
+        <div className="grid md:grid-cols-2 gap-10">
+          {columns.map(({ label, icon: Icon, base }) => (
+            <div key={base}>
+              <h3 className="flex items-center gap-2 text-lg font-semibold text-primary mb-4">
+                <Icon className="w-4 h-4" /> {label}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {ordered.map(({ slug, name }) => (
+                  <Link
+                    key={slug}
+                    to={`${base}/${slug}`}
+                    className={`px-3 py-2 rounded-xl border bg-background/50 hover:border-primary hover:bg-primary/5 transition-all text-sm text-center hover:text-primary ${
+                      region.tier1.has(slug) ? "border-primary/50 text-foreground font-medium" : "border-border text-muted-foreground"
+                    }`}
+                  >
+                    {name}
+                  </Link>
+                ))}
+              </div>
+            </div>
           ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <Link
-            to={viewAllHref}
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
-          >
-            {viewAllLabel} <ArrowRight className="w-4 h-4" />
-          </Link>
         </div>
       </div>
     </section>
