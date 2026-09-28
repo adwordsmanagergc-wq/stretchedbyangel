@@ -28,8 +28,8 @@ const IMAGES = {
 const CONTACT = {
   phone: "0434 773 815",
   phoneLink: "tel:0434773815",
-  instagram: "@angelfitnessau",
-  instagramLink: "https://instagram.com/angelfitnessau",
+  instagram: "@stretchedbyangel",
+  instagramLink: "https://www.instagram.com/stretchedbyangel/",
 };
 
 const SERVICES = [

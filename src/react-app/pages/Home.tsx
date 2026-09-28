@@ -35,8 +35,8 @@ const Logo = ({ className = "", lazy = false }: { className?: string; lazy?: boo
 const CONTACT = {
   phone: "0434 773 815",
   phoneLink: "tel:0434773815",
-  instagram: "@angelfitnessau",
-  instagramLink: "https://instagram.com/angelfitnessau",
+  instagram: "@stretchedbyangel",
+  instagramLink: "https://www.instagram.com/stretchedbyangel/",
   address: BUSINESS.addressLine,
   mapEmbed: `https://www.google.com/maps?q=${encodeURIComponent(
     `${BUSINESS.venue}, ${BUSINESS.addressLine}`

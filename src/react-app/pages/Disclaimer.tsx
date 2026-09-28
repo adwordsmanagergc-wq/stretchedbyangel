@@ -38,7 +38,7 @@ export default function DisclaimerPage() {
       <h2 className="text-2xl font-semibold text-foreground">Contact</h2>
       <p>
         Questions about these terms? Call 0434 773 815 or message{" "}
-        <a href="https://instagram.com/angelfitnessau" className="text-primary hover:underline">@angelfitnessau</a>.
+        <a href="https://www.instagram.com/stretchedbyangel/" className="text-primary hover:underline">@stretchedbyangel</a>.
       </p>
     </StubLayout>
   );
