@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router";
 import NotFoundPage from "@/react-app/pages/NotFound";
 import {
   Phone,
-  Instagram,
   ArrowRight,
   CheckCircle2,
   Target,
@@ -22,7 +21,8 @@ import {
   studioDistanceLabel,
 } from "@/data/suburbProfiles";
 import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
-import { IMG } from "@/data/images";
+import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import NearbyAreas from "@/react-app/components/NearbyAreas";
 
 export default function SuburbStretchPage() {
   const { slug = "" } = useParams();
@@ -57,31 +57,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
-            <span className="font-semibold text-lg">Stretched By Angel</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <a
-              href={CONTACT.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a
-              href={CONTACT.phoneLink}
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2 rounded-full transition-all"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">Book Now</span>
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
@@ -274,7 +250,9 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
       </section>
 
       {/* Nearby suburbs — internal linking */}
-      {neighbors.length > 0 && (
+      {tier === 1 ? (
+        <NearbyAreas service="stretch" slug={slug} suburb={suburb} />
+      ) : neighbors.length > 0 && (
         <section className="py-16 bg-card">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-6 justify-center">
@@ -359,17 +337,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
             Professional Assisted Stretching in {suburb} and across the Gold
             Coast
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-            <span>•</span>
-            <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
-            <span>•</span>
-            <Link to="/assisted-stretching-gold-coast" className="hover:text-primary transition-colors">Stretching Guide</Link>
-            <span>•</span>
-            <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
-            <span>•</span>
-            <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
-          </div>
+          <FooterLinks />
           <p className="text-muted-foreground/60 text-xs mt-6">
             © {new Date().getFullYear()} Stretched By Angel. All rights reserved.
           </p>

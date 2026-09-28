@@ -47,6 +47,33 @@ export function getTier(slug: string): Tier {
 
 export const TIER2_ROBOTS = "noindex,follow";
 
+/**
+ * Nearby Tier 1 suburbs for the "Nearby areas" block on Tier 1 pages. Only
+ * Tier 1 (indexed) suburbs are listed so the block never links to noindex
+ * pages. Ordered roughly by distance.
+ */
+const TIER1_NEARBY: Record<(typeof TIER1_SLUGS)[number], (typeof TIER1_SLUGS)[number][]> = {
+  "surfers-paradise": ["main-beach", "broadbeach", "bundall", "benowa", "southport"],
+  "main-beach": ["surfers-paradise", "southport", "labrador", "bundall"],
+  broadbeach: ["surfers-paradise", "mermaid-beach", "broadbeach-waters", "mermaid-waters", "bundall"],
+  bundall: ["surfers-paradise", "benowa", "broadbeach-waters", "ashmore", "main-beach"],
+  "broadbeach-waters": ["broadbeach", "mermaid-waters", "bundall", "benowa", "surfers-paradise"],
+  benowa: ["bundall", "ashmore", "broadbeach-waters", "surfers-paradise", "robina"],
+  "mermaid-beach": ["broadbeach", "miami", "mermaid-waters", "broadbeach-waters"],
+  "mermaid-waters": ["mermaid-beach", "broadbeach-waters", "miami", "robina", "broadbeach"],
+  southport: ["main-beach", "labrador", "ashmore", "surfers-paradise", "benowa"],
+  ashmore: ["southport", "benowa", "bundall", "labrador"],
+  miami: ["mermaid-beach", "burleigh-heads", "mermaid-waters", "broadbeach"],
+  labrador: ["southport", "main-beach", "ashmore"],
+  "burleigh-heads": ["miami", "mermaid-beach", "varsity-lakes", "robina"],
+  robina: ["varsity-lakes", "mermaid-waters", "burleigh-heads", "benowa"],
+  "varsity-lakes": ["robina", "burleigh-heads", "miami", "mermaid-waters"],
+};
+
+export function getTier1Nearby(slug: string): string[] {
+  return (TIER1_NEARBY as Record<string, string[]>)[slug] ?? [];
+}
+
 export type Faq = { q: string; a: string };
 export type ServiceCopy = {
   /** Unique 80+ word introduction about the suburb. */

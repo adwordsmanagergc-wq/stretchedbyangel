@@ -4,7 +4,7 @@ import { SUBURBS, slugify } from "@/data/suburbs";
 export const STATIC_ROUTES = [
   "/",
   "/areas-i-service",
-  "/assisted-stretching-gold-coast",
+  "/pnf-stretching",
   "/personal-training-gold-coast",
   "/disclaimer",
   "/waiver",

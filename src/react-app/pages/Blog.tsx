@@ -3,7 +3,6 @@ import { breadcrumbSchema } from "@/seo/schema";
 import { Link } from "react-router";
 import {
   Phone,
-  Instagram,
   ArrowRight,
   CheckCircle2,
   Sparkles,
@@ -18,15 +17,17 @@ import {
 } from "lucide-react";
 import { CONTACT } from "@/data/contact";
 import { IMG, absoluteImage } from "@/data/images";
+import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
 
 const LOGO = "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
 const HERO_IMG = absoluteImage(IMG.promo);
 
-const URL = "https://www.stretchedbyangel.com/assisted-stretching-gold-coast";
-const TITLE = "What Is PNF Stretching? Benefits and Who It Helps | Stretched By Angel";
+const URL = "https://www.stretchedbyangel.com/pnf-stretching";
+const TITLE = "What Is PNF Stretching? Benefits | Stretched By Angel";
 const DESCRIPTION =
   "What is PNF stretching? How assisted PNF stretching works, its benefits for flexibility, pain relief and recovery, and who it helps most, by Angel Elliott.";
 const PUBLISHED = "2026-05-17";
+const MODIFIED = "2026-09-28";
 
 const PHYSICAL_BENEFITS = [
   "Dramatically increased flexibility",
@@ -138,7 +139,7 @@ const BLOG_SCHEMA = {
   description: DESCRIPTION,
   image: HERO_IMG,
   datePublished: PUBLISHED,
-  dateModified: PUBLISHED,
+  dateModified: MODIFIED,
   author: {
     "@type": "Person",
     name: "Angel Elliott",
@@ -179,38 +180,14 @@ export default function BlogPage() {
     ],
     jsonLd: [
       BLOG_SCHEMA,
-      breadcrumbSchema([["What Is PNF Stretching?", "/assisted-stretching-gold-coast"]]),
+      breadcrumbSchema([["What Is PNF Stretching?", "/pnf-stretching"]]),
       ARTICLE_FAQ_SCHEMA,
     ],
   });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <nav className="bg-background/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img {...IMG.logo} alt="Stretched By Angel" className="h-12 w-12" />
-            <span className="font-semibold text-lg">Stretched By Angel</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <a
-              href={CONTACT.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a
-              href={CONTACT.phoneLink}
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2 rounded-full transition-all"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">Book Now</span>
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <article>
         {/* Hero */}
@@ -278,11 +255,11 @@ export default function BlogPage() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               This guide walks through exactly what assisted stretching does,
               who it helps, and what changes you can expect. If you'd rather
-              skip the reading and just book,{" "}
+              skip the reading and just book, see my{" "}
               <Link to="/" className="text-primary underline hover:text-primary/80">
-                head back to the home page for pricing and to lock in a session
-              </Link>
-              .
+                assisted stretching Gold Coast
+              </Link>{" "}
+              page for pricing and to lock in a session.
             </p>
           </section>
 
@@ -636,17 +613,7 @@ export default function BlogPage() {
           <p className="text-muted-foreground text-sm mb-4">
             Professional Assisted Stretching across the Gold Coast
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-            <span>•</span>
-            <Link to="/personal-training-gold-coast" className="hover:text-primary transition-colors">Personal Training</Link>
-            <span>•</span>
-            <Link to="/areas-i-service" className="hover:text-primary transition-colors">Areas I Service</Link>
-            <span>•</span>
-            <Link to="/waiver" className="hover:text-primary transition-colors">Liability Waiver</Link>
-            <span>•</span>
-            <Link to="/disclaimer" className="hover:text-primary transition-colors">Terms & Disclaimer</Link>
-          </div>
+          <FooterLinks />
           <p className="text-muted-foreground/60 text-xs mt-6">
             © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.
           </p>
