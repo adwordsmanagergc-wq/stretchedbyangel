@@ -132,7 +132,7 @@ export default function WaiverPage() {
           </p>
           <button
             onClick={handleDownload}
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 mb-6"
+            className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full mb-6"
           >
             <Download className="w-5 h-5" />
             Download Your Copy (PDF)
@@ -398,7 +398,7 @@ export default function WaiverPage() {
           <button
             type="submit"
             disabled={!isFormValid() || isSubmitting}
-            className="w-full bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full text-white font-semibold px-8 py-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Submitting..." : "Submit Waiver"}
           </button>

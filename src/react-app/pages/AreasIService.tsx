@@ -5,8 +5,7 @@ import { SUBURBS, slugify, unslugify } from "@/data/suburbs";
 import { getTier } from "@/data/suburbContent";
 import { BUSINESS } from "@/react-app/lib/business";
 import { CONTACT } from "@/data/contact";
-import { IMG } from "@/data/images";
-import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 export default function AreasIServicePage() {
   usePageHead({
@@ -21,11 +20,10 @@ export default function AreasIServicePage() {
       <SiteHeader />
 
       <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-500/20 via-rose-500/10 to-transparent" />
+        <div className="absolute inset-0 hero-bg" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <MapPin className="w-12 h-12 text-primary mx-auto mb-6" />
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-rose-300 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-gradient">
             Areas I Service
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -115,7 +113,7 @@ export default function AreasIServicePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={CONTACT.phoneLink}
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25"
+              className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
             >
               <Phone className="w-5 h-5" /> Call {CONTACT.phone}
             </a>
@@ -129,18 +127,7 @@ export default function AreasIServicePage() {
         </div>
       </section>
 
-      <footer className="py-8 bg-card border-t border-border">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <img {...IMG.logo} alt="Stretched By Angel" loading="lazy" className="h-12 w-12 mx-auto mb-4" />
-          <p className="text-muted-foreground text-sm mb-4">
-            Personal Training & Assisted Stretching on the Gold Coast
-          </p>
-          <FooterLinks />
-          <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Stretched By Angel. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

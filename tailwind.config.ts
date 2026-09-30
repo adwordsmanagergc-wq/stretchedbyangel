@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        display: ['"Fraunces Variable"', "Georgia", "Cambria", "serif"],
         sans: [
           '"Inter Variable"',
           "Inter",

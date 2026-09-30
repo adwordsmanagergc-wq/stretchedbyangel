@@ -309,4 +309,4 @@ vercel`) or deploy a preview to test the form.
 
 ## License & credits
 
-Built for Angel Elliott · [@angelfitnessau](https://instagram.com/angelfitnessau).
+Built for Angel Elliott · [@stretchedbyangel](https://www.instagram.com/stretchedbyangel/).

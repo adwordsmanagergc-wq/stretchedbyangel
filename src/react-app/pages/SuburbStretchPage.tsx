@@ -21,7 +21,7 @@ import {
   studioDistanceLabel,
 } from "@/data/suburbProfiles";
 import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
-import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 import NearbyAreas from "@/react-app/components/NearbyAreas";
 
 export default function SuburbStretchPage() {
@@ -60,11 +60,10 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
       <SiteHeader />
 
       <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500/20 via-rose-500/10 to-transparent" />
+        <div className="absolute inset-0 hero-bg" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-400 bg-clip-text text-transparent">
+            <span className="text-gradient accent-italic">
               Assisted Stretching
             </span>
             <br />
@@ -81,7 +80,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/#pricing"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all shadow-lg shadow-pink-500/25"
+              className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
             >
               View Prices & Book <ArrowRight className="w-5 h-5" />
             </Link>
@@ -305,7 +304,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={CONTACT.phoneLink}
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all shadow-lg shadow-pink-500/25"
+              className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
             >
               <Phone className="w-5 h-5" /> Call {CONTACT.phone}
             </a>
@@ -331,18 +330,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
         </svg>
       </a>
 
-      <footer className="py-8 bg-card border-t border-border">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-muted-foreground text-sm mb-4">
-            Professional Assisted Stretching in {suburb} and across the Gold
-            Coast
-          </p>
-          <FooterLinks />
-          <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Stretched By Angel. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter tagline={`Assisted PNF stretching in ${suburb} and across the Gold Coast with Angel Elliott.`} />
     </div>
   );
 }

@@ -10,8 +10,8 @@ export const BUSINESS = {
   telephone: "+61434773815",
   phoneDisplay: "0434 773 815",
   whatsapp: "https://wa.me/61434773815",
-  instagram: "https://instagram.com/angelfitnessau",
-  instagramHandle: "@angelfitnessau",
+  instagram: "https://www.instagram.com/stretchedbyangel/",
+  instagramHandle: "@stretchedbyangel",
   priceRange: "$$",
   currency: "AUD",
   /** Studio venue (Angel trains out of this gym). */

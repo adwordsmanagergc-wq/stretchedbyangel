@@ -1,4 +1,4 @@
-import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 export default function StubLayout({
   title,
@@ -21,10 +21,7 @@ export default function StubLayout({
         </div>
       </main>
 
-      <footer className="py-8 border-t border-border text-center text-sm text-muted-foreground">
-        <FooterLinks className="mb-4" />
-        © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
