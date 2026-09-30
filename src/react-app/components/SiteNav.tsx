@@ -221,14 +221,14 @@ export const SiteFooter = forwardRef<HTMLElement, { tagline?: string }>(function
         <div className="mt-14 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-muted-foreground/70">
           <p>© {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.</p>
           <p>
-            Website by{" "}
+            Website built by{" "}
             <a
               href="https://metatapdigital.com"
               target="_blank"
               rel="noopener"
               className="text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline"
             >
-              Metatap Digital
+              metatapdigital.com
             </a>
           </p>
         </div>
