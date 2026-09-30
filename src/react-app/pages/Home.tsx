@@ -24,13 +24,9 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { BUSINESS } from "@/react-app/lib/business";
 import { IMG } from "@/data/images";
-import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 const IMAGES = IMG;
-
-const Logo = ({ className = "", lazy = false }: { className?: string; lazy?: boolean }) => (
-  <img {...IMG.logo} alt="Stretched By Angel" loading={lazy ? "lazy" : undefined} className={className} />
-);
 
 const CONTACT = {
   phone: "0434 773 815",
@@ -143,7 +139,7 @@ function BookButton({ className = "", children = "Book Now" }: { className?: str
   return (
     <a
       href={CONTACT.phoneLink}
-      className={`inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-105 ${className}`}
+      className={`btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full ${className}`}
     >
       <Phone className="w-5 h-5" />
       {children}
@@ -186,79 +182,96 @@ export default function HomePage() {
       <SiteHeader overlay scrolled={scrolled} />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500/20 via-rose-500/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-500/15 via-blue-500/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent" />
+      <section className="relative min-h-[100svh] flex items-center overflow-hidden grain pt-28 pb-16 sm:pt-32 lg:pt-24">
+        <div className="absolute inset-0 hero-bg" />
+        <div aria-hidden="true" className="absolute -top-32 -right-32 w-[36rem] h-[36rem] rounded-full border border-white/[0.05]" />
+        <div aria-hidden="true" className="absolute -top-16 -right-16 w-[28rem] h-[28rem] rounded-full border border-white/[0.04]" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-20 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left relative">
-            <div className="absolute inset-0 flex items-start justify-center lg:justify-start pointer-events-none -top-48 sm:-top-56 lg:-top-64">
-              <Logo className="h-[280px] sm:h-[350px] lg:h-[420px] w-auto opacity-10" />
-            </div>
-            <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 w-full grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-16 items-center">
+          <div className="text-center lg:text-left">
+            <p className="inline-flex items-center gap-2 rounded-full surface px-4 py-1.5 text-xs font-medium text-muted-foreground mb-7">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]" />
+              Certified stretch therapist in Surfers Paradise
+            </p>
+            <h1 className="text-[2.6rem] leading-[1.05] sm:text-6xl lg:text-[4.25rem] font-bold mb-7">
               Professional{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
+              <span className="text-gradient accent-italic">
                 Assisted Stretching Gold Coast
               </span>{" "}
               & Personal Training
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-9 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Unlock your body's full potential with assisted stretching by trained professional Angel Elliott.
               Feel better, move better, live better.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center lg:justify-start">
               <a
                 href="#stretching"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-105"
+                className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full"
               >
                 <Sparkles className="w-5 h-5" />
                 Assisted Stretching
               </a>
               <Link
                 to="/personal-training-gold-coast"
-                className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-8 py-4 rounded-full hover:bg-secondary transition-all duration-300"
+                className="surface inline-flex items-center justify-center gap-2 text-foreground font-medium px-7 py-3.5 rounded-full hover:border-white/20 transition-colors"
               >
                 Personal Training
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#corporate"
-                className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-8 py-4 rounded-full hover:bg-secondary transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground font-medium px-4 py-3.5 transition-colors"
               >
                 <Building2 className="w-4 h-4" />
                 Corporate Wellness
               </a>
             </div>
-            <p className="text-xs text-muted-foreground/60 mt-3">
+            <p className="text-xs text-muted-foreground/60 mt-4">
               By booking, you agree to our <a href="/disclaimer" className="underline hover:text-muted-foreground">terms & disclaimer</a>.
             </p>
+
+            <dl className="mt-10 pt-8 border-t border-white/[0.07] grid grid-cols-3 gap-3 sm:gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+              {[
+                ["10+ yrs", "Experience"],
+                ["From $60", "30 minute sessions"],
+                ["Mobile", "Home visits Gold Coast wide"],
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <dt className="sr-only">{label}</dt>
+                  <dd className="font-display text-xl sm:text-3xl text-foreground whitespace-nowrap">{value}</dd>
+                  <dd className="text-xs sm:text-sm text-muted-foreground mt-1 leading-snug">{label}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/30 to-cyan-500/30 rounded-3xl blur-2xl" />
-            <div className="relative rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 aspect-[4/5]">
+
+          <div className="relative max-w-md mx-auto w-full lg:max-w-none">
+            <div aria-hidden="true" className="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border border-accent/35" />
+            <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 aspect-[4/5] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]">
               <img
                 {...IMAGES.heroAngel}
                 fetchPriority="high"
                 alt="Angel Elliott delivering an assisted PNF stretching session on the Gold Coast"
                 className="w-full h-full object-cover object-center"
               />
+              <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
+            </div>
+            <div className="absolute left-3 sm:-left-8 bottom-6 sm:bottom-8 rounded-2xl bg-background/80 backdrop-blur-xl border border-white/10 px-5 py-4 shadow-2xl">
+              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-primary font-semibold">PNF technique</p>
+              <p className="font-display text-lg leading-tight mt-1">Studio or home visit</p>
+              <p className="text-xs text-muted-foreground mt-0.5">30 and 60 minute sessions</p>
             </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-8 h-8 text-primary" />
         </div>
       </section>
 
       {/* About Section */}
-      <section id="stretching" className="py-20 lg:py-32 bg-gradient-to-b from-background to-card">
+      <section id="stretching" className="py-20 lg:py-28 bg-gradient-to-b from-background to-card">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative order-2 lg:order-1">
-              <div className="absolute -inset-4 bg-gradient-to-br from-pink-500/20 via-purple-500/10 to-cyan-500/20 rounded-3xl blur-2xl" />
+            <div className="relative order-2 lg:order-1 max-w-md mx-auto w-full">
+              <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
               <img
                 {...IMAGES.promo}
                 loading="lazy"
@@ -267,7 +280,7 @@ export default function HomePage() {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <span className="text-primary font-medium tracking-wider uppercase text-sm">
+              <span className="eyebrow">
                 Meet Your Stretch Therapist
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
@@ -305,10 +318,10 @@ export default function HomePage() {
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits" className="py-20 lg:py-32 bg-card">
+      <section id="benefits" className="py-20 lg:py-28 bg-card">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <span className="text-primary font-medium tracking-wider uppercase text-sm">
+            <span className="eyebrow">
               Why Choose Assisted Stretching?
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
@@ -324,7 +337,7 @@ export default function HomePage() {
             {BENEFITS.map((benefit, index) => (
               <div
                 key={index}
-                className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group"
+                className="surface rounded-2xl p-6 surface-hover group"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <benefit.icon className="w-7 h-7 text-primary" />
@@ -337,91 +350,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10 Session Discount Section */}
-      <section id="pricing" className="py-20 lg:py-32 bg-gradient-to-b from-card to-background">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-primary font-medium tracking-wider uppercase text-sm">
-              Save More
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
-              10 Session Discount
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              Commit to your flexibility journey and save with a 10 session package.
-            </p>
+      {/* Pricing: single sessions, then 10 session packs */}
+      <section id="pricing" className="py-20 lg:py-28 bg-background relative overflow-hidden">
+        <div aria-hidden="true" className="absolute left-1/2 top-0 -translate-x-1/2 w-[60rem] h-[30rem] bg-[radial-gradient(closest-side,hsl(var(--primary)/0.10),transparent)]" />
+        <div className="relative max-w-5xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <span className="eyebrow">Casual Sessions</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-5">Single Session Pricing</h2>
+            <p className="text-muted-foreground text-lg">Not ready for a multipack? Try a single session first.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="relative bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 border-2 border-cyan-500/30 rounded-3xl p-6 sm:p-8 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl" />
-              <h3 className="text-2xl font-bold text-center mb-6 text-cyan-400">30 Minute Sessions</h3>
-
-              <div className="flex items-center justify-center gap-4 bg-background/50 rounded-xl p-6 border border-border mb-6">
-                <div className="w-14 h-14 rounded-full bg-cyan-900 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">10x</div>
-                <div>
-                  <div className="text-4xl font-bold text-foreground">$550</div>
-                  <div className="text-sm text-muted-foreground">$55 / session</div>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <BookButton className="w-full">Get Started</BookButton>
-              </div>
-            </div>
-
-            <div className="relative bg-gradient-to-br from-rose-500/10 to-pink-600/5 border-2 border-rose-500/30 rounded-3xl p-6 sm:p-8 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-3xl" />
-              <h3 className="text-2xl font-bold text-center mb-6 text-rose-400">60 Minute Sessions</h3>
-
-              <div className="flex items-center justify-center gap-4 bg-background/50 rounded-xl p-6 border border-border mb-6">
-                <div className="w-14 h-14 rounded-full bg-rose-900 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">10x</div>
-                <div>
-                  <div className="text-4xl font-bold text-foreground">$800</div>
-                  <div className="text-sm text-muted-foreground">$80 / session</div>
-                </div>
-              </div>
-
-              <div className="text-sm text-muted-foreground border-t border-border pt-4">
-                <p className="flex items-center gap-2 text-rose-400">+ $30 per session for home visit</p>
-              </div>
-
-              <div className="mt-6">
-                <BookButton className="w-full">Get Started</BookButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Single Session Pricing */}
-      <section className="py-20 lg:py-32 bg-background">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-primary font-medium tracking-wider uppercase text-sm">
-              Casual Sessions
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
-              Single Session Pricing
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              Not ready for a multipack? Try a single session first.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-5">
             {PRICING.map((tier, index) => (
               <div
                 key={index}
-                className="relative bg-background border border-border rounded-2xl p-8 text-center hover:border-primary transition-all duration-300 group"
+                className={`surface surface-hover rounded-3xl p-7 flex flex-col text-center ${
+                  index === 1 ? "sm:-translate-y-3 border-primary/40 ring-1 ring-primary/20" : ""
+                }`}
               >
-                <div className="flex items-center justify-center gap-2 text-muted-foreground mb-4">
-                  <Clock className="w-5 h-5" />
-                  <span className="text-lg">{tier.duration}</span>
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-5">
+                  <Clock className="w-4 h-4 text-primary" />
+                  <span>{tier.duration}</span>
                 </div>
-                <div className="text-5xl font-bold text-primary mb-2">{tier.price}</div>
-                <p className="text-muted-foreground mb-6">{tier.description}</p>
-                <BookButton className="w-full">Book {tier.duration}</BookButton>
+                <div className="font-display text-5xl sm:text-6xl text-foreground mb-3">{tier.price}</div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-7 flex-1">{tier.description}</p>
+                <BookButton className="w-full !px-5 !py-3 text-sm">Book {tier.duration}</BookButton>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-24 text-center mb-12">
+            <span className="eyebrow">Save More</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-5">10 Session Discount</h2>
+            <p className="text-muted-foreground text-lg">Commit to your flexibility journey and save with a 10 session package.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              { title: "30 Minute Sessions", total: "$550", per: "$55 / session", save: "Save $50", extra: null },
+              { title: "60 Minute Sessions", total: "$800", per: "$80 / session", save: "Save $100", extra: "+ $30 per session for home visit" },
+            ].map((pack) => (
+              <div key={pack.title} className="surface rounded-3xl p-8 relative overflow-hidden">
+                <div aria-hidden="true" className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-primary/10 blur-3xl" />
+                <div className="relative flex items-start justify-between gap-4 mb-8">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">10 session pack</p>
+                    <h3 className="font-display text-2xl mt-2">{pack.title}</h3>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-accent/15 text-accent text-xs font-semibold px-3 py-1">{pack.save}</span>
+                </div>
+                <div className="relative flex items-end gap-3 mb-2">
+                  <span className="font-display text-6xl leading-none">{pack.total}</span>
+                  <span className="text-muted-foreground mb-1.5">{pack.per}</span>
+                </div>
+                <p className="relative text-sm text-primary min-h-[1.25rem] mb-7">{pack.extra}</p>
+                <BookButton className="relative w-full">Get Started</BookButton>
               </div>
             ))}
           </div>
@@ -429,11 +412,11 @@ export default function HomePage() {
       </section>
 
       {/* Gallery / Action Shot */}
-      <section className="py-20 lg:py-32 bg-background">
+      <section className="py-20 lg:py-28 bg-background">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
-              <span className="text-primary font-medium tracking-wider uppercase text-sm">
+              <span className="eyebrow">
                 See It In Action
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
@@ -454,7 +437,7 @@ export default function HomePage() {
               </ul>
             </div>
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/25 to-pink-500/25 rounded-3xl blur-2xl" />
+              <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
               <img
                 {...IMAGES.studio1}
                 loading="lazy"
@@ -467,15 +450,15 @@ export default function HomePage() {
       </section>
 
       {/* Corporate & Workplace Stretching */}
-      <section id="corporate" className="py-20 lg:py-32 bg-gradient-to-b from-background to-card">
+      <section id="corporate" className="py-20 lg:py-28 bg-gradient-to-b from-background to-card">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-14">
-            <span className="text-primary font-medium tracking-wider uppercase text-sm">
+            <span className="eyebrow">
               Corporate & Workplace Wellness
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
               Fewer Sick Days. Better Posture.{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
+              <span className="text-gradient accent-italic">
                 A Perk Your Team Will Actually Use.
               </span>
             </h2>
@@ -496,7 +479,7 @@ export default function HomePage() {
             ].map((point, i) => (
               <div
                 key={i}
-                className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-5 flex items-start gap-3"
+                className="surface rounded-2xl p-5 flex items-start gap-3"
               >
                 <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                 <p className="text-muted-foreground text-sm leading-relaxed">{point}</p>
@@ -535,7 +518,7 @@ export default function HomePage() {
             ].map((pkg, i) => (
               <div
                 key={i}
-                className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group"
+                className="surface rounded-2xl p-6 surface-hover group"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <pkg.icon className="w-7 h-7 text-primary" />
@@ -549,7 +532,7 @@ export default function HomePage() {
 
           {/* Benefits + Who it's for */}
           <div className="grid lg:grid-cols-2 gap-6 mb-16">
-            <div className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-7">
+            <div className="surface rounded-2xl p-7">
               <div className="flex items-center gap-3 mb-5">
                 <TrendingUp className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-semibold">The Return for Your Business</h3>
@@ -568,7 +551,7 @@ export default function HomePage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-background/50 backdrop-blur-sm border border-border rounded-2xl p-7">
+            <div className="surface rounded-2xl p-7">
               <div className="flex items-center gap-3 mb-5">
                 <Building2 className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-semibold">Who It's For</h3>
@@ -615,7 +598,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href={CONTACT.phoneLink}
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all duration-300 shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-105"
+                className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
               >
                 <Phone className="w-5 h-5" />
                 Book a Free On-Site Demo
@@ -639,10 +622,10 @@ export default function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 lg:py-32 bg-card">
+      <section className="py-20 lg:py-28 bg-card">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-16">
-            <span className="text-primary font-medium tracking-wider uppercase text-sm">
+            <span className="eyebrow">
               Got Questions?
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
@@ -650,7 +633,7 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="bg-background border border-border rounded-2xl p-6 sm:p-8">
+          <div className="surface rounded-2xl px-6 sm:px-8 py-2">
             {FAQS.map((faq, index) => (
               <FAQItem key={index} question={faq.question} answer={faq.answer} />
             ))}
@@ -659,10 +642,10 @@ export default function HomePage() {
       </section>
 
       {/* Instagram Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-b from-card to-background">
+      <section className="py-20 lg:py-28 bg-gradient-to-b from-card to-background">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <span className="text-primary font-medium tracking-wider uppercase text-sm">
+            <span className="eyebrow">
               Follow The Journey
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6">
@@ -680,14 +663,14 @@ export default function HomePage() {
             </a>
           </div>
 
-          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex sm:grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
             {[IMAGES.studio1, IMAGES.promo, IMAGES.heroAngel].map((img, index) => (
               <a
                 key={index}
                 href={CONTACT.instagramLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative flex-shrink-0 w-[280px] sm:w-auto aspect-square rounded-xl overflow-hidden group snap-center"
+                className="relative flex-shrink-0 w-[280px] sm:w-auto aspect-square rounded-2xl overflow-hidden group snap-center ring-1 ring-white/10"
               >
                 <img
                   {...img}
@@ -705,12 +688,12 @@ export default function HomePage() {
       </section>
 
       {/* Studio location */}
-      <section id="location" className="py-20 lg:py-32 bg-background">
+      <section id="location" className="py-20 lg:py-28 bg-background">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
               Assisted Stretching Studio in{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
+              <span className="text-gradient accent-italic">
                 Surfers Paradise
               </span>
             </h2>
@@ -722,7 +705,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-            <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
+            <div className="surface rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
               <div className="flex items-start gap-4">
                 <MapPin className="w-6 h-6 text-primary shrink-0 mt-1" />
                 <address className="not-italic">
@@ -791,12 +774,14 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 lg:py-32 bg-gradient-to-b from-background to-card relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-pink-500/15 via-cyan-500/5 to-transparent" />
-        <div className="relative max-w-4xl mx-auto px-4 text-center">
+      <section className="py-20 lg:py-28 bg-background relative">
+        <div className="relative max-w-5xl mx-auto px-4">
+        <div className="relative overflow-hidden grain rounded-[2.5rem] border border-white/[0.08] px-6 py-16 sm:px-12 sm:py-20 text-center hero-bg">
+        <div aria-hidden="true" className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[40rem] h-[20rem] bg-[radial-gradient(closest-side,hsl(var(--primary)/0.25),transparent)]" />
+        <div className="relative">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Ready to Feel{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
+            <span className="text-gradient accent-italic">
               Amazing
             </span>
             ?
@@ -840,49 +825,11 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+        </div>
+        </div>
       </section>
 
-      {/* Footer */}
-      <footer ref={footerRef} className="py-8 bg-card border-t border-border">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Logo className="h-10 w-10" lazy />
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-              <p className="text-muted-foreground text-sm text-center sm:text-left">
-                © {new Date().getFullYear()} Stretched By Angel.{" "}
-                <a href={CONTACT.directions} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  {CONTACT.address}
-                </a>
-                .{" "}
-                <a href={CONTACT.phoneLink} className="hover:text-primary transition-colors">
-                  {CONTACT.phone}
-                </a>
-              </p>
-              {/* The phone number is already in the line above. */}
-              <FooterLinks phone={false} />
-              <span className="text-muted-foreground/60 text-xs">
-                Website by Metatap Pty Ltd
-              </span>
-            </div>
-            <div className="flex items-center gap-4">
-              <a
-                href={CONTACT.instagramLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href={CONTACT.phoneLink}
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter ref={footerRef} />
 
       {/* WhatsApp Floating Button */}
       <a

@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { CONTACT } from "@/data/contact";
 import { IMG, absoluteImage } from "@/data/images";
-import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 const LOGO = "https://www.stretchedbyangel.com/stretched-by-angel-transparent-logo.png";
 const HERO_IMG = absoluteImage(IMG.promo);
@@ -192,15 +192,14 @@ export default function BlogPage() {
       <article>
         {/* Hero */}
         <header className="relative py-20 sm:py-28 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500/20 via-rose-500/10 to-transparent" />
+          <div className="absolute inset-0 hero-bg" />
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
             <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" />
               Stretching Guide · Gold Coast
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-gradient accent-italic">
                 What Is PNF Stretching?
               </span>
               <br />
@@ -230,7 +229,7 @@ export default function BlogPage() {
         {/* Lead image */}
         <div className="max-w-4xl mx-auto px-4 -mt-8 mb-12">
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/20 to-cyan-500/20 rounded-3xl blur-2xl" />
+            <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
             <img
               {...IMG.promo}
               alt="Assisted stretching Gold Coast — PNF stretch therapy with Angel Elliott"
@@ -434,7 +433,7 @@ export default function BlogPage() {
 
           {/* Secondary image */}
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-2xl" />
+            <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
             <img
               {...IMG.pnfSession}
               loading="lazy"
@@ -551,7 +550,7 @@ export default function BlogPage() {
           </section>
 
           {/* Closing CTA */}
-          <section className="bg-gradient-to-br from-pink-500/10 to-cyan-500/10 border border-primary/30 rounded-3xl p-8 sm:p-10 text-center">
+          <section className="bg-gradient-to-br from-pink-500/10 to-accent/5 border border-primary/30 rounded-3xl p-8 sm:p-10 text-center">
             <MapPin className="w-10 h-10 text-primary mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Ready to feel the difference?
@@ -566,7 +565,7 @@ export default function BlogPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
               <Link
                 to="/"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold px-8 py-4 rounded-full hover:from-pink-400 hover:to-rose-300 transition-all shadow-lg shadow-pink-500/25"
+                className="btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
               >
                 See Pricing & Book
                 <ArrowRight className="w-5 h-5" />
@@ -605,20 +604,7 @@ export default function BlogPage() {
         </svg>
       </a>
 
-      <footer className="py-8 bg-card border-t border-border">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <Link to="/" className="inline-block mb-4">
-            <img {...IMG.logo} alt="Stretched By Angel" loading="lazy" className="h-12 w-12 mx-auto" />
-          </Link>
-          <p className="text-muted-foreground text-sm mb-4">
-            Professional Assisted Stretching across the Gold Coast
-          </p>
-          <FooterLinks />
-          <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

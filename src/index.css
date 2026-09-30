@@ -1,4 +1,6 @@
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
 
 @tailwind base;
 @tailwind components;
@@ -6,36 +8,160 @@
 
 @layer base {
   :root {
-    /* Dark theme matching live stretchedbyangel.com */
-    --background: 210 40% 6%;            /* ~rgb(9,15,21) */
-    --foreground: 0 0% 98%;              /* near white */
-    --card: 215 30% 9%;
-    --card-foreground: 0 0% 98%;
-    --border: 215 25% 18%;
-    --input: 215 25% 18%;
-    --primary: 340 82% 62%;              /* pink/rose */
+    /* Night-time coastal studio: deep ink, rose, warm champagne. */
+    --background: 224 36% 6%;            /* deep ink */
+    --foreground: 36 33% 97%;            /* warm white */
+    --card: 225 30% 9%;
+    --card-foreground: 36 33% 97%;
+    --border: 226 20% 17%;
+    --input: 226 20% 17%;
+    --primary: 345 76% 66%;              /* rose */
     --primary-foreground: 0 0% 100%;
-    --secondary: 215 25% 14%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 215 25% 14%;
-    --muted-foreground: 215 15% 65%;
-    --accent: 188 86% 53%;               /* cyan accent */
-    --accent-foreground: 0 0% 100%;
+    --secondary: 226 22% 13%;
+    --secondary-foreground: 36 33% 97%;
+    --muted: 226 22% 13%;
+    --muted-foreground: 226 12% 69%;
+    --accent: 32 58% 74%;                /* champagne */
+    --accent-foreground: 224 36% 6%;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+    color: hsl(var(--foreground));
   }
 
   *,
   *::before,
   *::after {
     @apply border-border;
+  }
+
+  /* Editorial serif for page and section headings. */
+  h1,
+  h2 {
+    @apply font-display;
+    letter-spacing: -0.022em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+  :is(h1, h2).font-bold {
+    font-weight: 560;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small uppercase label above a section heading, led by a hairline. */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase text-primary;
+    letter-spacing: 0.22em;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-primary/60;
+  }
+  .text-center .eyebrow::after {
+    content: "";
+    @apply block h-px w-8 bg-primary/60;
+  }
+
+  /* Accent words in headings: rose to champagne. */
+  .text-gradient {
+    background-image: linear-gradient(100deg, hsl(var(--primary)) 10%, hsl(350 80% 78%) 50%, hsl(var(--accent)) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 0.06em;
+  }
+  .accent-italic {
+    font-style: italic;
+    font-weight: 440;
+    letter-spacing: -0.01em;
+  }
+
+  .btn-primary {
+    background-image: linear-gradient(135deg, hsl(345 80% 64%), hsl(352 78% 70%));
+    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px -12px hsl(var(--primary) / 0.7), inset 0 1px 0 hsl(0 0% 100% / 0.22);
+  }
+
+  /* Glassy card surface used for feature, pricing and info blocks. */
+  .surface {
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.035), hsl(0 0% 100% / 0.012));
+    border: 1px solid hsl(0 0% 100% / 0.075);
+    box-shadow: 0 1px 0 hsl(0 0% 100% / 0.04) inset, 0 20px 40px -24px hsl(0 0% 0% / 0.6);
+  }
+  .surface-hover {
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  }
+  .surface-hover:hover {
+    transform: translateY(-3px);
+    border-color: hsl(var(--primary) / 0.35);
+  }
+
+  /* Page hero backdrop: ink with a rose glow and a champagne glow. */
+  .hero-bg {
+    background:
+      radial-gradient(60% 55% at 85% 10%, hsl(var(--primary) / 0.2), transparent 70%),
+      radial-gradient(50% 50% at 5% 95%, hsl(var(--accent) / 0.1), transparent 70%),
+      linear-gradient(180deg, hsl(228 38% 9%), hsl(var(--background)));
+  }
+
+  /* Framed photo with an offset champagne hairline. */
+  .photo-frame {
+    @apply relative;
+  }
+  .photo-frame::before {
+    content: "";
+    @apply absolute rounded-3xl pointer-events-none;
+    inset: 0;
+    transform: translate(14px, 14px);
+    border: 1px solid hsl(var(--accent) / 0.35);
+  }
+
+  .grain::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
 

@@ -15,7 +15,7 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { PersonalTrainingGuide, PT_GUIDE_FAQS } from "@/react-app/components/PersonalTrainingGuide";
 import { IMG } from "@/data/images";
-import { SiteHeader, FooterLinks } from "@/react-app/components/SiteNav";
+import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 const IMAGES = {
   logo: IMG.logo,
@@ -123,9 +123,8 @@ export default function PersonalTrainingPage() {
 
       {/* Hero Section */}
       <section className="relative pt-8 sm:pt-12 pb-16 sm:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500/20 via-rose-500/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-500/15 via-blue-500/10 to-transparent" />
+        <div className="absolute inset-0 hero-bg" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-accent/7 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
@@ -135,7 +134,7 @@ export default function PersonalTrainingPage() {
                 10+ Years Experience
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-400 bg-clip-text text-transparent">
+                <span className="text-gradient accent-italic">
                   Personal Training
                 </span>
                 <br />
@@ -174,7 +173,7 @@ export default function PersonalTrainingPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative order-2 lg:order-1">
-              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-xl" />
+              <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
               <img
                 {...IMAGES.onlineCoaching}
                 loading="lazy"
@@ -186,7 +185,7 @@ export default function PersonalTrainingPage() {
             <div className="order-1 lg:order-2">
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">
                 Meet{" "}
-                <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="text-gradient accent-italic">
                   Angel Elliott
                 </span>
               </h2>
@@ -229,7 +228,7 @@ export default function PersonalTrainingPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="text-gradient accent-italic">
                 Training Options
               </span>
             </h2>
@@ -260,7 +259,7 @@ export default function PersonalTrainingPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="text-gradient accent-italic">
                 Train With Angel
               </span>
             </h2>
@@ -319,7 +318,7 @@ export default function PersonalTrainingPage() {
       <section className="py-16 sm:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="text-gradient accent-italic">
               Frequently Asked
             </span>
             {" "}Questions
@@ -341,7 +340,7 @@ export default function PersonalTrainingPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Also Looking for{" "}
-            <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="text-gradient accent-italic">
               Assisted Stretching
             </span>
             ?
@@ -362,12 +361,12 @@ export default function PersonalTrainingPage() {
 
       {/* Final CTA */}
       <section className="py-16 sm:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-background to-cyan-500/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-background to-accent/5" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             Ready to{" "}
-            <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="text-gradient accent-italic">
               Transform Your Life
             </span>
             ?
@@ -415,26 +414,7 @@ export default function PersonalTrainingPage() {
         </svg>
       </a>
 
-      {/* Footer */}
-      <footer ref={footerRef} className="py-8 bg-card border-t border-border">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <Link to="/" className="inline-block mb-4">
-            <img
-              {...IMAGES.logo}
-              alt="Stretched By Angel"
-              loading="lazy"
-              className="h-12 w-12 mx-auto"
-            />
-          </Link>
-          <p className="text-muted-foreground text-sm mb-4">
-            Personal Training & Assisted Stretching on the Gold Coast
-          </p>
-          <FooterLinks />
-          <p className="text-muted-foreground/60 text-xs mt-6">
-            © {new Date().getFullYear()} Stretched By Angel. All rights reserved. Website by Metatap Pty Ltd.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter ref={footerRef} tagline="Personal training in Surfers Paradise and online with Angel Elliott, plus assisted PNF stretching across the Gold Coast." />
     </div>
   );
 }

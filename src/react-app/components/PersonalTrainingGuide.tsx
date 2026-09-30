@@ -374,7 +374,7 @@ export function PersonalTrainingGuide() {
 
           {/* Secondary image */}
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 rounded-3xl blur-2xl" />
+            <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
             <img
               {...IMG.ptGymSession}
               loading="lazy"
@@ -428,7 +428,7 @@ export function PersonalTrainingGuide() {
           </section>
 
           {/* Pair with stretching */}
-          <section className="bg-gradient-to-br from-pink-500/10 to-cyan-500/10 border border-primary/20 rounded-2xl p-6 sm:p-8">
+          <section className="bg-gradient-to-br from-pink-500/10 to-accent/5 border border-primary/20 rounded-2xl p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-foreground mb-3">
               Pair training with assisted stretching for faster results
             </h2>
