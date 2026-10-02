@@ -24,6 +24,7 @@ import {
 import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { BUSINESS } from "@/react-app/lib/business";
 import { IMG } from "@/data/images";
+import { TIER1_SUBURBS } from "@/data/suburbContent";
 import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 const IMAGES = IMG;
@@ -177,7 +178,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SchemaMarkup type="home" />
+      <SchemaMarkup type="home" faqs={FAQS.map(({ question, answer }) => ({ q: question, a: answer }))} />
       {/* Navigation */}
       <SiteHeader overlay scrolled={scrolled} />
 
@@ -251,7 +252,8 @@ export default function HomePage() {
             <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 aspect-[4/5] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]">
               <img
                 {...IMAGES.heroAngel}
-                fetchPriority="high"
+                loading="eager"
+                {...{ fetchpriority: "high" }}
                 alt="Angel Elliott delivering an assisted PNF stretching session on the Gold Coast"
                 className="w-full h-full object-cover object-center"
               />
@@ -347,6 +349,11 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <p className="text-center mt-10">
+            <Link to="/pnf-stretching#benefits" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
+              Read the full guide to PNF stretching benefits <ArrowRight className="w-4 h-4" />
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -408,6 +415,13 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <p className="text-center mt-10 text-muted-foreground">
+            Home visits are available across the Gold Coast.{" "}
+            <Link to="/areas-i-service" className="text-primary hover:text-primary/80 font-medium transition-colors">
+              See the areas Angel covers
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
@@ -464,8 +478,8 @@ export default function HomePage() {
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               On-site assisted stretching and mobility sessions for office and corporate
-              teams across the Gold Coast — from Bundall and Southport to Robina and
-              Broadbeach. A workplace wellness investment your staff will feel the same day.
+              teams across the Gold Coast — from <Link to="/assisted-stretching/bundall" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:text-primary">Bundall</Link> and <Link to="/assisted-stretching/southport" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:text-primary">Southport</Link> to{" "}
+              <Link to="/assisted-stretching/robina" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:text-primary">Robina</Link> and <Link to="/assisted-stretching/broadbeach" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:text-primary">Broadbeach</Link>. A workplace wellness investment your staff will feel the same day.
             </p>
           </div>
 
@@ -638,6 +652,11 @@ export default function HomePage() {
               <FAQItem key={index} question={faq.question} answer={faq.answer} />
             ))}
           </div>
+          <p className="text-center mt-8">
+            <Link to="/pnf-stretching#faq" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
+              More answers in the PNF stretching guide <ArrowRight className="w-4 h-4" />
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -769,6 +788,41 @@ export default function HomePage() {
                 allowFullScreen
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Areas We Cover: Tier 1 (indexed) suburb pages only */}
+      <section id="areas" className="py-20 lg:py-28 bg-card">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="eyebrow">Mobile Assisted Stretching</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-5">Areas We Cover</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Home visits and studio sessions for clients across the Gold Coast. Find your suburb for
+              local details, drive times from the studio and answers to common questions.
+            </p>
+          </div>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {TIER1_SUBURBS.map(({ slug, name }) => (
+              <li key={slug}>
+                <Link
+                  to={`/assisted-stretching/${slug}`}
+                  className="surface surface-hover flex items-center gap-2 h-full rounded-xl px-4 py-3 text-sm text-foreground hover:text-primary transition-colors"
+                >
+                  <MapPin className="w-4 h-4 text-primary shrink-0" />
+                  Assisted Stretching {name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/areas-i-service" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
+              See every Gold Coast suburb we cover <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/personal-training-gold-coast" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
+              Personal Training Gold Coast <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

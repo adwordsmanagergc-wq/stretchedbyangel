@@ -286,7 +286,7 @@ export default function BlogPage() {
           </section>
 
           {/* Physical benefits */}
-          <section>
+          <section id="benefits">
             <h2 className="text-3xl font-bold text-foreground mb-3">
               The physical benefits of assisted stretching
             </h2>
@@ -525,7 +525,7 @@ export default function BlogPage() {
           </section>
 
           {/* FAQs */}
-          <section>
+          <section id="faq">
             <h2 className="text-3xl font-bold text-foreground mb-6">
               Assisted stretching Gold Coast: FAQ
             </h2>

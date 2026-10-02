@@ -8,6 +8,7 @@ import { Clock, Instagram, MapPin, Menu, MessageCircle, Phone, X } from "lucide-
 import { CONTACT } from "@/data/contact";
 import { IMG } from "@/data/images";
 import { BUSINESS } from "@/react-app/lib/business";
+import { TIER1_SUBURBS } from "@/data/suburbContent";
 
 export const MAIN_NAV = [
   { to: "/", label: "Assisted Stretching" },
@@ -218,7 +219,20 @@ export const SiteFooter = forwardRef<HTMLElement, { tagline?: string }>(function
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-muted-foreground/70">
+        <div className="mt-12 pt-8 border-t border-white/[0.06]">
+          <p className={heading}>Assisted stretching near you</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            {TIER1_SUBURBS.map(({ slug, name }) => (
+              <li key={slug}>
+                <Link to={`/assisted-stretching/${slug}`} className={item}>
+                  Assisted Stretching {name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-10 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-muted-foreground/70">
           <p>© {new Date().getFullYear()} Stretched By Angel. Gold Coast, Australia.</p>
           <p>
             Website built by{" "}

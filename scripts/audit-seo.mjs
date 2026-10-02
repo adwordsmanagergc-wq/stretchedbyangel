@@ -21,7 +21,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = resolve(ROOT, "dist");
 const SITE = "https://www.stretchedbyangel.com";
-const PORT = 4190 + Math.floor(Math.random() * 100);
+// 4300+ avoids ports fetch() refuses (4190, sieve, is on the blocked list).
+const PORT = 4300 + Math.floor(Math.random() * 100);
 const BASE = `http://localhost:${PORT}`;
 
 const server = spawn(process.execPath, [resolve(ROOT, "scripts/serve-dist.mjs"), String(PORT)], {
