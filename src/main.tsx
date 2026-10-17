@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import AppRoutes from "@/App";
 import { Analytics } from "@vercel/analytics/react";
+import { initClickTracking } from "@/react-app/lib/analytics";
 import "@/index.css";
+
+initClickTracking();
 
 const container = document.getElementById("root")!;
 const app = (

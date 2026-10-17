@@ -3,6 +3,7 @@ import { usePageHead } from "@/seo/head";
 import { Link } from "react-router";
 import { CheckCircle2, AlertCircle, ArrowLeft, Download } from "lucide-react";
 import { IMG } from "@/data/images";
+import { track } from "@/react-app/lib/analytics";
 
 const HEALTH_QUESTIONS = [
   "Heart condition requiring restricted activity?",
@@ -85,6 +86,7 @@ export default function WaiverPage() {
 
       if (response.ok) {
         setSubmitStatus("success");
+        track("waiver_submit");
       } else {
         const data = await response.json().catch(() => ({}));
         setErrorMessage(data.error || "Failed to submit waiver");
