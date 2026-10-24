@@ -8,33 +8,6 @@ type SchemaType = "home" | "personal-training";
 /** Canonical personal training URL (/personal-training 301-redirects here). */
 const PT_PATH = "/personal-training-gold-coast";
 
-const STRETCHING_FAQS = [
-  {
-    q: "What is PNF stretching?",
-    a: "PNF (Proprioceptive Neuromuscular Facilitation) stretching is an advanced technique that combines passive stretching with isometric contractions. Research suggests it can produce greater flexibility gains than traditional static stretching, often in less time.",
-  },
-  {
-    q: "How is assisted stretching different from stretching on my own?",
-    a: "With assisted stretching, a trained professional guides your body into deeper, more effective stretches than you could achieve alone. I can apply the right amount of pressure, ensure proper form, and target muscles you might not be able to reach yourself.",
-  },
-  {
-    q: "Who can benefit from PNF stretching?",
-    a: "Everyone! Whether you're an athlete looking to improve performance, someone with chronic pain or stiffness, an office worker with tight shoulders and neck, or just want to move and feel better—assisted stretching can help you.",
-  },
-  {
-    q: "How often should I get stretched?",
-    a: "For best results, I recommend 1-2 sessions per week. However, even a single session can provide noticeable relief. We'll discuss a schedule that works for your goals and lifestyle.",
-  },
-  {
-    q: "What should I wear to a session?",
-    a: "Wear comfortable, flexible clothing you can move in—activewear, leggings, shorts, or athletic gear works great. Avoid jeans or restrictive clothing.",
-  },
-  {
-    q: "Do I need to be flexible to start?",
-    a: "Absolutely not! I work with people of all flexibility levels. In fact, the less flexible you are, the more you'll benefit from assisted stretching. Every session is tailored to your current ability.",
-  },
-];
-
 function businessSchema() {
   return {
     "@context": "https://schema.org",
@@ -221,7 +194,7 @@ function buildSchemas(type: SchemaType, faqs?: Faq[]) {
       businessSchema(),
       personSchema(),
       stretchingServiceSchema(),
-      faqSchema(STRETCHING_FAQS),
+      ...(faqs?.length ? [faqSchema(faqs)] : []),
       webPageSchema("home"),
     ];
   }

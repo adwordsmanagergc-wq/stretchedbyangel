@@ -47,6 +47,11 @@ export function getTier(slug: string): Tier {
 
 export const TIER2_ROBOTS = "noindex,follow";
 
+/** Indexed (Tier 1) suburbs, alphabetical. */
+export const TIER1_SUBURBS = SUBURB_TIERS.filter((s) => s.tier === 1).sort((a, b) =>
+  a.name.localeCompare(b.name)
+);
+
 /**
  * Nearby Tier 1 suburbs for the "Nearby areas" block on Tier 1 pages. Only
  * Tier 1 (indexed) suburbs are listed so the block never links to noindex
@@ -70,8 +75,9 @@ const TIER1_NEARBY: Record<(typeof TIER1_SLUGS)[number], (typeof TIER1_SLUGS)[nu
   "varsity-lakes": ["robina", "burleigh-heads", "miami", "mermaid-waters"],
 };
 
+/** Up to 4 nearby Tier 1 suburbs, closest first. */
 export function getTier1Nearby(slug: string): string[] {
-  return (TIER1_NEARBY as Record<string, string[]>)[slug] ?? [];
+  return ((TIER1_NEARBY as Record<string, string[]>)[slug] ?? []).slice(0, 4);
 }
 
 export type Faq = { q: string; a: string };
