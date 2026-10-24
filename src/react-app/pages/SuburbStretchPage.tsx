@@ -389,7 +389,7 @@ function buildFaqs(
 function pricingFaq(suburb: string) {
   return {
     q: `How much does stretching cost in ${suburb}?`,
-    a: `Single sessions are $60 (30 minutes), $90 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
+    a: `Single sessions are $60 (30 minutes), $100 (60 minutes in-studio), or $130 for a 60-minute home visit in ${suburb}. The 10-session packs work out to $55 per 30-minute session, or $80 per 60-minute session — with home visits adding $30 per session.`,
   };
 }
 

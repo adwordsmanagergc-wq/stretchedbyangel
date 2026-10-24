@@ -79,7 +79,7 @@ export function suburbServiceSchema({
       ? {
           offers: [
             { "@type": "Offer", name: "60 Minute Home Visit", price: "130", priceCurrency: "AUD" },
-            { "@type": "Offer", name: "60 Minute Studio Session", price: "90", priceCurrency: "AUD" },
+            { "@type": "Offer", name: "60 Minute Studio Session", price: "100", priceCurrency: "AUD" },
             { "@type": "Offer", name: "30 Minute Studio Session", price: "60", priceCurrency: "AUD" },
           ],
         }
