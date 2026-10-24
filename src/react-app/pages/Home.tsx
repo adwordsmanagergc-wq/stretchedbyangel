@@ -103,7 +103,7 @@ const FAQS = [
 
 const PRICING = [
   { duration: "30 mins", price: "$60", description: "Perfect for targeting specific problem areas" },
-  { duration: "60 mins", price: "$90", description: "Full body stretch for complete relief" },
+  { duration: "60 mins", price: "$100", description: "Full body stretch for complete relief" },
   { duration: "60 mins (Home Visit)", price: "$130", description: "Full body stretch in the comfort of your home" },
 ];
 
@@ -395,7 +395,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[
               { title: "30 Minute Sessions", total: "$550", per: "$55 / session", save: "Save $50", extra: null },
-              { title: "60 Minute Sessions", total: "$800", per: "$80 / session", save: "Save $100", extra: "+ $30 per session for home visit" },
+              { title: "60 Minute Sessions", total: "$800", per: "$80 / session", save: "Save $200", extra: "+ $30 per session for home visit" },
             ].map((pack) => (
               <div key={pack.title} className="surface rounded-3xl p-8 relative overflow-hidden">
                 <div aria-hidden="true" className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-primary/10 blur-3xl" />

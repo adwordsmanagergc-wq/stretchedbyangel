@@ -86,7 +86,7 @@ function stretchingServiceSchema() {
         {
           "@type": "Offer",
           name: "60 Minute Session",
-          price: "90",
+          price: "100",
           priceCurrency: "AUD",
           itemOffered: { "@type": "Service", name: "60 Minute Assisted Stretching Session" },
         },
