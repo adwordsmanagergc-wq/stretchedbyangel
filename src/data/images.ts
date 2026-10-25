@@ -14,7 +14,7 @@ export type ImageAsset = { src: string; width: number; height: number };
 export const IMG = {
   logo: { src: "/stretched-by-angel-logo.webp", width: 512, height: 512 },
   heroAngel: { src: "/assisted-stretching-gold-coast-hero.webp", width: 896, height: 1195 },
-  promo: { src: "/assisted-stretching-gold-coast.webp", width: 900, height: 1117 },
+  promo: { src: "/assisted-stretching-gold-coast.webp", width: 1080, height: 1080 },
   studio1: { src: "/assisted-stretching-gold-coast-1.webp", width: 900, height: 985 },
   angelPortrait: {
     src: "/images/angel-elliott-stretch-therapist-gold-coast.webp",
