@@ -9,6 +9,7 @@ import { CONTACT } from "@/data/contact";
 import { IMG } from "@/data/images";
 import { BUSINESS } from "@/react-app/lib/business";
 import { TIER1_SUBURBS } from "@/data/suburbContent";
+import MobileContactBar from "@/react-app/components/MobileContactBar";
 
 export const MAIN_NAV = [
   { to: "/", label: "Assisted Stretching" },
@@ -135,8 +136,9 @@ export const SiteFooter = forwardRef<HTMLElement, { tagline?: string }>(function
   const heading = "text-xs font-semibold uppercase tracking-[0.2em] text-foreground/80 mb-4";
   const item = "text-sm text-muted-foreground hover:text-primary transition-colors";
   return (
+    <>
     <footer ref={ref} className="relative bg-card border-t border-white/[0.06]">
-      <div className="max-w-6xl mx-auto px-4 pt-16 pb-10">
+      <div className="max-w-6xl mx-auto px-4 pt-16 pb-28 sm:pb-10">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]">
           <div>
             <Link to="/" className="inline-flex items-center gap-3">
@@ -248,5 +250,7 @@ export const SiteFooter = forwardRef<HTMLElement, { tagline?: string }>(function
         </div>
       </div>
     </footer>
+    <MobileContactBar />
+    </>
   );
 });
