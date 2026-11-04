@@ -55,6 +55,7 @@ export function suburbServiceSchema({
     "@type": "Service",
     "@id": `${SITE_URL}${path}#service`,
     name: `${isStretch ? "Assisted Stretching" : "Personal Training"} ${suburb}`,
+    ...(isStretch ? {} : { alternateName: `Female Personal Trainer ${suburb}` }),
     serviceType: isStretch ? "Assisted Stretching" : "Personal Training",
     url: `${SITE_URL}${path}`,
     provider: {

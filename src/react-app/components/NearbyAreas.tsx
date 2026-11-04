@@ -19,7 +19,7 @@ export default function NearbyAreas({
 }) {
   const isStretch = service === "stretch";
   const base = isStretch ? "/assisted-stretching" : "/personal-training";
-  const label = isStretch ? "Assisted stretching" : "Personal training";
+  const label = isStretch ? "Assisted stretching" : "Female personal trainer";
   const nearby = getTier1Nearby(slug)
     .map((s) => ({ slug: s, name: unslugify(s) }))
     .filter((n): n is { slug: string; name: NonNullable<typeof n.name> } => Boolean(n.name));
@@ -52,14 +52,14 @@ export default function NearbyAreas({
             to={isStretch ? `/personal-training/${slug}` : `/assisted-stretching/${slug}`}
             className="flex items-center justify-between gap-2 px-5 py-4 rounded-xl border border-border bg-background/50 hover:border-primary transition-all text-foreground hover:text-primary"
           >
-            {isStretch ? `Personal training in ${suburb}` : `Assisted stretching in ${suburb}`}
+            {isStretch ? `Female personal trainer in ${suburb}` : `Assisted stretching in ${suburb}`}
             <ArrowRight className="w-4 h-4 shrink-0" />
           </Link>
           <Link
             to={isStretch ? "/" : "/personal-training-gold-coast"}
             className="flex items-center justify-between gap-2 px-5 py-4 rounded-xl border border-border bg-background/50 hover:border-primary transition-all text-foreground hover:text-primary"
           >
-            {isStretch ? "Assisted stretching Gold Coast" : "Personal training Gold Coast"}
+            {isStretch ? "Assisted stretching Gold Coast" : "Female personal trainer Gold Coast"}
             <ArrowRight className="w-4 h-4 shrink-0" />
           </Link>
         </div>

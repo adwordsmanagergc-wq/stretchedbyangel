@@ -26,6 +26,12 @@ import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/su
 import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 import NearbyAreas from "@/react-app/components/NearbyAreas";
 
+/** Title for a personal training suburb page, kept to 60 characters or fewer. */
+function ptTitle(suburb: string) {
+  const full = `Female Personal Trainer ${suburb} | Stretched By Angel`;
+  return full.length <= 60 ? full : `Female Personal Trainer ${suburb}, Gold Coast`;
+}
+
 export default function SuburbPTPage() {
   const { slug = "" } = useParams();
   const suburb = unslugify(slug);
@@ -40,7 +46,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
   const copy = getTier1Copy(slug, "pt");
 
   usePageHead({
-    title: `Personal Training ${suburb} | Stretched By Angel`,
+    title: ptTitle(suburb),
     description: suburbPTDescription(suburb, profile.studioMin),
     canonical: `/personal-training/${slug}`,
     robots: tier === 2 ? TIER2_ROBOTS : undefined,
@@ -48,7 +54,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
       suburbServiceSchema({ service: "pt", suburb, path: `/personal-training/${slug}` }),
       breadcrumbSchema([
         ["Areas I Service", "/areas-i-service"],
-        [`Personal Training ${suburb}`, `/personal-training/${slug}`],
+        [`Female Personal Trainer ${suburb}`, `/personal-training/${slug}`],
       ]),
       buildFaqSchema(suburb, profile, copy),
     ],
@@ -70,13 +76,14 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
             <span className="text-gradient accent-italic">
-              Personal Training
+              Female Personal Trainer
             </span>
             <br />
             <span className="text-white">{suburb}</span>
           </h1>
           <p className="text-xl text-white/80 max-w-2xl mx-auto mb-4 leading-relaxed">
-            One-on-one personal training for {suburb} — {profile.vibe}.
+            One-on-one personal training for {suburb} with Angel, a female personal trainer
+            with 10+ years experience. {suburb} is {profile.vibe}.
             Train in-person at Wicked Bodz in Surfers Paradise ({distanceLabel}),
             or online from anywhere in the world.
           </p>
@@ -340,7 +347,7 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
         </svg>
       </a>
 
-      <SiteFooter tagline={`Personal training in ${suburb} and across the Gold Coast with Angel Elliott.`} />
+      <SiteFooter tagline={`Personal training in ${suburb} and across the Gold Coast with Angel Elliott, female personal trainer.`} />
     </div>
   );
 }
@@ -357,12 +364,17 @@ function buildFaqs(
     q: `How do I get started from ${suburb}?`,
     a: `Call ${CONTACT.phone} or DM ${CONTACT.instagram} on Instagram. I'll run through your goals, your schedule, and your current fitness level, recommend the right option (in-person, online or program-only), and book you in for your first session. Whether you're near ${landmark} or anywhere else on the coast, getting started is the same call.`,
   };
+  const femaleTrainer = {
+    q: `Are you a female personal trainer near ${suburb}?`,
+    a: `Yes. I'm Angel Elliott, a female personal trainer with over 10 years experience. ${suburb} clients train with me one-on-one at Wicked Bodz Fitness Centre in Surfers Paradise (${studioDistanceLabel(profile.studioMin)}) or online, on a program built around your goals, whether that's strength, fat loss, confidence in the gym or getting back into training after a break.`,
+  };
   if (copy) {
     // Tier 1: suburb-specific FAQs plus how to get started.
-    return [...copy.faqs, gettingStarted];
+    return [femaleTrainer, ...copy.faqs, gettingStarted];
   }
 
   return [
+    femaleTrainer,
     {
       q: `Do you offer personal training in ${suburb}?`,
       a: profile.faqLocation,

@@ -56,6 +56,7 @@ function personSchema() {
     "@id": `${BUSINESS.url}/#angel`,
     name: ANGEL.name,
     jobTitle: ANGEL.jobTitle,
+    gender: ANGEL.gender,
     image: ANGEL.image,
     worksFor: { "@id": `${BUSINESS.url}/#business` },
     knowsAbout: ANGEL.knowsAbout,
@@ -122,6 +123,7 @@ function ptServiceSchema() {
     "@type": "Service",
     "@id": `${BUSINESS.url}/#pt-service`,
     name: "Personal Training Gold Coast",
+    alternateName: "Female Personal Trainer Gold Coast",
     serviceType: "Personal Training",
     provider: { "@id": `${BUSINESS.url}/#business` },
     areaServed: AREAS_SERVED.map((name) => ({ "@type": "City", name })),
@@ -181,7 +183,7 @@ function webPageSchema(type: SchemaType) {
     url: `${BUSINESS.url}${isHome ? "/" : PT_PATH}`,
     name: isHome
       ? "Assisted Stretching Gold Coast | Stretched By Angel"
-      : "Personal Training Gold Coast | Stretched By Angel",
+      : "Female Personal Trainer Gold Coast | Stretched By Angel",
     isPartOf: { "@id": `${BUSINESS.url}/#website` },
     about: { "@id": `${BUSINESS.url}/#business` },
     primaryImageOfPage: BUSINESS.image,
@@ -216,9 +218,9 @@ const META = {
     ogImage: BUSINESS.image,
   },
   "personal-training": {
-    title: "Personal Training Gold Coast | Stretched By Angel",
+    title: "Female Personal Trainer Gold Coast | Stretched By Angel",
     description:
-      "Personal training Gold Coast with Angel Elliott, 10+ years experience. In-person sessions in Surfers Paradise, plus online coaching and custom programs.",
+      "Female personal trainer on the Gold Coast. Train one-on-one with Angel Elliott, 10+ years experience, in Surfers Paradise, or with online coaching and programs.",
     ogImage: BUSINESS.image,
   },
 } satisfies Record<SchemaType, { title: string; description: string; ogImage: string }>;
