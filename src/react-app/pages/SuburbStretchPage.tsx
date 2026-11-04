@@ -23,6 +23,7 @@ import {
 import { getTier, getTier1Copy, TIER2_ROBOTS, type ServiceCopy } from "@/data/suburbContent";
 import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 import NearbyAreas from "@/react-app/components/NearbyAreas";
+import { IMG } from "@/data/images";
 
 export default function SuburbStretchPage() {
   const { slug = "" } = useParams();
@@ -114,6 +115,46 @@ function SuburbPage({ slug, suburb }: { slug: string; suburb: string }) {
               reaches. Targeted assisted PNF stretching does.
             </p>
           )}
+        </div>
+      </section>
+
+      {/* Real client sessions */}
+      <section className="py-16 bg-background">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="eyebrow">Real Client Sessions</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mt-4 mb-4">
+              What Assisted Stretching Looks Like
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              These are real sessions with a real client, not stock photos. {suburb} clients get the
+              same hands-on, one-on-one PNF stretching, in the studio or at home.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+            {[
+              {
+                img: IMG.clientQuadStretch,
+                alt: `Angel Elliott giving a client an assisted PNF quad and hip flexor stretch, assisted stretching ${suburb}`,
+                caption: "Assisted quad and hip flexor stretch",
+              },
+              {
+                img: IMG.clientHipStretch,
+                alt: `Angel Elliott giving a client an assisted hip and glute stretch, assisted stretching ${suburb}`,
+                caption: "Assisted hip and glute stretch",
+              },
+            ].map(({ img, alt, caption }) => (
+              <figure key={img.src}>
+                <img
+                  {...img}
+                  loading="lazy"
+                  alt={alt}
+                  className="w-full aspect-[4/5] object-cover rounded-2xl ring-1 ring-white/10 shadow-2xl"
+                />
+                <figcaption className="mt-3 text-sm text-muted-foreground text-center">{caption}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 

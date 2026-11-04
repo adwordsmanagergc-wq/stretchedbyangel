@@ -33,6 +33,8 @@ export const IMG = {
     width: 772,
     height: 772,
   },
+  clientQuadStretch: { src: "/assisted-stretching-client-quad-stretch.webp", width: 900, height: 1117 },
+  clientHipStretch: { src: "/assisted-stretching-client-hip-stretch.webp", width: 900, height: 1206 },
   pnfSession: { src: "/images/pnf-stretching-session-gold-coast.webp", width: 1200, height: 901 },
 } satisfies Record<string, ImageAsset>;
 
