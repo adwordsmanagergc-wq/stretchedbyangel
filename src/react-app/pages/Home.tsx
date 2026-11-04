@@ -259,9 +259,9 @@ export default function HomePage() {
             <div className="relative order-2 lg:order-1 max-w-md mx-auto w-full">
               <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-2xl border border-accent/35" />
               <img
-                {...IMAGES.promo}
+                {...IMAGES.aboutHomeVisit}
                 loading="lazy"
-                alt="Stretched By Angel - PNF Stretching Services"
+                alt="Angel Elliott giving a client an assisted PNF quad stretch during a home visit on the Gold Coast"
                 className="relative rounded-2xl shadow-2xl w-full max-w-md mx-auto object-contain ring-1 ring-white/10"
               />
             </div>
