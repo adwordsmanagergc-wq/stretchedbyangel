@@ -401,7 +401,7 @@ export default function PersonalTrainingPage() {
         href="https://wa.me/61434773815?text=Hi%20Angel!%20I'm%20interested%20in%20personal%20training."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed right-6 z-50 bg-[#25D366] hover:bg-[#20BA5C] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all group"
+        className="hidden sm:block fixed right-6 z-50 bg-[#25D366] hover:bg-[#20BA5C] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all group"
         style={{ bottom: `${whatsappBottom}px` }}
         aria-label="Chat on WhatsApp"
       >
