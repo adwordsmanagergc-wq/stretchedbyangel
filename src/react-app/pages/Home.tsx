@@ -25,6 +25,7 @@ import SchemaMarkup from "@/react-app/components/SchemaMarkup";
 import { BUSINESS } from "@/react-app/lib/business";
 import { IMG } from "@/data/images";
 import { TIER1_SUBURBS } from "@/data/suburbContent";
+import HeroSlideshow from "@/react-app/components/HeroSlideshow";
 import { SiteHeader, SiteFooter } from "@/react-app/components/SiteNav";
 
 const IMAGES = IMG;
@@ -247,24 +248,7 @@ export default function HomePage() {
             </dl>
           </div>
 
-          <div className="relative max-w-md mx-auto w-full lg:max-w-none">
-            <div aria-hidden="true" className="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border border-accent/35" />
-            <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 aspect-[4/5] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]">
-              <img
-                {...IMAGES.heroAngel}
-                loading="eager"
-                {...{ fetchpriority: "high" }}
-                alt="Angel Elliott delivering an assisted PNF stretching session on the Gold Coast"
-                className="w-full h-full object-cover object-center"
-              />
-              <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
-            </div>
-            <div className="absolute left-3 sm:-left-8 bottom-6 sm:bottom-8 rounded-2xl bg-background/80 backdrop-blur-xl border border-white/10 px-5 py-4 shadow-2xl">
-              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-primary font-semibold">PNF technique</p>
-              <p className="font-display text-lg leading-tight mt-1">Studio or home visit</p>
-              <p className="text-xs text-muted-foreground mt-0.5">30 and 60 minute sessions</p>
-            </div>
-          </div>
+          <HeroSlideshow />
         </div>
       </section>
 
