@@ -56,6 +56,10 @@ const FAQS = [
     answer: "I've been a qualified personal trainer for over 10 years. Helping people transform their lives through fitness is my passion, and I've worked with clients all over the world—from Jersey to Australia and everywhere in between.",
   },
   {
+    question: "Are you a female personal trainer on the Gold Coast?",
+    answer: "Yes. I'm Angel Elliott, a female personal trainer with over 10 years experience. I train clients one-on-one at Wicked Bodz Fitness Centre in Surfers Paradise and online. Many of my clients tell me they feel more at ease starting out with a female coach, and every program is built around your goals, your body and your schedule.",
+  },
+  {
     question: "Where do you train clients on the Gold Coast?",
     answer: "I train clients at Wicked Bodz Fitness Centre in Surfers Paradise, or I can come to your location for home visits. Whatever works best for your lifestyle!",
   },
@@ -135,14 +139,14 @@ export default function PersonalTrainingPage() {
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 <span className="text-gradient accent-italic">
-                  Personal Training
+                  Female Personal Trainer
                 </span>
                 <br />
                 <span className="text-white">Gold Coast</span>
               </h1>
               <p className="text-xl text-white/80 mb-8 leading-relaxed">
-                Transform your body and your life with Angel—a qualified personal trainer
-                with over a decade of experience helping people reach their fitness goals.
+                Transform your body and your life with Angel Elliott, a qualified female personal
+                trainer with over a decade of experience helping people reach their fitness goals.
                 In-person on the Gold Coast or online anywhere in the world.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -177,7 +181,7 @@ export default function PersonalTrainingPage() {
               <img
                 {...IMAGES.onlineCoaching}
                 loading="lazy"
-                alt="Angel Elliott - Personal Trainer Gold Coast"
+                alt="Angel Elliott, female personal trainer on the Gold Coast"
                 className="relative rounded-2xl shadow-2xl w-full"
               />
             </div>
@@ -220,6 +224,54 @@ export default function PersonalTrainingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Why a female personal trainer */}
+      <section className="py-16 sm:py-24 bg-background">
+        <div className="max-w-3xl mx-auto px-4">
+          <span className="eyebrow">Female Personal Trainer Gold Coast</span>
+          <h2 className="text-3xl sm:text-4xl font-bold mt-4 mb-6">
+            Why Train With a{" "}
+            <span className="text-gradient accent-italic">Female Personal Trainer</span>?
+          </h2>
+          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              Plenty of people searching for a female personal trainer on the Gold Coast tell me the
+              same thing: they want a coach they feel comfortable with from the very first session.
+              That might mean walking into a gym for the first time, coming back after a long break,
+              or training around a busy week of work and family.
+            </p>
+            <p>
+              Every session is one-on-one with me, so there is no crowd, no ego and no guesswork.
+              We start with your goals and your current fitness, then build a program that fits
+              your body and your schedule, whether you want to get stronger, lose fat, move better
+              or feel more confident in the gym.
+            </p>
+          </div>
+          <ul className="mt-8 grid sm:grid-cols-2 gap-3">
+            {[
+              "One-on-one sessions in Surfers Paradise",
+              "Strength, fat loss and confidence goals",
+              "Beginners and comeback clients welcome",
+              "Online coaching from anywhere",
+            ].map((item) => (
+              <li key={item} className="flex items-center gap-3 text-foreground">
+                <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 text-muted-foreground">
+            Looking closer to home? See{" "}
+            <Link to="/areas-i-service" className="text-primary hover:underline">
+              female personal training by suburb
+            </Link>
+            , including{" "}
+            <Link to="/personal-training/southport" className="text-primary hover:underline">Southport</Link>,{" "}
+            <Link to="/personal-training/broadbeach" className="text-primary hover:underline">Broadbeach</Link> and{" "}
+            <Link to="/personal-training/robina" className="text-primary hover:underline">Robina</Link>.
+          </p>
         </div>
       </section>
 
@@ -270,7 +322,7 @@ export default function PersonalTrainingPage() {
               <img
                 {...IMAGES.gymTraining}
                 loading="lazy"
-                alt="Angel training at the gym"
+                alt="Angel Elliott, female personal trainer, coaching at the gym in Surfers Paradise"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -296,7 +348,7 @@ export default function PersonalTrainingPage() {
               <img
                 {...IMAGES.physique}
                 loading="lazy"
-                alt="Angel doing online coaching"
+                alt="Angel Elliott, female personal trainer, doing online coaching"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -414,7 +466,7 @@ export default function PersonalTrainingPage() {
         </svg>
       </a>
 
-      <SiteFooter ref={footerRef} tagline="Personal training in Surfers Paradise and online with Angel Elliott, plus assisted PNF stretching across the Gold Coast." />
+      <SiteFooter ref={footerRef} tagline="Female personal trainer in Surfers Paradise and online: Angel Elliott, plus assisted PNF stretching across the Gold Coast." />
     </div>
   );
 }

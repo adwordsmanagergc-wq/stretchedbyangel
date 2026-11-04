@@ -80,7 +80,8 @@ export const AREAS_SERVED = [
 
 export const ANGEL = {
   name: "Angel Elliott",
-  jobTitle: "Certified Stretch Therapist & Personal Trainer",
+  jobTitle: "Certified Stretch Therapist & Female Personal Trainer",
+  gender: "Female",
   yearsExperience: 10,
   // Self-hosted copy of the original portrait (see scripts/localize-remote-images.mjs).
   image: "https://www.stretchedbyangel.com/images/angel-elliott-stretch-therapist-gold-coast.webp",

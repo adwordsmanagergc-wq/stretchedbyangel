@@ -821,7 +821,7 @@ export default function HomePage() {
               See every Gold Coast suburb we cover <ArrowRight className="w-4 h-4" />
             </Link>
             <Link to="/personal-training-gold-coast" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
-              Personal Training Gold Coast <ArrowRight className="w-4 h-4" />
+              Female Personal Trainer Gold Coast <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

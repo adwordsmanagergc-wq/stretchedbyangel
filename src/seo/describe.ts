@@ -52,7 +52,10 @@ export function suburbStretchDescription(suburb: string, studioMin: number) {
 
 export function suburbPTDescription(suburb: string, studioMin: number) {
   return fitDescription([
-    [`Personal training in ${suburb} with Angel Elliott, 10+ years experience.`],
+    [
+      `Female personal trainer in ${suburb}: Angel Elliott, 10+ years experience.`,
+      `Female personal trainer in ${suburb}: Angel Elliott.`,
+    ],
     [
       " Strength, fat loss and fitness coaching.",
       " Strength and fat loss coaching.",

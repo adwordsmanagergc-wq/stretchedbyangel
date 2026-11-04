@@ -45,7 +45,8 @@ export default function AreasIServicePage() {
             <p>
               If getting to Surfers Paradise doesn't suit you, I come to you. Mobile sessions run
               right across the Gold Coast, from Ormeau and Jacobs Well in the north to Coolangatta
-              in the south, and out into the hinterland. Personal training is available in person
+              in the south, and out into the hinterland. Personal training with me, a female personal
+              trainer, is available in person
               at the studio or online from anywhere.
             </p>
           </div>
@@ -99,7 +100,7 @@ export default function AreasIServicePage() {
             to="/personal-training-gold-coast"
             className="inline-flex items-center justify-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
           >
-            <Dumbbell className="w-4 h-4" /> View General Personal Training Page <ArrowRight className="w-4 h-4" />
+            <Dumbbell className="w-4 h-4" /> Female Personal Trainer Gold Coast <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
@@ -205,7 +206,7 @@ function RegionSection({ region, alt }: { region: Region & { tier1: Set<string> 
   ];
   const columns = [
     { label: "Assisted stretching", icon: Sparkles, base: "/assisted-stretching" },
-    { label: "Personal training", icon: Dumbbell, base: "/personal-training" },
+    { label: "Female personal trainer", icon: Dumbbell, base: "/personal-training" },
   ];
 
   return (

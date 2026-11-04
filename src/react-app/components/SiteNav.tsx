@@ -144,7 +144,7 @@ export const SiteFooter = forwardRef<HTMLElement, { tagline?: string }>(function
               <span className="font-display text-2xl tracking-tight">Stretched By Angel</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
-              {tagline ?? "Assisted PNF stretching and personal training on the Gold Coast with Angel Elliott."}
+              {tagline ?? "Assisted PNF stretching and personal training on the Gold Coast with Angel Elliott, certified stretch therapist and female personal trainer."}
             </p>
             <div className="mt-5 flex items-center gap-3">
               <a
